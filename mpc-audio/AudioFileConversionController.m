@@ -19,9 +19,7 @@
 -(void)convertAudioFilesFromUrls:(NSArray *)audioFileUrls
              toDestinationFolder:(NSURL *)destinationFolder
                       completion:(void(^)(void))complete;
-{
-    [FileOperations createFolderIfDoesNotExistForUrl:destinationFolder];
-    
+{    
     AudioFileReaderWriter *readerWriter = [[AudioFileReaderWriter alloc]init];
     
     [self processArray:audioFileUrls withReaderWriter:readerWriter toDestinationFolder:destinationFolder completion:^{

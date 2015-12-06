@@ -42,8 +42,7 @@ class ViewController: NSViewController {
         let folderPicker: NSOpenPanel = NSOpenPanel()
         folderPicker.canCreateDirectories = true
         folderPicker.canChooseDirectories = true
-        folderPicker.title = "Folder Selector"
-        folderPicker.prompt = "Select Folder"
+        folderPicker.title = "Select Folder"
         folderPicker.showsHiddenFiles = false
         folderPicker.showsTagField = false
         folderPicker.beginWithCompletionHandler({ (result) -> Void in
@@ -64,8 +63,7 @@ class ViewController: NSViewController {
         let filePicker: NSOpenPanel = NSOpenPanel()
         filePicker.allowsMultipleSelection = true
         filePicker.canChooseFiles = true
-        filePicker.title = "File Selector"
-        filePicker.prompt = "Select Files"
+        filePicker.title = "Select Files"
         filePicker.canChooseDirectories = false
         filePicker.runModal()
         
@@ -82,10 +80,8 @@ class ViewController: NSViewController {
         
         hideConvertAudioButton(true)
         
-        let destinationFolder: NSURL = NSURL.init(fileURLWithPath: "///Users/carl/Desktop/converted")
-        
         let conversionController: AudioFileConversionController = AudioFileConversionController()
-        conversionController.convertAudioFilesFromUrls(selectedAudioFileUrls as! [NSArray], toDestinationFolder: destinationFolder) { () -> Void in
+        conversionController.convertAudioFilesFromUrls(selectedAudioFileUrls as! [NSArray], toDestinationFolder: selectedFolder) { () -> Void in
             print("DONE");
         }
     }

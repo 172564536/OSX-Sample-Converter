@@ -9,24 +9,18 @@
 #import "AudioFileReaderWriter.h"
 @import AVFoundation;
 
-@interface AudioFileReaderWriter () {
-    AVAsset *asset;
-}
-@end
-
 @implementation AudioFileReaderWriter
 
 -(void)convertAudioFileFromInputUrl:(NSURL *)inputUrl toOutputUrl:(NSURL *)outputUrl
 {
     AVAsset *origAsset = [AVAsset assetWithURL:inputUrl];
-    asset = origAsset;
     
     // reader
     NSError *readerError = nil;
-    AVAssetReader *reader = [[AVAssetReader alloc] initWithAsset:asset
+    AVAssetReader *reader = [[AVAssetReader alloc] initWithAsset:origAsset
                                                            error:&readerError];
     
-    AVAssetTrack *track = [[asset tracksWithMediaType:AVMediaTypeAudio] objectAtIndex:0];
+    AVAssetTrack *track = [[origAsset tracksWithMediaType:AVMediaTypeAudio] objectAtIndex:0];
     AVAssetReaderTrackOutput *readerOutput = [[AVAssetReaderTrackOutput alloc] initWithTrack:track
                                                                               outputSettings:nil];
     [reader addOutput:readerOutput];
@@ -73,6 +67,7 @@
     [writerInput requestMediaDataWhenReadyOnQueue:mediaInputQueue usingBlock:^{
         
         NSLog(@"Asset Writer ready : %d", writerInput.readyForMoreMediaData);
+        
         while (writerInput.readyForMoreMediaData) {
             CMSampleBufferRef nextBuffer;
             if ([reader status] == AVAssetReaderStatusReading && (nextBuffer = [readerOutput copyNextSampleBuffer])) {
@@ -95,7 +90,7 @@
                         break;
                     case AVAssetReaderStatusCompleted:
                         NSLog(@"Writer completed");
-                        [writer endSessionAtSourceTime:asset.duration];
+                        [writer endSessionAtSourceTime:origAsset.duration];
                         [writer finishWritingWithCompletionHandler:^{
                             NSData *data = [NSData dataWithContentsOfFile:outputUrl.absoluteString];
                             NSLog(@"Data: %@", data);
@@ -109,5 +104,7 @@
     
    //Todo: return result?
 }
+
+
 
 @end

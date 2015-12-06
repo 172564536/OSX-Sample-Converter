@@ -10,16 +10,18 @@ import Cocoa
 
 class ViewController: NSViewController {
     
-    // MARK: Outlets
+    // MARK: outlets
     @IBOutlet weak var convertAudioButton: NSButton!
+    @IBOutlet weak var selectedOutputFolderTextField: NSTextField!
     
-    // MARK: Ivars
+    // MARK: ivars
     var selectedAudioFileUrls = []
+    var selectedFolder: NSURL?
     
-    // MARK: LifeCycle
+    // MARK: lifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        hideConvertAudioButton(true)
+        setUpView()
     }
     
     override var representedObject: AnyObject? {
@@ -28,17 +30,48 @@ class ViewController: NSViewController {
         }
     }
     
-    // MARK: UserActions
+     // MARK: setUpView
+    func setUpView() {
+        hideConvertAudioButton(true)
+        selectedOutputFolderTextField.editable = false;
+    }
+    
+    // MARK: userActions
+    @IBAction func selectOutputFolderPressed(sender: NSButton) {
+        
+        let folderPicker: NSOpenPanel = NSOpenPanel()
+        folderPicker.canCreateDirectories = true
+        folderPicker.canChooseDirectories = true
+        folderPicker.title = "Folder Selector"
+        folderPicker.prompt = "Select Folder"
+        folderPicker.showsHiddenFiles = false
+        folderPicker.showsTagField = false
+        folderPicker.beginWithCompletionHandler({ (result) -> Void in
+            if (result == NSFileHandlingPanelOKButton) {
+                
+                self.selectedFolder = folderPicker.URL!
+                self.selectedOutputFolderTextField.stringValue = self.selectedFolder!.absoluteString
+                
+                if (self.selectedFolder != nil && self.canShowConvertAudioButton()) {
+                    self.hideConvertAudioButton(false)
+                }
+            }
+        })
+    }
+    
     @IBAction func selectFilesPressed(button: NSButton) {
-     
+        
         let filePicker: NSOpenPanel = NSOpenPanel()
         filePicker.allowsMultipleSelection = true
         filePicker.canChooseFiles = true
+        filePicker.title = "File Selector"
+        filePicker.prompt = "Select Files"
         filePicker.canChooseDirectories = false
         filePicker.runModal()
         
         selectedAudioFileUrls = filePicker.URLs
-        if (selectedAudioFileUrls.count > 0) {
+        
+        if (selectedAudioFileUrls.count > 0 && canShowConvertAudioButton()) {
             hideConvertAudioButton(false)
         } else {
             hideConvertAudioButton(true)
@@ -46,22 +79,28 @@ class ViewController: NSViewController {
     }
     
     @IBAction func convertAudioPressed(button: NSButton) {
-       hideConvertAudioButton(true)
-        convertSelectedAudioFiles(selectedAudioFileUrls)
-    }
-    
-    func hideConvertAudioButton(hidden: Bool) {
-        self.convertAudioButton.hidden = hidden
-    }
-    
-    func convertSelectedAudioFiles(fileUrls: NSArray) {
+        
+        hideConvertAudioButton(true)
         
         let destinationFolder: NSURL = NSURL.init(fileURLWithPath: "///Users/carl/Desktop/converted")
         
         let conversionController: AudioFileConversionController = AudioFileConversionController()
-        conversionController.convertAudioFilesFromUrls(fileUrls as! [NSArray], toDestinationFolder: destinationFolder) { () -> Void in
-            print("DONE");            
+        conversionController.convertAudioFilesFromUrls(selectedAudioFileUrls as! [NSArray], toDestinationFolder: destinationFolder) { () -> Void in
+            print("DONE");
         }
+    }
+    
+    // MARK: hide/show convert audio button
+    func canShowConvertAudioButton() -> Bool {
+        if (selectedFolder != nil && selectedAudioFileUrls.count > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    func hideConvertAudioButton(hidden: Bool) {
+        self.convertAudioButton.hidden = hidden
     }
 }
 

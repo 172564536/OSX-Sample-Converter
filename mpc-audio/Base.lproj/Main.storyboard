@@ -683,7 +683,7 @@
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pf1-8F-pZa">
-                                <rect key="frame" x="185" y="222" width="111" height="32"/>
+                                <rect key="frame" x="14" y="189" width="111" height="32"/>
                                 <buttonCell key="cell" type="push" title="Select Files" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="mcs-S3-Vdt">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -692,10 +692,29 @@
                                     <action selector="selectFilesPressed:" target="XfG-lQ-9wD" id="46M-Fs-Bu7"/>
                                 </connections>
                             </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="J3K-4C-Zt0">
+                                <rect key="frame" x="14" y="222" width="168" height="32"/>
+                                <buttonCell key="cell" type="push" title="Select Output Folder" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="LRG-uY-MRH">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="selectOutputFolderPressed:" target="XfG-lQ-9wD" id="lJ0-1Z-98d"/>
+                                </connections>
+                            </button>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uvQ-6X-Blf">
+                                <rect key="frame" x="184" y="229" width="276" height="22"/>
+                                <textFieldCell key="cell" lineBreakMode="truncatingHead" sendsActionOnEndEditing="YES" borderStyle="bezel" alignment="left" placeholderString="" drawsBackground="YES" id="SJe-6B-KkT">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                     </view>
                     <connections>
                         <outlet property="convertAudioButton" destination="Bnm-tM-fXb" id="fu5-6a-LCP"/>
+                        <outlet property="selectedOutputFolderTextField" destination="uvQ-6X-Blf" id="gNA-Gr-f4A"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

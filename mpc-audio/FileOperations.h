@@ -10,7 +10,6 @@
 
 @interface FileOperations : NSObject
 
-+(BOOL)createFolderIfDoesNotExistForUrl:(NSURL *)folderUrl;
 +(BOOL)deleteFileIfExists:(NSURL *)fileUrl;
 
 @end

@@ -12,4 +12,9 @@
 
 +(BOOL)deleteFileIfExists:(NSURL *)fileUrl;
 
++(NSString*)createNewFileNameFromExistingFileName:(NSString*)fileName
+                                 withRandomString:(NSString *)randomString
+                               restrictedToLength:(NSInteger)permitedLength
+                                       fileNumber:(NSInteger)fileNumnber;
+
 @end

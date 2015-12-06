@@ -24,4 +24,17 @@
     }
 }
 
++(NSString*)createNewFileNameFromExistingFileName:(NSString*)fileName
+                                 withRandomString:(NSString *)randomString
+                               restrictedToLength:(NSInteger)permitedLength
+                                       fileNumber:(NSInteger)fileNumnber;
+{
+    NSString *fileExtension = [fileName pathExtension];
+    NSString *slicedFileName = [fileName substringToIndex:4];
+    NSString *fileNumberString = [NSString stringWithFormat:@"%ld", (long)fileNumnber];
+    NSString *newFileNanme = [NSString stringWithFormat:@"%@_%@_%@.%@", slicedFileName, randomString, fileNumberString, fileExtension];
+    
+    return newFileNanme;
+}
+
 @end

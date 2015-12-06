@@ -35,9 +35,10 @@ toDestinationFolder:(NSURL *)destinationFolder
     NSInteger count = audioFileUrls.count;
     if (count == 0) return complete();
     
-    NSURL *inputFileUrl = [audioFileUrls objectAtIndex:0];
-    NSString *fileName = [inputFileUrl lastPathComponent];
-    NSURL *outputFileUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", destinationFolder.absoluteString, fileName]];
+    NSURL *inputFileUrl      = [audioFileUrls objectAtIndex:0];
+    NSString *inpultFileName = [inputFileUrl lastPathComponent];
+    NSString *newFileName    = [FileOperations createNewFileNameFromExistingFileName:inpultFileName withRandomString:@"ZYZ" restrictedToLength:8 fileNumber:count];
+    NSURL *outputFileUrl     = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", destinationFolder.absoluteString, newFileName]];
     
     [FileOperations deleteFileIfExists:outputFileUrl];
     

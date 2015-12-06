@@ -1,5 +1,5 @@
 //
-//  AudioFileConversionController2.h
+//  AudioFileConversionController.h
 //  mpc-audio
 //
 //  Created by Carl  on 06/12/2015.
@@ -10,6 +10,6 @@
 
 @interface AudioFileConversionController : NSObject
 
--(NSArray*)convertAudioFileFromInputUrl:(NSURL *)inputUrl toOutputUrl:(NSURL *)outputUrl;
+-(NSArray*)convertAudioFileFromInputUrl:(NSURL *)inputUrl;
 
 @end

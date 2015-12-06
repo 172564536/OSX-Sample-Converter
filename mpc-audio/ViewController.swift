@@ -67,10 +67,8 @@ class ViewController: NSViewController {
     
     func convertSelectedAudioFiles(fileUrl: NSURL) {
         
-        let destinationUrl: NSURL = NSURL.init(fileURLWithPath: "///Users/carl/Desktop/converted/atest.wav")
-        
         let conversionController: AudioFileConversionController = AudioFileConversionController()
-        conversionController.convertAudioFileFromInputUrl(fileUrl, toOutputUrl: destinationUrl)
+        conversionController.convertAudioFileFromInputUrl(fileUrl)
         
     }
     

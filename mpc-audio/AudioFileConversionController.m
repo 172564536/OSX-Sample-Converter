@@ -1,5 +1,5 @@
 //
-//  AudioFileConversionController2.m
+//  AudioFileConversionController.m
 //  mpc-audio
 //
 //  Created by Carl  on 06/12/2015.
@@ -15,7 +15,7 @@
 
 @implementation AudioFileConversionController
 
--(NSArray*)convertAudioFileFromInputUrl:(NSURL *)bob toOutputUrl:(NSURL *)bob2
+-(NSArray*)convertAudioFileFromInputUrl:(NSURL *)bob
 {    
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDesktopDirectory, NSUserDomainMask, YES );
     NSString *desktopPath = [paths objectAtIndex:0];

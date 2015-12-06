@@ -60,9 +60,8 @@ class ViewController: NSViewController {
         
         let conversionController: AudioFileConversionController = AudioFileConversionController()
         conversionController.convertAudioFilesFromUrls(fileUrls as! [NSArray], toDestinationFolder: destinationFolder) { () -> Void in
-            print("DONE");
-            
+            print("DONE");            
         }
-    }    
+    }
 }
 

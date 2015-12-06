@@ -15,10 +15,8 @@
     NSError *error;
     BOOL success = YES;
     NSFileManager *fileManager = [NSFileManager defaultManager];
+    success = [fileManager createDirectoryAtURL:folderUrl withIntermediateDirectories:NO attributes:nil error:&error];
     
-    if (![fileManager fileExistsAtPath:folderUrl.absoluteString isDirectory:YES]) {
-        success = [fileManager createDirectoryAtURL:folderUrl withIntermediateDirectories:YES attributes:nil error:&error];
-    }
     if (!error && success) {
         return YES;
     } else {
@@ -31,12 +29,7 @@
     NSError *error;
     BOOL success = YES;
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    
-    NSString *pathString = fileUrl.absoluteString;
-    
-    if ([fileManager fileExistsAtPath:pathString]) {
-        success = [fileManager removeItemAtPath:pathString error:&error];
-    }
+    success = [fileManager removeItemAtURL:fileUrl error:&error];
     
     if (!error && success) {
         return YES;

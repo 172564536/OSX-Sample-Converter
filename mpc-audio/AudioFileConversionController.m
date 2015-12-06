@@ -41,6 +41,8 @@ toDestinationFolder:(NSURL *)destinationFolder
     NSString *fileName = [inputFileUrl lastPathComponent];
     NSURL *outputFileUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", destinationFolder.absoluteString, fileName]];
     
+    [FileOperations deleteFileIfExists:outputFileUrl];
+    
     [readerWriter convertAudioFileFromInputUrl:inputFileUrl toOutputUrl:outputFileUrl withCallBack:^(BOOL success) {
         NSArray *remainingUrls = [audioFileUrls subarrayWithRange:NSMakeRange(1, count-1)];
         [self processArray:remainingUrls withReaderWriter:readerWriter toDestinationFolder:destinationFolder completion:complete];

@@ -7,18 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C39A88DF1C143FF5000E2613 /* AudioFileConversionController2.m in Sources */ = {isa = PBXBuildFile; fileRef = C39A88DE1C143FF5000E2613 /* AudioFileConversionController2.m */; };
+		C39A88DF1C143FF5000E2613 /* AudioFileConversionController.m in Sources */ = {isa = PBXBuildFile; fileRef = C39A88DE1C143FF5000E2613 /* AudioFileConversionController.m */; };
 		C39A88E41C14527E000E2613 /* AudioFileReaderWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = C39A88E31C14527E000E2613 /* AudioFileReaderWriter.m */; };
 		C3F038B41C12FF8B00EB3849 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F038B31C12FF8B00EB3849 /* AppDelegate.swift */; };
 		C3F038B61C12FF8B00EB3849 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F038B51C12FF8B00EB3849 /* ViewController.swift */; };
 		C3F038B81C12FF8B00EB3849 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C3F038B71C12FF8B00EB3849 /* Assets.xcassets */; };
 		C3F038BB1C12FF8B00EB3849 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C3F038B91C12FF8B00EB3849 /* Main.storyboard */; };
-		C3F038C91C131B3200EB3849 /* AudioFileConversionController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3F038C81C131B3200EB3849 /* AudioFileConversionController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		C39A88DD1C143FF5000E2613 /* AudioFileConversionController2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioFileConversionController2.h; sourceTree = "<group>"; };
-		C39A88DE1C143FF5000E2613 /* AudioFileConversionController2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioFileConversionController2.m; sourceTree = "<group>"; };
+		C39A88DD1C143FF5000E2613 /* AudioFileConversionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioFileConversionController.h; sourceTree = "<group>"; };
+		C39A88DE1C143FF5000E2613 /* AudioFileConversionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioFileConversionController.m; sourceTree = "<group>"; };
 		C39A88E21C14527E000E2613 /* AudioFileReaderWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioFileReaderWriter.h; sourceTree = "<group>"; };
 		C39A88E31C14527E000E2613 /* AudioFileReaderWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioFileReaderWriter.m; sourceTree = "<group>"; };
 		C3F038B01C12FF8B00EB3849 /* mpc-audio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "mpc-audio.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -28,8 +27,6 @@
 		C3F038BA1C12FF8B00EB3849 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C3F038BC1C12FF8B00EB3849 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C3F038C61C131B3200EB3849 /* mpc-audio-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "mpc-audio-Bridging-Header.h"; sourceTree = "<group>"; };
-		C3F038C71C131B3200EB3849 /* AudioFileConversionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioFileConversionController.h; sourceTree = "<group>"; };
-		C3F038C81C131B3200EB3849 /* AudioFileConversionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioFileConversionController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,14 +61,12 @@
 			children = (
 				C3F038B31C12FF8B00EB3849 /* AppDelegate.swift */,
 				C3F038B51C12FF8B00EB3849 /* ViewController.swift */,
-				C3F038C71C131B3200EB3849 /* AudioFileConversionController.h */,
-				C3F038C81C131B3200EB3849 /* AudioFileConversionController.m */,
 				C3F038B71C12FF8B00EB3849 /* Assets.xcassets */,
 				C3F038B91C12FF8B00EB3849 /* Main.storyboard */,
 				C3F038BC1C12FF8B00EB3849 /* Info.plist */,
 				C3F038C61C131B3200EB3849 /* mpc-audio-Bridging-Header.h */,
-				C39A88DD1C143FF5000E2613 /* AudioFileConversionController2.h */,
-				C39A88DE1C143FF5000E2613 /* AudioFileConversionController2.m */,
+				C39A88DD1C143FF5000E2613 /* AudioFileConversionController.h */,
+				C39A88DE1C143FF5000E2613 /* AudioFileConversionController.m */,
 				C39A88E21C14527E000E2613 /* AudioFileReaderWriter.h */,
 				C39A88E31C14527E000E2613 /* AudioFileReaderWriter.m */,
 			);
@@ -148,9 +143,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C3F038C91C131B3200EB3849 /* AudioFileConversionController.m in Sources */,
 				C3F038B61C12FF8B00EB3849 /* ViewController.swift in Sources */,
-				C39A88DF1C143FF5000E2613 /* AudioFileConversionController2.m in Sources */,
+				C39A88DF1C143FF5000E2613 /* AudioFileConversionController.m in Sources */,
 				C3F038B41C12FF8B00EB3849 /* AppDelegate.swift in Sources */,
 				C39A88E41C14527E000E2613 /* AudioFileReaderWriter.m in Sources */,
 			);

@@ -11,25 +11,27 @@
 
 @implementation AudioFileReaderWriter
 
--(void)convertAudioFileFromInputUrl:(NSURL *)inputUrl toOutputUrl:(NSURL *)outputUrl
+-(void)convertAudioFileFromInputUrl:(NSURL *)inputUrl toOutputUrl:(NSURL *)outputUrl withCallBack:(void(^)(BOOL success))callBack
 {
     AVAsset *origAsset = [AVAsset assetWithURL:inputUrl];
     
-    // reader
+    // set up reader
     NSError *readerError = nil;
     AVAssetReader *reader = [[AVAssetReader alloc] initWithAsset:origAsset
                                                            error:&readerError];
+    if (readerError) callBack(NO);
     
     AVAssetTrack *track = [[origAsset tracksWithMediaType:AVMediaTypeAudio] objectAtIndex:0];
     AVAssetReaderTrackOutput *readerOutput = [[AVAssetReaderTrackOutput alloc] initWithTrack:track
                                                                               outputSettings:nil];
     [reader addOutput:readerOutput];
     
-    // writer
+    // set up writer
     NSError *writerError = nil;
     AVAssetWriter *writer = [[AVAssetWriter alloc] initWithURL:outputUrl
                                                       fileType:AVFileTypeWAVE
                                                          error:&writerError];
+    if (writerError) callBack(NO);
     
     AudioChannelLayout channelLayout;
     memset(&channelLayout, 0, sizeof(AudioChannelLayout));
@@ -53,21 +55,22 @@
                                     [NSNumber numberWithUnsignedInteger:2], AVNumberOfChannelsKey,
                                     nil];
     
-    
     AVAssetWriterInput *writerInput = [[AVAssetWriterInput alloc] initWithMediaType:AVMediaTypeAudio
                                                                      outputSettings:outputSettings];
     [writerInput setExpectsMediaDataInRealTime:NO];
     [writer addInput:writerInput];
     
+    // start conversion process
     [writer startWriting];
     [writer startSessionAtSourceTime:kCMTimeZero];
-    
     [reader startReading];
+    
     dispatch_queue_t mediaInputQueue = dispatch_queue_create("mediaInputQueue", NULL);
     [writerInput requestMediaDataWhenReadyOnQueue:mediaInputQueue usingBlock:^{
         
         NSLog(@"Asset Writer ready : %d", writerInput.readyForMoreMediaData);
         
+        // Loop through samples until done
         while (writerInput.readyForMoreMediaData) {
             CMSampleBufferRef nextBuffer;
             if ([reader status] == AVAssetReaderStatusReading && (nextBuffer = [readerOutput copyNextSampleBuffer])) {
@@ -78,33 +81,30 @@
             } else {
                 [writerInput markAsFinished];
                 
+                //ToDo:
+                // 1. will this reader status need checking periodically (with other enum values) rather then just at end?
+                
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wswitch"                
                 switch ([reader status]) {
-                    case AVAssetReaderStatusCancelled:
-                        break;
-                    case AVAssetReaderStatusUnknown:
-                        break;
-                    case AVAssetReaderStatusReading:
-                        break;
                     case AVAssetReaderStatusFailed:
                         [writer cancelWriting];
+                        callBack(NO);
                         break;
                     case AVAssetReaderStatusCompleted:
                         NSLog(@"Writer completed");
                         [writer endSessionAtSourceTime:origAsset.duration];
                         [writer finishWritingWithCompletionHandler:^{
-                            NSData *data = [NSData dataWithContentsOfFile:outputUrl.absoluteString];
-                            NSLog(@"Data: %@", data);
+                            callBack(YES);
                         }];
                         break;
                 }
+#pragma GCC diagnostic pop
+                
                 break;
             }
         }
     }];
-    
-   //Todo: return result?
 }
-
-
 
 @end

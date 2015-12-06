@@ -24,7 +24,9 @@
     NSURL *outputFileUrl = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/atest_converted.aif",desktopPath] isDirectory:NO];
     
     AudioFileReaderWriter *readerWriter = [[AudioFileReaderWriter alloc]init];
-    [readerWriter convertAudioFileFromInputUrl:origFileUrl toOutputUrl:outputFileUrl];
+    [readerWriter convertAudioFileFromInputUrl:origFileUrl toOutputUrl:outputFileUrl withCallBack:^(BOOL success) {
+        
+    }];
     
     return nil;
 }

@@ -10,6 +10,8 @@
 
 @interface AudioFileConversionController : NSObject
 
--(NSArray*)convertAudioFileFromInputUrl:(NSURL *)inputUrl;
+-(void)convertAudioFilesFromUrls:(NSArray *)audioFileUrls
+             toDestinationFolder:(NSURL *)destinationFolder
+                      completion:(void(^)(void))complete;
 
 @end

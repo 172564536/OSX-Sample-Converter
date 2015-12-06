@@ -11,7 +11,9 @@
 
 @implementation AudioFileReaderWriter
 
--(void)convertAudioFileFromInputUrl:(NSURL *)inputUrl toOutputUrl:(NSURL *)outputUrl withCallBack:(void(^)(BOOL success))callBack
+-(void)convertAudioFileFromInputUrl:(NSURL *)inputUrl
+                        toOutputUrl:(NSURL *)outputUrl
+                       withCallBack:(void(^)(BOOL success))callBack;
 {
     AVAsset *origAsset = [AVAsset assetWithURL:inputUrl];
     

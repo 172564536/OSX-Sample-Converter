@@ -10,6 +10,8 @@
 
 @interface AudioFileReaderWriter : NSObject
 
--(void)convertAudioFileFromInputUrl:(NSURL *)inputUrl toOutputUrl:(NSURL *)outputUrl withCallBack:(void(^)(BOOL success))callBack;
+-(void)convertAudioFileFromInputUrl:(NSURL *)inputUrl
+                        toOutputUrl:(NSURL *)outputUrl
+                       withCallBack:(void(^)(BOOL success))callBack;
 
 @end

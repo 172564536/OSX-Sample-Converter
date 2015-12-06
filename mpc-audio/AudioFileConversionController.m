@@ -8,6 +8,7 @@
 
 #import "AudioFileConversionController.h"
 #import "AudioFileReaderWriter.h"
+#import "FileOperations.h"
 
 @interface AudioFileConversionController ()
 
@@ -15,20 +16,35 @@
 
 @implementation AudioFileConversionController
 
--(NSArray*)convertAudioFileFromInputUrl:(NSURL *)bob
-{    
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDesktopDirectory, NSUserDomainMask, YES );
-    NSString *desktopPath = [paths objectAtIndex:0];
-    
-    NSURL *origFileUrl = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/atest.aif",desktopPath] isDirectory:NO];
-    NSURL *outputFileUrl = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/atest_converted.aif",desktopPath] isDirectory:NO];
+-(void)convertAudioFilesFromUrls:(NSArray *)audioFileUrls
+             toDestinationFolder:(NSURL *)destinationFolder
+                      completion:(void(^)(void))complete;
+{
+    [FileOperations createFolderIfDoesNotExistForUrl:destinationFolder];
     
     AudioFileReaderWriter *readerWriter = [[AudioFileReaderWriter alloc]init];
-    [readerWriter convertAudioFileFromInputUrl:origFileUrl toOutputUrl:outputFileUrl withCallBack:^(BOOL success) {
-        
-    }];
     
-    return nil;
+    [self processArray:audioFileUrls withReaderWriter:readerWriter toDestinationFolder:destinationFolder completion:^{
+        complete();
+    }];
+}
+
+-(void)processArray:(NSArray *)audioFileUrls
+   withReaderWriter:(AudioFileReaderWriter *)readerWriter
+toDestinationFolder:(NSURL *)destinationFolder
+         completion:(void(^)(void))complete;
+{
+    NSInteger count = audioFileUrls.count;
+    if (count == 0) return complete();
+    
+    NSURL *inputFileUrl = [audioFileUrls objectAtIndex:0];
+    NSString *fileName = [inputFileUrl lastPathComponent];
+    NSURL *outputFileUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", destinationFolder.absoluteString, fileName]];
+    
+    [readerWriter convertAudioFileFromInputUrl:inputFileUrl toOutputUrl:outputFileUrl withCallBack:^(BOOL success) {
+        NSArray *remainingUrls = [audioFileUrls subarrayWithRange:NSMakeRange(1, count-1)];
+        [self processArray:remainingUrls withReaderWriter:readerWriter toDestinationFolder:destinationFolder completion:complete];
+    }];
 }
 
 @end

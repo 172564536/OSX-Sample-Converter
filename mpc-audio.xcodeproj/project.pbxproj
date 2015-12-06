@@ -43,6 +43,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C39A88E81C146D2E000E2613 /* AudioFileConversion */ = {
+			isa = PBXGroup;
+			children = (
+				C39A88DD1C143FF5000E2613 /* AudioFileConversionController.h */,
+				C39A88DE1C143FF5000E2613 /* AudioFileConversionController.m */,
+				C39A88E21C14527E000E2613 /* AudioFileReaderWriter.h */,
+				C39A88E31C14527E000E2613 /* AudioFileReaderWriter.m */,
+				C39A88E51C145E7A000E2613 /* FileOperations.h */,
+				C39A88E61C145E7A000E2613 /* FileOperations.m */,
+			);
+			name = AudioFileConversion;
+			sourceTree = "<group>";
+		};
 		C3F038A71C12FF8B00EB3849 = {
 			isa = PBXGroup;
 			children = (
@@ -62,18 +75,13 @@
 		C3F038B21C12FF8B00EB3849 /* mpc-audio */ = {
 			isa = PBXGroup;
 			children = (
+				C39A88E81C146D2E000E2613 /* AudioFileConversion */,
 				C3F038B31C12FF8B00EB3849 /* AppDelegate.swift */,
 				C3F038B51C12FF8B00EB3849 /* ViewController.swift */,
 				C3F038B71C12FF8B00EB3849 /* Assets.xcassets */,
 				C3F038B91C12FF8B00EB3849 /* Main.storyboard */,
 				C3F038BC1C12FF8B00EB3849 /* Info.plist */,
 				C3F038C61C131B3200EB3849 /* mpc-audio-Bridging-Header.h */,
-				C39A88DD1C143FF5000E2613 /* AudioFileConversionController.h */,
-				C39A88DE1C143FF5000E2613 /* AudioFileConversionController.m */,
-				C39A88E21C14527E000E2613 /* AudioFileReaderWriter.h */,
-				C39A88E31C14527E000E2613 /* AudioFileReaderWriter.m */,
-				C39A88E51C145E7A000E2613 /* FileOperations.h */,
-				C39A88E61C145E7A000E2613 /* FileOperations.m */,
 			);
 			path = "mpc-audio";
 			sourceTree = "<group>";

@@ -22,8 +22,8 @@ class ViewController: NSViewController {
         
         hideConvertAudioButton(true)
         
-          let url: NSURL = NSURL.init(fileURLWithPath: "///Users/carl/Desktop/atest.wav")
-        convertSelectedAudioFiles(url)
+//          let url: NSURL = NSURL.init(fileURLWithPath: "///Users/carl/Desktop/atest.wav")
+//        convertSelectedAudioFiles(url)
         
         // Do any additional setup after loading the view.
     }
@@ -47,7 +47,9 @@ class ViewController: NSViewController {
         let chosenFile = filePicker.URL
         if (chosenFile != nil) {
 //            hideConvertAudioButton(false)
-            convertSelectedAudioFiles(chosenFile!)
+            var urlsArray = [NSURL]()
+            urlsArray.append(chosenFile!)
+            convertSelectedAudioFiles(urlsArray)
             
         } else {
             // show message
@@ -65,10 +67,14 @@ class ViewController: NSViewController {
         self.convertAudioButton.hidden = hidden
     }
     
-    func convertSelectedAudioFiles(fileUrl: NSURL) {
+    func convertSelectedAudioFiles(fileUrls: NSArray) {
+        
+        let destinationFolder: NSURL = NSURL.init(fileURLWithPath: "///Users/carl/Desktop/converted")
         
         let conversionController: AudioFileConversionController = AudioFileConversionController()
-        conversionController.convertAudioFileFromInputUrl(fileUrl)
+        conversionController.convertAudioFilesFromUrls(fileUrls as! [NSArray], toDestinationFolder: destinationFolder) { () -> Void in
+            print("DONE");
+        }
         
     }
     

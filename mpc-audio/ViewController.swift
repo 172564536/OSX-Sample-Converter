@@ -14,18 +14,12 @@ class ViewController: NSViewController {
     @IBOutlet weak var convertAudioButton: NSButton!
     
     // MARK: Ivars
-    var selectedAudioFileURL: NSURL!
+    var selectedAudioFileUrls = []
     
     // MARK: LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         hideConvertAudioButton(true)
-        
-//          let url: NSURL = NSURL.init(fileURLWithPath: "///Users/carl/Desktop/atest.wav")
-//        convertSelectedAudioFiles(url)
-        
-        // Do any additional setup after loading the view.
     }
     
     override var representedObject: AnyObject? {
@@ -34,33 +28,26 @@ class ViewController: NSViewController {
         }
     }
     
-    
     // MARK: UserActions
     @IBAction func selectFilesPressed(button: NSButton) {
      
         let filePicker: NSOpenPanel = NSOpenPanel()
-        filePicker.allowsMultipleSelection = false
+        filePicker.allowsMultipleSelection = true
         filePicker.canChooseFiles = true
         filePicker.canChooseDirectories = false
         filePicker.runModal()
         
-        let chosenFile = filePicker.URL
-        if (chosenFile != nil) {
-//            hideConvertAudioButton(false)
-            var urlsArray = [NSURL]()
-            urlsArray.append(chosenFile!)
-            convertSelectedAudioFiles(urlsArray)
-            
+        selectedAudioFileUrls = filePicker.URLs
+        if (selectedAudioFileUrls.count > 0) {
+            hideConvertAudioButton(false)
         } else {
-            // show message
+            hideConvertAudioButton(true)
         }
-        
     }
     
     @IBAction func convertAudioPressed(button: NSButton) {
-       
        hideConvertAudioButton(true)
-        
+        convertSelectedAudioFiles(selectedAudioFileUrls)
     }
     
     func hideConvertAudioButton(hidden: Bool) {
@@ -74,10 +61,8 @@ class ViewController: NSViewController {
         let conversionController: AudioFileConversionController = AudioFileConversionController()
         conversionController.convertAudioFilesFromUrls(fileUrls as! [NSArray], toDestinationFolder: destinationFolder) { () -> Void in
             print("DONE");
+            
         }
-        
-    }
-    
-  
+    }    
 }
 

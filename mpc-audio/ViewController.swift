@@ -9,19 +9,71 @@
 import Cocoa
 
 class ViewController: NSViewController {
-
+    
+    // MARK: Outlets
+    @IBOutlet weak var convertAudioButton: NSButton!
+    
+    // MARK: Ivars
+    var selectedAudioFileURL: NSURL!
+    
+    // MARK: LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        hideConvertAudioButton(true)
+        
+          let url: NSURL = NSURL.init(fileURLWithPath: "///Users/carl/Desktop/atest.wav")
+        convertSelectedAudioFiles(url)
+        
         // Do any additional setup after loading the view.
     }
-
+    
     override var representedObject: AnyObject? {
         didSet {
-        // Update the view, if already loaded.
+            // Update the view, if already loaded.
         }
     }
-
-
+    
+    
+    // MARK: UserActions
+    @IBAction func selectFilesPressed(button: NSButton) {
+     
+        let filePicker: NSOpenPanel = NSOpenPanel()
+        filePicker.allowsMultipleSelection = false
+        filePicker.canChooseFiles = true
+        filePicker.canChooseDirectories = false
+        filePicker.runModal()
+        
+        let chosenFile = filePicker.URL
+        if (chosenFile != nil) {
+//            hideConvertAudioButton(false)
+            convertSelectedAudioFiles(chosenFile!)
+            
+        } else {
+            // show message
+        }
+        
+    }
+    
+    @IBAction func convertAudioPressed(button: NSButton) {
+       
+       hideConvertAudioButton(true)
+        
+    }
+    
+    func hideConvertAudioButton(hidden: Bool) {
+        self.convertAudioButton.hidden = hidden
+    }
+    
+    func convertSelectedAudioFiles(fileUrl: NSURL) {
+        
+        let destinationUrl: NSURL = NSURL.init(fileURLWithPath: "///Users/carl/Desktop/converted/atest.wav")
+        
+        let conversionController: AudioFileConversionController2 = AudioFileConversionController2()
+        conversionController.convertAudioFileFromInputUrl(fileUrl, toOutputUrl: destinationUrl)
+        
+    }
+    
+  
 }
 

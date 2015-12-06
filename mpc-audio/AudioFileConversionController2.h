@@ -1,0 +1,15 @@
+//
+//  AudioFileConversionController2.h
+//  mpc-audio
+//
+//  Created by Carl  on 06/12/2015.
+//  Copyright © 2015 Carl Taylor. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+
+@interface AudioFileConversionController2 : NSObject
+
+-(NSArray*)convertAudioFileFromInputUrl:(NSURL *)inputUrl toOutputUrl:(NSURL *)outputUrl;
+
+@end

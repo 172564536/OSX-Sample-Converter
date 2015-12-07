@@ -80,10 +80,11 @@ class ViewController: NSViewController {
     @IBAction func convertFilesPressed(sender: NSButton) {
         
         hideConvertAudioButton(true)
+        let exportPrefix = fileNamePrefixTextField.stringValue       
         
         let exportConfig = ExportConfig()
         exportConfig.buildFromDefaults(MpcUserDefaults.getImmutableDefsFile())
-        exportConfig.exportPrefix = fileNamePrefixTextField.stringValue
+        exportConfig.exportPrefix = exportPrefix
         
         let conversionController: AudioFileConversionController = AudioFileConversionController()
         conversionController.convertAudioFilesFromUrls(selectedAudioFileUrls as! [NSArray], toDestinationFolder: selectedFolder,  withExportOptionsConfig: exportConfig) { () -> Void in

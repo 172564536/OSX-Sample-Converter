@@ -8,13 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
+@class ExportConfig;
+
 @interface FileOperations : NSObject
 
 +(BOOL)deleteFileIfExists:(NSURL *)fileUrl;
 
 +(NSString*)createNewFileNameFromExistingFileName:(NSString*)fileName
-                                 withRandomString:(NSString *)randomString
-                               restrictedToLength:(NSInteger)permitedLength
-                                       fileNumber:(NSInteger)fileNumnber;
+                                 withExportConfig:(ExportConfig *)exportConfig
+                                       fileNumber:(NSInteger)fileNumber;
 
 @end

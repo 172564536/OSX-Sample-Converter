@@ -29,7 +29,7 @@
                                  withExportConfig:(ExportConfig *)exportConfig
                                        fileNumber:(NSInteger)fileNumber;
 {
-    NSMutableString *newFileName = [[NSMutableString alloc]init];
+    NSMutableString *mutableFileName = [[NSMutableString alloc]init];
     NSString *exportPrefix = [self cleanString:exportConfig.exportPrefix];
     NSString *fileNumberAsString = [NSString stringWithFormat:@"%ld", (long)fileNumber];
     
@@ -38,15 +38,15 @@
     
     // Add user created prefix (if exists) and see if we need to keep original prefix or overwrite it
     if (exportPrefix) {
-        [newFileName appendString:exportPrefix];
+        [mutableFileName appendString:exportPrefix];
         if ([exportConfig.replaceOriginalFilePrefix boolValue]) {
             NSString *slicedFileName = [fileNameWithoutExtension substringFromIndex:exportPrefix.length];
-            [newFileName appendString:slicedFileName];
+            [mutableFileName appendString:slicedFileName];
         } else {
-            [newFileName appendString:fileNameWithoutExtension];
+            [mutableFileName appendString:fileNameWithoutExtension];
         }
     } else {
-        [newFileName appendString:fileNameWithoutExtension];
+        [mutableFileName appendString:fileNameWithoutExtension];
     }
     
     // Now we need to see if string needs trimming back to the permitted number of characters (with/wihout appended file number)
@@ -55,21 +55,25 @@
     
     // Check if we need to append file number
     if (appendNumberToFileName) {
-        if ((newFileName.length + fileNumberAsString.length) > permittedNumberOfCharactersInFileName.longValue) {
+        if ((mutableFileName.length + fileNumberAsString.length) > permittedNumberOfCharactersInFileName.longValue) {
             // Total string length including number is too long, we need to trim it down
-        NSInteger totalProposedLegth = (newFileName.length + fileNumberAsString.length);
+            NSString *slicedString = [mutableFileName substringToIndex:permittedNumberOfCharactersInFileName.integerValue - fileNumberAsString.length];
+            mutableFileName = [[NSMutableString alloc]init];
+            [mutableFileName appendString:slicedString];
+            [mutableFileName appendString:fileNumberAsString];
         } else {
             // Total string (including file number) doesnt go over permitted limit so we are cool
-            [newFileName appendString:fileNumberAsString];
+            [mutableFileName appendString:fileNumberAsString];
         }
-    } else if (newFileName.length > permittedNumberOfCharactersInFileName.longValue) {
+    } else if (mutableFileName.length > permittedNumberOfCharactersInFileName.longValue) {
         // We are not appending file number but the string is still too long
-        NSString *slicedString = [newFileName substringToIndex:permittedNumberOfCharactersInFileName.integerValue];
-        newFileName = [slicedString copy];
+        NSString *slicedString = [mutableFileName substringToIndex:permittedNumberOfCharactersInFileName.integerValue];
+        mutableFileName = [[NSMutableString alloc]init];
+        [mutableFileName appendString:slicedString];
     }
     
-    [newFileName appendString:@".wav"];
-    return [newFileName copy];
+    [mutableFileName appendString:@".wav"];
+    return [mutableFileName copy];
 }
 
 +(NSString*)cleanString:(NSString*)string

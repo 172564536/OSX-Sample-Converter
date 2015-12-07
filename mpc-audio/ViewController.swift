@@ -38,6 +38,7 @@ class ViewController: NSViewController {
         let folderPicker: NSOpenPanel = NSOpenPanel()
         folderPicker.canCreateDirectories = true
         folderPicker.canChooseDirectories = true
+        folderPicker.canChooseFiles = false;
         folderPicker.title = "Select Folder"
         folderPicker.showsHiddenFiles = false
         folderPicker.showsTagField = false

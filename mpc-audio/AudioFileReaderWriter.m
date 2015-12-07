@@ -101,8 +101,7 @@
                         }];
                         break;
                 }
-#pragma GCC diagnostic pop
-                
+#pragma GCC diagnostic pop                
                 break;
             }
         }

@@ -649,8 +649,8 @@
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
             <objects>
-                <windowController id="B8D-0N-5wS" sceneMemberID="viewController">
-                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
+                <windowController showSeguePresentationStyle="single" id="B8D-0N-5wS" sceneMemberID="viewController">
+                    <window key="window" title="MPC Convert" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="196" y="240" width="480" height="270"/>
@@ -664,26 +664,16 @@
             </objects>
             <point key="canvasLocation" x="75" y="250"/>
         </scene>
-        <!--View Controller-->
+        <!--MPC File Converter-->
         <scene sceneID="hIz-AP-VOD">
             <objects>
-                <viewController id="XfG-lQ-9wD" customClass="ViewController" customModule="mpc_audio" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="MPC File Converter" id="XfG-lQ-9wD" customClass="ViewController" customModule="mpc_audio" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="m2S-Jp-Qdl">
                         <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bnm-tM-fXb">
-                                <rect key="frame" x="176" y="13" width="129" height="32"/>
-                                <buttonCell key="cell" type="push" title="Convert Audio" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="IQk-7L-iFo">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="convertAudioPressed:" target="XfG-lQ-9wD" id="CsO-B8-uW9"/>
-                                </connections>
-                            </button>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pf1-8F-pZa">
-                                <rect key="frame" x="14" y="189" width="111" height="32"/>
+                                <rect key="frame" x="14" y="101" width="168" height="32"/>
                                 <buttonCell key="cell" type="push" title="Select Files" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="mcs-S3-Vdt">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -693,7 +683,7 @@
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="J3K-4C-Zt0">
-                                <rect key="frame" x="14" y="222" width="168" height="32"/>
+                                <rect key="frame" x="14" y="134" width="168" height="32"/>
                                 <buttonCell key="cell" type="push" title="Select Output Folder" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="LRG-uY-MRH">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -703,23 +693,121 @@
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uvQ-6X-Blf">
-                                <rect key="frame" x="184" y="229" width="276" height="22"/>
-                                <textFieldCell key="cell" lineBreakMode="truncatingHead" sendsActionOnEndEditing="YES" borderStyle="bezel" alignment="left" placeholderString="" drawsBackground="YES" id="SJe-6B-KkT">
+                                <rect key="frame" x="190" y="143" width="266" height="17"/>
+                                <textFieldCell key="cell" lineBreakMode="truncatingHead" sendsActionOnEndEditing="YES" alignment="left" placeholderString="" drawsBackground="YES" id="SJe-6B-KkT">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" white="0.90372983870000001" alpha="1" colorSpace="calibratedWhite"/>
                                 </textFieldCell>
                             </textField>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uN7-Lh-F82">
+                                <rect key="frame" x="184" y="222" width="168" height="32"/>
+                                <buttonCell key="cell" type="push" title="Export Options" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Qda-Wn-N25">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <segue destination="vZl-4s-2vT" kind="popover" popoverAnchorView="uN7-Lh-F82" popoverBehavior="semitransient" preferredEdge="maxY" id="sq6-Am-ATu"/>
+                                </connections>
+                            </button>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qBE-Vv-bqD">
+                                <rect key="frame" x="188" y="110" width="270" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" id="pGW-M2-KXo">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="q7c-jE-3E2">
+                                <rect key="frame" x="20" y="228" width="156" height="22"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" placeholderString="Export Prefix" drawsBackground="YES" usesSingleLineMode="YES" id="s7z-aF-4DV">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                                <connections>
+                                    <outlet property="delegate" destination="XfG-lQ-9wD" id="dHd-gG-VSp"/>
+                                </connections>
+                            </textField>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bnm-tM-fXb">
+                                <rect key="frame" x="14" y="13" width="452" height="32"/>
+                                <buttonCell key="cell" type="push" title="Convert Files" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="IQk-7L-iFo">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="convertFilesPressed:" target="XfG-lQ-9wD" id="xvV-cv-w9K"/>
+                                </connections>
+                            </button>
                         </subviews>
                     </view>
                     <connections>
-                        <outlet property="convertAudioButton" destination="Bnm-tM-fXb" id="fu5-6a-LCP"/>
+                        <outlet property="convertFilesButton" destination="Bnm-tM-fXb" id="Gwm-5T-kda"/>
+                        <outlet property="fileNamePrefixTextField" destination="q7c-jE-3E2" id="Hqr-yA-pvu"/>
+                        <outlet property="numberOfFilesSelectedTextField" destination="qBE-Vv-bqD" id="u5R-lY-y0g"/>
                         <outlet property="selectedOutputFolderTextField" destination="uvQ-6X-Blf" id="gNA-Gr-f4A"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="655"/>
+            <point key="canvasLocation" x="-185" y="661"/>
+        </scene>
+        <!--Export OptionsVC-->
+        <scene sceneID="b1T-B4-aQ0">
+            <objects>
+                <viewController id="vZl-4s-2vT" customClass="exportOptionsVC" customModule="mpc_audio" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="mew-M6-gOL">
+                        <rect key="frame" x="0.0" y="0.0" width="304" height="105"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oA5-Gn-fib">
+                                <rect key="frame" x="18" y="18" width="268" height="18"/>
+                                <buttonCell key="cell" type="check" title="Replace orignal file prefix with my prefix" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="YQw-RL-eu8">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="replacePrefixPressed:" target="vZl-4s-2vT" id="8jb-f6-elt"/>
+                                </connections>
+                            </button>
+                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sQ0-bS-RLt">
+                                <rect key="frame" x="18" y="38" width="197" height="18"/>
+                                <buttonCell key="cell" type="check" title="Append number to file name" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="Odr-5a-yiY">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="appendNumberPressed:" target="vZl-4s-2vT" id="00c-oh-gis"/>
+                                </connections>
+                            </button>
+                            <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3ZG-ka-Lb8">
+                                <rect key="frame" x="18" y="61" width="168" height="26"/>
+                                <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="1v6-fO-SIT">
+                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="menu"/>
+                                    <menu key="menu" id="7YI-bI-g36">
+                                        <items>
+                                            <menuItem title="No character limit" id="B8I-fZ-bba"/>
+                                            <menuItem title="8 character limit" id="d8Z-gb-btm"/>
+                                            <menuItem title="16 character limit" id="Jdy-oG-Ms0"/>
+                                        </items>
+                                    </menu>
+                                </popUpButtonCell>
+                                <connections>
+                                    <action selector="charLimitValueChanged:" target="vZl-4s-2vT" id="eUs-dh-mVN"/>
+                                </connections>
+                            </popUpButton>
+                        </subviews>
+                    </view>
+                    <connections>
+                        <outlet property="appendNumberCheckButton" destination="sQ0-bS-RLt" id="jla-xy-ceN"/>
+                        <outlet property="charLimitPopupButton" destination="3ZG-ka-Lb8" id="b5r-3b-x14"/>
+                        <outlet property="replacePrefixCheckButton" destination="oA5-Gn-fib" id="j53-6G-rBj"/>
+                    </connections>
+                </viewController>
+                <customObject id="Xfx-Jf-6pO" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="236" y="578.5"/>
         </scene>
     </scenes>
 </document>

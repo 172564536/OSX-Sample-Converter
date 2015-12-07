@@ -11,8 +11,10 @@ import Cocoa
 class ViewController: NSViewController {
     
     // MARK: outlets
-    @IBOutlet weak var convertAudioButton: NSButton!
+    @IBOutlet weak var convertFilesButton: NSButton!
     @IBOutlet weak var selectedOutputFolderTextField: NSTextField!
+    @IBOutlet weak var numberOfFilesSelectedTextField: NSTextField!
+    @IBOutlet weak var fileNamePrefixTextField: NSTextField!
     
     // MARK: ivars
     var selectedAudioFileUrls = []
@@ -65,18 +67,23 @@ class ViewController: NSViewController {
         filePicker.canChooseFiles = true
         filePicker.title = "Select Files"
         filePicker.canChooseDirectories = false
-        filePicker.runModal()
-        
-        selectedAudioFileUrls = filePicker.URLs
-        
-        if (selectedAudioFileUrls.count > 0 && canShowConvertAudioButton()) {
-            hideConvertAudioButton(false)
-        } else {
-            hideConvertAudioButton(true)
+        filePicker.beginWithCompletionHandler { (result) -> Void in
+            if (result == NSFileHandlingPanelOKButton) {
+                
+                self.selectedAudioFileUrls = filePicker.URLs
+                self.numberOfFilesSelectedTextField.stringValue = "Files selected: \(self.selectedAudioFileUrls.count)"
+                if (self.selectedAudioFileUrls.count > 0 && self.canShowConvertAudioButton()) {
+                    self.hideConvertAudioButton(false)
+                } else {
+                    self.hideConvertAudioButton(true)
+                }
+            }
         }
+        
+        
     }
     
-    @IBAction func convertAudioPressed(button: NSButton) {
+    @IBAction func convertFilesPressed(sender: NSButton) {
         
         hideConvertAudioButton(true)
         
@@ -96,7 +103,7 @@ class ViewController: NSViewController {
     }
     
     func hideConvertAudioButton(hidden: Bool) {
-        self.convertAudioButton.hidden = hidden
-    }
+        self.convertFilesButton.hidden = hidden
+    }       
 }
 

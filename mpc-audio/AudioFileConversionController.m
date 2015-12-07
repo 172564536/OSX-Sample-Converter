@@ -45,8 +45,11 @@ toDestinationFolder:(NSURL *)destinationFolder
     [FileOperations deleteFileIfExists:outputFileUrl];
     
     [readerWriter convertAudioFileFromInputUrl:inputFileUrl toOutputUrl:outputFileUrl withCallBack:^(BOOL success) {
+        if (!success) {
+            [FileOperations deleteFileIfExists:outputFileUrl];
+        }
         NSArray *remainingUrls = [audioFileUrls subarrayWithRange:NSMakeRange(1, count-1)];
-        [self processArray:remainingUrls withReaderWriter:readerWriter toDestinationFolder:destinationFolder withExportConfig:exportConfig completion:complete];
+        [self processArray:remainingUrls withReaderWriter:readerWriter toDestinationFolder:destinationFolder withExportConfig:exportConfig completion:complete];        
     }];
 }
 

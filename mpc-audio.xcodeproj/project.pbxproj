@@ -73,7 +73,7 @@
 			name = ViewControllers;
 			sourceTree = "<group>";
 		};
-		C39A88F31C15ABBD000E2613 /* UserDefaults */ = {
+		C39A88F31C15ABBD000E2613 /* Config */ = {
 			isa = PBXGroup;
 			children = (
 				C39A88EF1C15AA75000E2613 /* MpcUserDefaults.h */,
@@ -81,7 +81,7 @@
 				C39A88F41C15BFE6000E2613 /* ExportConfig.h */,
 				C39A88F51C15BFE6000E2613 /* ExportConfig.m */,
 			);
-			name = UserDefaults;
+			name = Config;
 			sourceTree = "<group>";
 		};
 		C3F038A71C12FF8B00EB3849 = {
@@ -103,7 +103,7 @@
 		C3F038B21C12FF8B00EB3849 /* mpc-audio */ = {
 			isa = PBXGroup;
 			children = (
-				C39A88F31C15ABBD000E2613 /* UserDefaults */,
+				C39A88F31C15ABBD000E2613 /* Config */,
 				C39A88F21C15ABAD000E2613 /* ViewControllers */,
 				C39A88E81C146D2E000E2613 /* AudioFileConversion */,
 				C3F038B31C12FF8B00EB3849 /* AppDelegate.swift */,

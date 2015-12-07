@@ -21,7 +21,7 @@
     NSError *readerError = nil;
     AVAssetReader *reader = [[AVAssetReader alloc] initWithAsset:origAsset
                                                            error:&readerError];
-    if (readerError) callBack(NO);
+    if (readerError) return callBack(NO);
     
     AVAssetTrack *track = [[origAsset tracksWithMediaType:AVMediaTypeAudio] objectAtIndex:0];
     AVAssetReaderTrackOutput *readerOutput = [[AVAssetReaderTrackOutput alloc] initWithTrack:track
@@ -33,7 +33,7 @@
     AVAssetWriter *writer = [[AVAssetWriter alloc] initWithURL:outputUrl
                                                       fileType:AVFileTypeWAVE
                                                          error:&writerError];
-    if (writerError) callBack(NO);
+    if (writerError) return callBack(NO);
     
     AudioChannelLayout channelLayout;
     memset(&channelLayout, 0, sizeof(AudioChannelLayout));
@@ -72,38 +72,43 @@
         
         NSLog(@"Asset Writer ready : %d", writerInput.readyForMoreMediaData);
         
-        // Loop through samples until done
-        while (writerInput.readyForMoreMediaData) {
-            CMSampleBufferRef nextBuffer;
-            if ([reader status] == AVAssetReaderStatusReading && (nextBuffer = [readerOutput copyNextSampleBuffer])) {
-                if (nextBuffer) {
-                    NSLog(@"Adding buffer");
-                    [writerInput appendSampleBuffer:nextBuffer];
-                }
-            } else {
-                [writerInput markAsFinished];
-                
-                //ToDo:
-                // 1. will this reader status need checking periodically (with other enum values) rather then just at end?
-                
+        @try {
+            // Loop through samples until done
+            while (writerInput.readyForMoreMediaData) {
+                CMSampleBufferRef nextBuffer;
+                if ([reader status] == AVAssetReaderStatusReading && (nextBuffer = [readerOutput copyNextSampleBuffer])) {
+                    if (nextBuffer) {
+                        NSLog(@"Adding buffer");
+                        [writerInput appendSampleBuffer:nextBuffer];
+                    }
+                } else {
+                    [writerInput markAsFinished];
+                    
+                    //ToDo:
+                    // 1. will this reader status need checking periodically (with other enum values) rather then just at end?
+                    
 #pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wswitch"                
-                switch ([reader status]) {
-                    case AVAssetReaderStatusFailed:
-                        [writer cancelWriting];
-                        callBack(NO);
-                        break;
-                    case AVAssetReaderStatusCompleted:
-                        NSLog(@"Writer completed");
-                        [writer endSessionAtSourceTime:origAsset.duration];
-                        [writer finishWritingWithCompletionHandler:^{
-                            callBack(YES);
-                        }];
-                        break;
+#pragma GCC diagnostic ignored "-Wswitch"
+                    switch ([reader status]) {
+                        case AVAssetReaderStatusFailed:
+                            [writer cancelWriting];
+                            return callBack(NO);
+                        case AVAssetReaderStatusCompleted:
+                            NSLog(@"Writer completed");
+                            [writer endSessionAtSourceTime:origAsset.duration];
+                            [writer finishWritingWithCompletionHandler:^{
+                               return callBack(YES);
+                            }];
+                            break;
+                    }
+#pragma GCC diagnostic pop
+                    break;
                 }
-#pragma GCC diagnostic pop                
-                break;
-            }
+            }            
+        }
+        @catch (NSException *exception) {
+            NSLog(@"Error Converting File. Maybe a compressed format made its way in? %@", exception.description);
+            return callBack(NO);
         }
     }];
 }

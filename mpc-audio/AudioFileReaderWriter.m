@@ -108,6 +108,7 @@
         }
         @catch (NSException *exception) {
             NSLog(@"Error Converting File. Maybe a compressed format made its way in? %@", exception.description);
+            //todo: this cant keep calling back else we are in the shit
             return callBack(NO);
         }
     }];

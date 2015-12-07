@@ -8,10 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
+@class ExportConfig;
+
 @interface AudioFileConversionController : NSObject
 
 -(void)convertAudioFilesFromUrls:(NSArray *)audioFileUrls
              toDestinationFolder:(NSURL *)destinationFolder
+         withExportOptionsConfig:(ExportConfig *)exportConfig
                       completion:(void(^)(void))complete;
 
 @end

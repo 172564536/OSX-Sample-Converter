@@ -12,6 +12,7 @@
 		C39A88E71C145E7A000E2613 /* FileOperations.m in Sources */ = {isa = PBXBuildFile; fileRef = C39A88E61C145E7A000E2613 /* FileOperations.m */; };
 		C39A88EC1C15A4DE000E2613 /* exportOptionsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39A88EB1C15A4DE000E2613 /* exportOptionsVC.swift */; };
 		C39A88F11C15AA75000E2613 /* MpcUserDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = C39A88F01C15AA75000E2613 /* MpcUserDefaults.m */; };
+		C39A88F61C15BFE6000E2613 /* ExportConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = C39A88F51C15BFE6000E2613 /* ExportConfig.m */; };
 		C3F038B41C12FF8B00EB3849 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F038B31C12FF8B00EB3849 /* AppDelegate.swift */; };
 		C3F038B61C12FF8B00EB3849 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F038B51C12FF8B00EB3849 /* ViewController.swift */; };
 		C3F038B81C12FF8B00EB3849 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C3F038B71C12FF8B00EB3849 /* Assets.xcassets */; };
@@ -28,6 +29,8 @@
 		C39A88EB1C15A4DE000E2613 /* exportOptionsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = exportOptionsVC.swift; sourceTree = "<group>"; };
 		C39A88EF1C15AA75000E2613 /* MpcUserDefaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MpcUserDefaults.h; sourceTree = "<group>"; };
 		C39A88F01C15AA75000E2613 /* MpcUserDefaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MpcUserDefaults.m; sourceTree = "<group>"; };
+		C39A88F41C15BFE6000E2613 /* ExportConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExportConfig.h; sourceTree = "<group>"; };
+		C39A88F51C15BFE6000E2613 /* ExportConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExportConfig.m; sourceTree = "<group>"; };
 		C3F038B01C12FF8B00EB3849 /* mpc-audio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "mpc-audio.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3F038B31C12FF8B00EB3849 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C3F038B51C12FF8B00EB3849 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -75,6 +78,8 @@
 			children = (
 				C39A88EF1C15AA75000E2613 /* MpcUserDefaults.h */,
 				C39A88F01C15AA75000E2613 /* MpcUserDefaults.m */,
+				C39A88F41C15BFE6000E2613 /* ExportConfig.h */,
+				C39A88F51C15BFE6000E2613 /* ExportConfig.m */,
 			);
 			name = UserDefaults;
 			sourceTree = "<group>";
@@ -184,6 +189,7 @@
 				C39A88E71C145E7A000E2613 /* FileOperations.m in Sources */,
 				C39A88DF1C143FF5000E2613 /* AudioFileConversionController.m in Sources */,
 				C39A88F11C15AA75000E2613 /* MpcUserDefaults.m in Sources */,
+				C39A88F61C15BFE6000E2613 /* ExportConfig.m in Sources */,
 				C3F038B41C12FF8B00EB3849 /* AppDelegate.swift in Sources */,
 				C39A88E41C14527E000E2613 /* AudioFileReaderWriter.m in Sources */,
 				C39A88EC1C15A4DE000E2613 /* exportOptionsVC.swift in Sources */,

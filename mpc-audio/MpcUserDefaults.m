@@ -14,6 +14,11 @@ NSString * const DEFS_KEY_REPLACE_EXISTING_PREFIX    = @"mpc.defs.replaceExistin
 
 @implementation MpcUserDefaults
 
++(NSDictionary *)getImmutableDefsFile
+{
+    return [[self getUserDefs]copy];
+}
+
 +(NSMutableDictionary*)getUserDefs
 {
     NSFileManager *fileManager = [NSFileManager defaultManager];

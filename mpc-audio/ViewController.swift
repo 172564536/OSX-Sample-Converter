@@ -26,12 +26,6 @@ class ViewController: NSViewController {
         setUpView()
     }
     
-    override var representedObject: AnyObject? {
-        didSet {
-            // Update the view, if already loaded.
-        }
-    }
-    
      // MARK: setUpView
     func setUpView() {
         hideConvertAudioButton(true)
@@ -87,8 +81,12 @@ class ViewController: NSViewController {
         
         hideConvertAudioButton(true)
         
+        let exportConfig = ExportConfig()
+        exportConfig.buildFromDefaults(MpcUserDefaults.getImmutableDefsFile())
+        exportConfig.exportPrefix = fileNamePrefixTextField.stringValue
+        
         let conversionController: AudioFileConversionController = AudioFileConversionController()
-        conversionController.convertAudioFilesFromUrls(selectedAudioFileUrls as! [NSArray], toDestinationFolder: selectedFolder) { () -> Void in
+        conversionController.convertAudioFilesFromUrls(selectedAudioFileUrls as! [NSArray], toDestinationFolder: selectedFolder,  withExportOptionsConfig: exportConfig) { () -> Void in
             print("DONE");
         }
     }

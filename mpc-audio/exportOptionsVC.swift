@@ -49,7 +49,7 @@ class exportOptionsVC: NSViewController {
             }
         }
         
-        appendNumberCheckButton.state = MpcUserDefaults.valueForKey(DEFS_KEY_APPEND_NUMBER_TO_FILE_NAME).integerValue
+        appendNumberCheckButton.state  = MpcUserDefaults.valueForKey(DEFS_KEY_APPEND_NUMBER_TO_FILE_NAME).integerValue
         replacePrefixCheckButton.state = MpcUserDefaults.valueForKey(DEFS_KEY_REPLACE_EXISTING_PREFIX).integerValue
     }
     

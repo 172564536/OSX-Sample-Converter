@@ -18,5 +18,6 @@ extern NSString * const DEFS_KEY_REPLACE_EXISTING_PREFIX;
 
 +(id)valueForKey:(NSString*)key;
 +(void)setValue:(id)value forKey:(NSString*)key;
++(NSDictionary *)getImmutableDefsFile;
 
 @end

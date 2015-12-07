@@ -18,6 +18,7 @@
 
 -(void)convertAudioFilesFromUrls:(NSArray *)audioFileUrls
              toDestinationFolder:(NSURL *)destinationFolder
+         withExportOptionsConfig:(ExportConfig *)exportConfig
                       completion:(void(^)(void))complete;
 {    
     AudioFileReaderWriter *readerWriter = [[AudioFileReaderWriter alloc]init];

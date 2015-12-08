@@ -20,9 +20,8 @@
 
 @interface AudioFileConversionController : NSObject
 
--(void)convertAudioFilesFromUrls:(NSArray *)audioFileUrls
-             toDestinationFolder:(NSURL *)destinationFolder
-         withExportOptionsConfig:(ExportConfig *)exportConfig;
+-(instancetype)initWithAudioFileUrls:(NSArray *)audioFileUrls DestinationFolder:(NSURL *)destinationFolder andExportOptionsConfig:(ExportConfig *)exportConfig;
+-(void)start;
 
 @property (nonatomic, weak) id <AudioFileConversionControllerDelegate>delegate;
 

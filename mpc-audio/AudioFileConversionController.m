@@ -27,7 +27,26 @@
 @implementation AudioFileConversionController
 
 #pragma mark -
-#pragma mark - SetUp
+#pragma mark - Initialisation
+
+-(instancetype)init
+{
+    [NSException raise:@"** Invalid State **" format:@"Call 'initWithAudioFileUrls' instead"];
+    return nil;
+}
+
+-(instancetype)initWithAudioFileUrls:(NSArray *)audioFileUrls DestinationFolder:(NSURL *)destinationFolder andExportOptionsConfig:(ExportConfig *)exportConfig
+{
+    self = [super init];
+    
+    if (self) {
+        [self initializeReaderWriter];
+        self.destintionFolderUrl = destinationFolder;
+        self.audioFileUrls = [[NSMutableArray alloc]initWithArray:audioFileUrls];
+        self.exportConfig = exportConfig;
+    }
+    return self;
+}
 
 -(void)initializeReaderWriter
 {
@@ -40,16 +59,8 @@
 #pragma mark -
 #pragma mark - Conversion
 
--(void)convertAudioFilesFromUrls:(NSArray *)audioFileUrls
-             toDestinationFolder:(NSURL *)destinationFolder
-         withExportOptionsConfig:(ExportConfig *)exportConfig
-
+-(void)start
 {
-    [self initializeReaderWriter];
-    self.destintionFolderUrl = destinationFolder;
-    self.audioFileUrls = [[NSMutableArray alloc]initWithArray:audioFileUrls];
-    self.exportConfig = exportConfig;
-
     [self checkForRemainingItemsToProcess];
 }
 

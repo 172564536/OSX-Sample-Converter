@@ -114,9 +114,9 @@ class ViewController: NSViewController, AudioFileConversionControllerDelegate {
         
         startProgressIndicator()
         
-        conversionController = AudioFileConversionController()
+        conversionController = AudioFileConversionController.init(audioFileUrls: selectedAudioFileUrls as! [NSArray], destinationFolder: selectedFolder,  andExportOptionsConfig: exportConfig)
         conversionController?.delegate = self
-        conversionController!.convertAudioFilesFromUrls(selectedAudioFileUrls as! [NSArray], toDestinationFolder: selectedFolder,  withExportOptionsConfig: exportConfig)
+        conversionController!.start()
     }
     
     func audioFileConversionControllerDidFinish() {

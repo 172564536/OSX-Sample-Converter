@@ -10,11 +10,11 @@
 
 @interface ExportConfig : NSObject
 
-@property (copy, readwrite) NSString *exportPrefix;
+@property (copy, readwrite, nonatomic) NSString *exportPrefix;
 
-@property (readonly) NSNumber *appendNumberToFileName;
-@property (readonly) NSNumber *replaceOriginalFilePrefix;
-@property (readonly) NSNumber *permitedNumberOfCharactersInFileName;
+@property (readonly, nonatomic) NSNumber *appendNumberToFileName;
+@property (readonly, nonatomic) NSNumber *replaceOriginalFilePrefix;
+@property (readonly, nonatomic) NSNumber *permitedNumberOfCharactersInFileName;
 
 -(void)buildFromDefaults:(NSDictionary *)defaults;
 

@@ -14,6 +14,13 @@
 -(void)convertAudioFileFromInputUrl:(NSURL *)inputUrl
                         toOutputUrl:(NSURL *)outputUrl
 {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self convertInBackGroundFromInputUrl:inputUrl toOutputUrl:outputUrl];
+    });
+}
+
+-(void)convertInBackGroundFromInputUrl:(NSURL *)inputUrl toOutputUrl:(NSURL *)outputUrl
+{
     AVAsset *origAsset = [AVAsset assetWithURL:inputUrl];
     
     // set up reader
@@ -119,11 +126,13 @@
 
 -(void)callDelgateOnMainThreadWithOutcome:(BOOL)success
 {
-    if (success) {
-        [self.delegate audioFileReaderWriterDidCompleteWithSuccess];
-    } else {
-        [self.delegate audioFileReaderWriterDidFail];
-    }
+    dispatch_async(dispatch_get_main_queue(), ^(){
+        if (success) {
+            [self.delegate audioFileReaderWriterDidCompleteWithSuccess];
+        } else {
+            [self.delegate audioFileReaderWriterDidFail];
+        }
+    });
 }
 
 @end

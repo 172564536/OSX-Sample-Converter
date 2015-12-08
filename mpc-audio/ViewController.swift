@@ -130,7 +130,6 @@ class ViewController: NSViewController, AudioFileConversionControllerDelegate {
     
     // MARK: ProgressIndicator
     func startProgressIndicator() {
-        progressIndicator.usesThreadedAnimation = true
         progressIndicator.startAnimation(self)
     }
     

@@ -16,6 +16,7 @@ class ViewController: NSViewController {
     @IBOutlet weak var numberOfFilesSelectedTextField: NSTextField!
     @IBOutlet weak var fileNamePrefixTextField: NSTextField!
     
+    @IBOutlet weak var progressIndicator: NSProgressIndicator!
     // MARK: ivars
     var selectedAudioFileUrls = []
     var selectedFolder: NSURL?
@@ -23,6 +24,7 @@ class ViewController: NSViewController {
     // MARK: lifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setUpView()
     }
     
@@ -107,6 +109,21 @@ class ViewController: NSViewController {
     
     func hideConvertAudioButton(hidden: Bool) {
         self.convertFilesButton.hidden = hidden
-    }       
+    }
+    
+    // MARK: ProgressIndicator
+    func startProgressIndicator() {
+        progressIndicator.usesThreadedAnimation = true
+        progressIndicator.startAnimation(self)
+        progressIndicator.incrementBy(2)
+    }
+    
+    func incrementProgressIndicator() {
+        progressIndicator.incrementBy(1)
+    }
+    
+    func stopProgressIndicator() {
+        progressIndicator.stopAnimation(self)
+    }
 }
 

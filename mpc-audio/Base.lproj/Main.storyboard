@@ -730,7 +730,7 @@
                                 </connections>
                             </textField>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bnm-tM-fXb">
-                                <rect key="frame" x="14" y="13" width="452" height="32"/>
+                                <rect key="frame" x="345" y="13" width="121" height="32"/>
                                 <buttonCell key="cell" type="push" title="Convert Files" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="IQk-7L-iFo">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -739,12 +739,16 @@
                                     <action selector="convertFilesPressed:" target="XfG-lQ-9wD" id="xvV-cv-w9K"/>
                                 </connections>
                             </button>
+                            <progressIndicator fixedFrame="YES" maxValue="100" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="YsR-QT-ds3">
+                                <rect key="frame" x="15" y="19" width="328" height="20"/>
+                            </progressIndicator>
                         </subviews>
                     </view>
                     <connections>
                         <outlet property="convertFilesButton" destination="Bnm-tM-fXb" id="Gwm-5T-kda"/>
                         <outlet property="fileNamePrefixTextField" destination="q7c-jE-3E2" id="Hqr-yA-pvu"/>
                         <outlet property="numberOfFilesSelectedTextField" destination="qBE-Vv-bqD" id="u5R-lY-y0g"/>
+                        <outlet property="progressIndicator" destination="YsR-QT-ds3" id="bbJ-VM-6aM"/>
                         <outlet property="selectedOutputFolderTextField" destination="uvQ-6X-Blf" id="gNA-Gr-f4A"/>
                     </connections>
                 </viewController>

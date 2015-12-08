@@ -53,4 +53,13 @@ NSString * const DEFS_KEY_REPLACE_EXISTING_PREFIX    = @"mpc.defs.replaceExistin
     [defs writeToFile:[self getPath] atomically:YES];
 }
 
++(void)setUpDefaultValues
+{
+    NSMutableDictionary *defs = [self getUserDefs];
+    [defs setValue:@16 forKey:DEFS_KEY_MAX_CHARACTER_COUNT];
+    [defs setValue:@YES forKey:DEFS_KEY_APPEND_NUMBER_TO_FILE_NAME];
+    [defs setValue:@NO forKey:DEFS_KEY_REPLACE_EXISTING_PREFIX];
+    [defs writeToFile:[self getPath] atomically:YES];
+}
+
 @end

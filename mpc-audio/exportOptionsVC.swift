@@ -24,6 +24,12 @@ class exportOptionsVC: NSViewController {
     // MARK: lifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let defaultsDict = MpcUserDefaults.getImmutableDefsFile()
+        if (defaultsDict.keys.count == 0) {
+            MpcUserDefaults.setUpDefaultValues()
+        }
+        
         setUpView()
     }
     

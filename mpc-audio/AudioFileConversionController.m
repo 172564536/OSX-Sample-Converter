@@ -8,6 +8,7 @@
 
 #import "AudioFileConversionController.h"
 #import "AudioFileReaderWriter.h"
+#import "MpcFileNameGenerator.h"
 #import "FileOperations.h"
 
 @interface AudioFileConversionController ()
@@ -39,7 +40,7 @@ toDestinationFolder:(NSURL *)destinationFolder
     
     NSURL *inputFileUrl      = [audioFileUrls objectAtIndex:0];
     NSString *inpultFileName = [inputFileUrl lastPathComponent];
-    NSString *newFileName    = [FileOperations createNewFileNameFromExistingFileName:inpultFileName withExportConfig:exportConfig fileNumber:count];
+    NSString *newFileName    = [MpcFileNameGenerator createNewFileNameFromExistingFileName:inpultFileName withExportConfig:exportConfig fileNumber:count];
     NSURL *outputFileUrl     = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", destinationFolder.absoluteString, newFileName]];
     
     [FileOperations deleteFileIfExists:outputFileUrl];

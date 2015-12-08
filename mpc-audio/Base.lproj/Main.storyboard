@@ -118,12 +118,12 @@
             <objects>
                 <viewController title="MPC File Converter" id="XfG-lQ-9wD" customClass="ViewController" customModule="mpc_audio" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="219"/>
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="189"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pf1-8F-pZa">
-                                <rect key="frame" x="14" y="109" width="177" height="32"/>
-                                <buttonCell key="cell" type="push" title="Choose Files" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="mcs-S3-Vdt">
+                                <rect key="frame" x="20" y="83" width="165" height="25"/>
+                                <buttonCell key="cell" type="roundTextured" title="Files" bezelStyle="texturedRounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="mcs-S3-Vdt">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -132,8 +132,8 @@
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="J3K-4C-Zt0">
-                                <rect key="frame" x="14" y="140" width="177" height="32"/>
-                                <buttonCell key="cell" type="push" title="Choose Output Folder" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="LRG-uY-MRH">
+                                <rect key="frame" x="20" y="114" width="165" height="25"/>
+                                <buttonCell key="cell" type="roundTextured" title="Output Folder" bezelStyle="texturedRounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="LRG-uY-MRH">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -142,7 +142,7 @@
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uvQ-6X-Blf">
-                                <rect key="frame" x="192" y="149" width="267" height="17"/>
+                                <rect key="frame" x="192" y="119" width="267" height="17"/>
                                 <textFieldCell key="cell" lineBreakMode="truncatingHead" sendsActionOnEndEditing="YES" alignment="left" placeholderString="" drawsBackground="YES" id="SJe-6B-KkT">
                                     <font key="font" size="13" name=".HelveticaNeueDeskInterface-Light"/>
                                     <color key="textColor" name="alternateSelectedControlColor" catalog="System" colorSpace="catalog"/>
@@ -150,8 +150,8 @@
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uN7-Lh-F82">
-                                <rect key="frame" x="14" y="171" width="177" height="32"/>
-                                <buttonCell key="cell" type="push" title="Choose Export Options" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Qda-Wn-N25">
+                                <rect key="frame" x="20" y="145" width="165" height="25"/>
+                                <buttonCell key="cell" type="roundTextured" title="Export Options" bezelStyle="texturedRounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Qda-Wn-N25">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -160,7 +160,7 @@
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qBE-Vv-bqD">
-                                <rect key="frame" x="191" y="119" width="271" height="17"/>
+                                <rect key="frame" x="191" y="88" width="271" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" id="pGW-M2-KXo">
                                     <font key="font" size="13" name=".HelveticaNeueDeskInterface-Light"/>
                                     <color key="textColor" name="alternateSelectedControlColor" catalog="System" colorSpace="catalog"/>
@@ -168,8 +168,8 @@
                                 </textFieldCell>
                             </textField>
                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="q7c-jE-3E2">
-                                <rect key="frame" x="20" y="84" width="165" height="22"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="center" placeholderString="Choose Export Prefix" drawsBackground="YES" usesSingleLineMode="YES" id="s7z-aF-4DV">
+                                <rect key="frame" x="20" y="54" width="165" height="22"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="center" placeholderString="Add Prefix" usesSingleLineMode="YES" bezelStyle="round" id="s7z-aF-4DV">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -178,9 +178,12 @@
                                     <outlet property="delegate" destination="XfG-lQ-9wD" id="dHd-gG-VSp"/>
                                 </connections>
                             </textField>
+                            <progressIndicator fixedFrame="YES" maxValue="100" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="YsR-QT-ds3">
+                                <rect key="frame" x="20" y="19" width="267" height="22"/>
+                            </progressIndicator>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bnm-tM-fXb">
-                                <rect key="frame" x="322" y="42" width="144" height="32"/>
-                                <buttonCell key="cell" type="push" title="Start Conversion" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="IQk-7L-iFo">
+                                <rect key="frame" x="295" y="17" width="165" height="25"/>
+                                <buttonCell key="cell" type="roundTextured" title="Start Conversion" bezelStyle="texturedRounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="IQk-7L-iFo">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -188,9 +191,6 @@
                                     <action selector="convertFilesPressed:" target="XfG-lQ-9wD" id="xvV-cv-w9K"/>
                                 </connections>
                             </button>
-                            <progressIndicator fixedFrame="YES" maxValue="100" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="YsR-QT-ds3">
-                                <rect key="frame" x="20" y="48" width="300" height="22"/>
-                            </progressIndicator>
                         </subviews>
                     </view>
                     <connections>
@@ -203,7 +203,7 @@
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-242" y="614.5"/>
+            <point key="canvasLocation" x="-242" y="599.5"/>
         </scene>
         <!--Export OptionsVC-->
         <scene sceneID="b1T-B4-aQ0">
@@ -234,9 +234,9 @@
                                 </connections>
                             </button>
                             <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3ZG-ka-Lb8">
-                                <rect key="frame" x="18" y="61" width="168" height="26"/>
-                                <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="1v6-fO-SIT">
-                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                <rect key="frame" x="18" y="62" width="168" height="25"/>
+                                <popUpButtonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="1v6-fO-SIT">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="menu"/>
                                     <menu key="menu" id="7YI-bI-g36">
                                         <items>

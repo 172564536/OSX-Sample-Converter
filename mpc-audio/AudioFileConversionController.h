@@ -8,13 +8,22 @@
 
 #import <Foundation/Foundation.h>
 
+
+@protocol AudioFileConversionControllerDelegate <NSObject>
+
+@required
+-(void)audioFileConversionControllerDidReportProgress;
+-(void)audioFileConversionControllerDidFinish;
+@end
+
 @class ExportConfig;
 
 @interface AudioFileConversionController : NSObject
 
 -(void)convertAudioFilesFromUrls:(NSArray *)audioFileUrls
              toDestinationFolder:(NSURL *)destinationFolder
-         withExportOptionsConfig:(ExportConfig *)exportConfig
-                      completion:(void(^)(void))complete;
+         withExportOptionsConfig:(ExportConfig *)exportConfig;
+
+@property (nonatomic, weak) id <AudioFileConversionControllerDelegate>delegate;
 
 @end

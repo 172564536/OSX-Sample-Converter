@@ -11,47 +11,86 @@
 #import "MpcFileNameGenerator.h"
 #import "FileOperations.h"
 
-@interface AudioFileConversionController ()
+@interface AudioFileConversionController () <AudioFileReaderWriterDelegate>
+
+@property (nonatomic, strong) AudioFileReaderWriter *readerWriter;
+@property (nonatomic, strong) NSMutableArray *audioFileUrls;
+@property (nonatomic, strong) ExportConfig *exportConfig;
+
+@property (nonatomic, strong) NSURL *currentExportUrl;
+@property (nonatomic, strong) NSURL *destintionFolderUrl;
+
+@property NSInteger counter;
 
 @end
 
 @implementation AudioFileConversionController
 
+#pragma mark -
+#pragma mark - SetUp
+
+-(void)initializeReaderWriter
+{
+    self.readerWriter = nil;
+    self.readerWriter.delegate = nil;
+    self.readerWriter = [[AudioFileReaderWriter alloc]init];
+    self.readerWriter.delegate = self;
+}
+
+#pragma mark -
+#pragma mark - Conversion
+
 -(void)convertAudioFilesFromUrls:(NSArray *)audioFileUrls
              toDestinationFolder:(NSURL *)destinationFolder
          withExportOptionsConfig:(ExportConfig *)exportConfig
-                      completion:(void(^)(void))complete;
-{    
-    AudioFileReaderWriter *readerWriter = [[AudioFileReaderWriter alloc]init];
-    
-    [self processArray:audioFileUrls withReaderWriter:readerWriter toDestinationFolder:destinationFolder withExportConfig:exportConfig completion:^{
-        complete();
-    }];
+
+{
+    [self initializeReaderWriter];
+    self.destintionFolderUrl = destinationFolder;
+    self.audioFileUrls = [[NSMutableArray alloc]initWithArray:audioFileUrls];
+    self.exportConfig = exportConfig;
+
+    [self checkForRemainingItemsToProcess];
 }
 
--(void)processArray:(NSArray *)audioFileUrls
-   withReaderWriter:(AudioFileReaderWriter *)readerWriter
-toDestinationFolder:(NSURL *)destinationFolder
-   withExportConfig:(ExportConfig *)exportConfig
-         completion:(void(^)(void))complete;
+-(void)checkForRemainingItemsToProcess
 {
-    NSInteger count = audioFileUrls.count;
-    if (count == 0) return complete();
-    
-    NSURL *inputFileUrl      = [audioFileUrls objectAtIndex:0];
+    if (self.audioFileUrls.count > 0) {
+        self.counter ++;
+        [self.delegate audioFileConversionControllerDidReportProgress];
+        
+        self.currentExportUrl = [self.audioFileUrls objectAtIndex:0];
+        [self.audioFileUrls removeObjectAtIndex:0];
+        [self processItemForUrl:self.currentExportUrl];
+    } else {
+        [self.delegate audioFileConversionControllerDidFinish];
+    }
+}
+
+-(void)processItemForUrl:(NSURL*)inputFileUrl
+{
     NSString *inpultFileName = [inputFileUrl lastPathComponent];
-    NSString *newFileName    = [MpcFileNameGenerator createNewFileNameFromExistingFileName:inpultFileName withExportConfig:exportConfig fileNumber:count];
-    NSURL *outputFileUrl     = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", destinationFolder.absoluteString, newFileName]];
+    NSString *newFileName    = [MpcFileNameGenerator createNewFileNameFromExistingFileName:inpultFileName withExportConfig:self.exportConfig fileNumber:self.counter];
+    NSURL *outputFileUrl     = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", self.destintionFolderUrl.absoluteString, newFileName]];
     
     [FileOperations deleteFileIfExists:outputFileUrl];
     
-    [readerWriter convertAudioFileFromInputUrl:inputFileUrl toOutputUrl:outputFileUrl withCallBack:^(BOOL success) {
-        if (!success) {
-            [FileOperations deleteFileIfExists:outputFileUrl];
-        }
-        NSArray *remainingUrls = [audioFileUrls subarrayWithRange:NSMakeRange(1, count-1)];
-        [self processArray:remainingUrls withReaderWriter:readerWriter toDestinationFolder:destinationFolder withExportConfig:exportConfig completion:complete];        
-    }];
+    [self.readerWriter convertAudioFileFromInputUrl:inputFileUrl toOutputUrl:outputFileUrl];
+}
+
+#pragma mark -
+#pragma mark - AudioFileReaderWriterDelegate
+
+-(void)audioFileReaderWriterDidCompleteWithSuccess
+{
+    [self checkForRemainingItemsToProcess];
+}
+
+-(void)audioFileReaderWriterDidFail
+{
+    [self initializeReaderWriter];
+    [FileOperations deleteFileIfExists:self.currentExportUrl];
+    [self checkForRemainingItemsToProcess];
 }
 
 @end

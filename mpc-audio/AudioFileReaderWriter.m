@@ -13,7 +13,6 @@
 
 -(void)convertAudioFileFromInputUrl:(NSURL *)inputUrl
                         toOutputUrl:(NSURL *)outputUrl
-                       withCallBack:(void(^)(BOOL success))callBack;
 {
     AVAsset *origAsset = [AVAsset assetWithURL:inputUrl];
     
@@ -21,7 +20,9 @@
     NSError *readerError = nil;
     AVAssetReader *reader = [[AVAssetReader alloc] initWithAsset:origAsset
                                                            error:&readerError];
-    if (readerError) return callBack(NO);
+    if (readerError) {
+        [self callDelgateOnMainThreadWithOutcome:NO];
+    }
     
     AVAssetTrack *track = [[origAsset tracksWithMediaType:AVMediaTypeAudio] objectAtIndex:0];
     AVAssetReaderTrackOutput *readerOutput = [[AVAssetReaderTrackOutput alloc] initWithTrack:track
@@ -33,7 +34,9 @@
     AVAssetWriter *writer = [[AVAssetWriter alloc] initWithURL:outputUrl
                                                       fileType:AVFileTypeWAVE
                                                          error:&writerError];
-    if (writerError) return callBack(NO);
+    if (writerError) {
+        [self callDelgateOnMainThreadWithOutcome:NO];
+    }
     
     AudioChannelLayout channelLayout;
     memset(&channelLayout, 0, sizeof(AudioChannelLayout));
@@ -93,26 +96,34 @@
                     switch ([reader status]) {
                         case AVAssetReaderStatusFailed:
                             [writer cancelWriting];
-                            return callBack(NO);
+                            [self callDelgateOnMainThreadWithOutcome:NO];
                         case AVAssetReaderStatusCompleted:
                             NSLog(@"Writer completed");
                             [writer endSessionAtSourceTime:origAsset.duration];
                             [writer finishWritingWithCompletionHandler:^{
-                               return callBack(YES);
+                                [self callDelgateOnMainThreadWithOutcome:YES];
                             }];
                             break;
                     }
 #pragma GCC diagnostic pop
                     break;
                 }
-            }            
+            }
         }
         @catch (NSException *exception) {
             NSLog(@"Error Converting File. Maybe a compressed format made its way in? %@", exception.description);
-            //todo: this cant keep calling back else we are in the shit
-            return callBack(NO);
+            [self callDelgateOnMainThreadWithOutcome:NO];
         }
     }];
+}
+
+-(void)callDelgateOnMainThreadWithOutcome:(BOOL)success
+{
+    if (success) {
+        [self.delegate audioFileReaderWriterDidCompleteWithSuccess];
+    } else {
+        [self.delegate audioFileReaderWriterDidFail];
+    }
 }
 
 @end

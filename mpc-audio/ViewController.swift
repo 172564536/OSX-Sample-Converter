@@ -8,18 +8,19 @@
 
 import Cocoa
 
-class ViewController: NSViewController {
+class ViewController: NSViewController, AudioFileConversionControllerDelegate {
     
     // MARK: outlets
     @IBOutlet weak var convertFilesButton: NSButton!
     @IBOutlet weak var selectedOutputFolderTextField: NSTextField!
     @IBOutlet weak var numberOfFilesSelectedTextField: NSTextField!
     @IBOutlet weak var fileNamePrefixTextField: NSTextField!
-    
     @IBOutlet weak var progressIndicator: NSProgressIndicator!
+    
     // MARK: ivars
     var selectedAudioFileUrls = []
     var selectedFolder: NSURL?
+    var conversionController: AudioFileConversionController?
     
     // MARK: lifeCycle
     override func viewDidLoad() {
@@ -92,10 +93,7 @@ class ViewController: NSViewController {
         exportConfig.buildFromDefaults(MpcUserDefaults.getImmutableDefsFile())
         exportConfig.exportPrefix = exportPrefix
         
-        let conversionController: AudioFileConversionController = AudioFileConversionController()
-        conversionController.convertAudioFilesFromUrls(selectedAudioFileUrls as! [NSArray], toDestinationFolder: selectedFolder,  withExportOptionsConfig: exportConfig) { () -> Void in
-            print("DONE");
-        }
+        startConversionWithExportOptions(exportConfig)
     }
     
     // MARK: hide/show convert audio button
@@ -111,11 +109,29 @@ class ViewController: NSViewController {
         self.convertFilesButton.hidden = hidden
     }
     
+    // MARK: AudioFileConversionController / Delegate
+    func startConversionWithExportOptions(exportConfig: ExportConfig) {
+        
+        startProgressIndicator()
+        
+        conversionController = AudioFileConversionController()
+        conversionController?.delegate = self
+        conversionController!.convertAudioFilesFromUrls(selectedAudioFileUrls as! [NSArray], toDestinationFolder: selectedFolder,  withExportOptionsConfig: exportConfig)
+    }
+    
+    func audioFileConversionControllerDidFinish() {
+        stopProgressIndicator()
+        hideConvertAudioButton(false)
+    }
+    
+    func audioFileConversionControllerDidReportProgress() {
+        incrementProgressIndicator()
+    }
+    
     // MARK: ProgressIndicator
     func startProgressIndicator() {
         progressIndicator.usesThreadedAnimation = true
         progressIndicator.startAnimation(self)
-        progressIndicator.incrementBy(2)
     }
     
     func incrementProgressIndicator() {

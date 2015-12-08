@@ -49,6 +49,7 @@
     NSDictionary *outputSettings = [NSDictionary dictionaryWithObjectsAndKeys:
                                     [NSNumber numberWithUnsignedInt:kAudioFormatLinearPCM], AVFormatIDKey,
                                     [NSNumber numberWithInteger:16], AVLinearPCMBitDepthKey,
+                                    AVSampleRateConverterAlgorithm_Mastering, AVSampleRateConverterAlgorithmKey,
                                     [NSNumber numberWithBool:NO], AVLinearPCMIsFloatKey,
                                     [NSNumber numberWithBool:NO], AVLinearPCMIsBigEndianKey,
                                     [NSNumber numberWithBool:NO], AVLinearPCMIsNonInterleaved,

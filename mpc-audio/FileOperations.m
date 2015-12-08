@@ -11,6 +11,20 @@
 
 @implementation FileOperations
 
++(BOOL)createFolderAtUrl:(NSURL *)fileUrl
+{
+    NSError *error;
+    BOOL success = YES;
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    success = [fileManager createDirectoryAtURL:fileUrl withIntermediateDirectories:YES attributes:nil error:&error];
+    
+    if (!error && success) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
 +(BOOL)deleteFileIfExists:(NSURL *)fileUrl
 {
     NSError *error;

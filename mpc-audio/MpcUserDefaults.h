@@ -20,6 +20,6 @@ extern NSString * const DEFS_KEY_REPLACE_EXISTING_PREFIX;
 +(void)setValue:(id)value forKey:(NSString*)key;
 +(NSDictionary *)getImmutableDefsFile;
 
-+(void)setUpDefaultValues;
++(void)setUpDefaultValuesIfPlistMissing;
 
 @end

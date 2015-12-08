@@ -84,10 +84,7 @@ class ViewController: NSViewController {
         hideConvertAudioButton(true)
         let exportPrefix = fileNamePrefixTextField.stringValue       
         
-        let defaultsDict = MpcUserDefaults.getImmutableDefsFile()
-        if (defaultsDict.keys.count == 0) {
-           MpcUserDefaults.setUpDefaultValues()
-        }
+        MpcUserDefaults.setUpDefaultValuesIfPlistMissing()
         
         let exportConfig = ExportConfig()
         exportConfig.buildFromDefaults(MpcUserDefaults.getImmutableDefsFile())

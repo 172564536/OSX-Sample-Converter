@@ -12,6 +12,7 @@
 
 @interface FileOperations : NSObject
 
++(BOOL)createFolderAtUrl:(NSURL *)fileUrl;
 +(BOOL)deleteFileIfExists:(NSURL *)fileUrl;
 
 +(NSString*)createNewFileNameFromExistingFileName:(NSString*)fileName

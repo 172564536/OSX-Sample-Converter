@@ -25,11 +25,7 @@ class exportOptionsVC: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let defaultsDict = MpcUserDefaults.getImmutableDefsFile()
-        if (defaultsDict.keys.count == 0) {
-            MpcUserDefaults.setUpDefaultValues()
-        }
-        
+        MpcUserDefaults.setUpDefaultValuesIfPlistMissing()
         setUpView()
     }
     

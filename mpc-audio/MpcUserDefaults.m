@@ -7,10 +7,14 @@
 //
 
 #import "MpcUserDefaults.h"
+#import "FileOperations.h"
 
 NSString * const DEFS_KEY_MAX_CHARACTER_COUNT        = @"mpc.defs.maxCharCount";
 NSString * const DEFS_KEY_APPEND_NUMBER_TO_FILE_NAME = @"mpc.defs.appendNumberToFileName";
 NSString * const DEFS_KEY_REPLACE_EXISTING_PREFIX    = @"mpc.defs.replaceExistingPrefix";
+
+NSString * const FOLDER_NAME = @"Mpc-Audio-Convert";
+NSString * const PLIST_NAME  = @"mpcUserSettings.plist";
 
 @implementation MpcUserDefaults
 
@@ -32,11 +36,18 @@ NSString * const DEFS_KEY_REPLACE_EXISTING_PREFIX    = @"mpc.defs.replaceExistin
     }
 }
 
-+(NSString*)getPath
++(NSString *)getPath
 {
-    NSString *destPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-    destPath = [destPath stringByAppendingPathComponent:@"mpcUserSettings.plist"];
+    NSString *destPath = [self getFolderPath];
+    destPath = [destPath stringByAppendingPathComponent:PLIST_NAME];
     return destPath;
+}
+
++(NSString *)getFolderPath
+{
+    NSString *folderPath = [NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES) lastObject];
+    folderPath = [folderPath stringByAppendingPathComponent:FOLDER_NAME];
+    return folderPath;
 }
 
 +(id)valueForKey:(NSString*)key;
@@ -53,13 +64,21 @@ NSString * const DEFS_KEY_REPLACE_EXISTING_PREFIX    = @"mpc.defs.replaceExistin
     [defs writeToFile:[self getPath] atomically:YES];
 }
 
-+(void)setUpDefaultValues
++(void)setUpDefaultValuesIfPlistMissing
 {
     NSMutableDictionary *defs = [self getUserDefs];
-    [defs setValue:@16 forKey:DEFS_KEY_MAX_CHARACTER_COUNT];
-    [defs setValue:@YES forKey:DEFS_KEY_APPEND_NUMBER_TO_FILE_NAME];
-    [defs setValue:@NO forKey:DEFS_KEY_REPLACE_EXISTING_PREFIX];
-    [defs writeToFile:[self getPath] atomically:YES];
+    
+    if ([[defs allKeys]count] == 0) {
+        
+        NSString *folderPath = [self getFolderPath];
+        NSURL *folderUrl = [[NSURL alloc]initFileURLWithPath:folderPath];
+        [FileOperations createFolderAtUrl:folderUrl];
+        
+        [defs setValue:@16 forKey:DEFS_KEY_MAX_CHARACTER_COUNT];
+        [defs setValue:@YES forKey:DEFS_KEY_APPEND_NUMBER_TO_FILE_NAME];
+        [defs setValue:@NO forKey:DEFS_KEY_REPLACE_EXISTING_PREFIX];
+        [defs writeToFile:[self getPath] atomically:YES];
+    }  
 }
 
 @end

@@ -23,6 +23,7 @@ class ViewController: NSViewController, AudioFileConversionControllerDelegate {
     var selectedAudioFileUrls = []
     var selectedFolder: NSURL?
     var conversionController: AudioFileConversionController?
+    var numberOfFilesSelectedToProcess: Int?
     
     // MARK: lifeCycle
     override func viewDidLoad() {
@@ -112,6 +113,7 @@ class ViewController: NSViewController, AudioFileConversionControllerDelegate {
     // MARK: AudioFileConversionController / Delegate
     func startConversionWithExportOptions(exportConfig: ExportConfig) {
         
+        numberOfFilesSelectedToProcess = selectedAudioFileUrls.count
         startProgressIndicator()
         
         conversionController = AudioFileConversionController.init(audioFileUrls: selectedAudioFileUrls as! [NSArray], destinationFolder: selectedFolder,  andExportOptionsConfig: exportConfig)
@@ -130,6 +132,7 @@ class ViewController: NSViewController, AudioFileConversionControllerDelegate {
     
     // MARK: ProgressIndicator
     func startProgressIndicator() {
+        progressIndicator.maxValue = Double(selectedAudioFileUrls.count)
         progressIndicator.startAnimation(self)
     }
     
@@ -139,6 +142,7 @@ class ViewController: NSViewController, AudioFileConversionControllerDelegate {
     
     func stopProgressIndicator() {
         progressIndicator.stopAnimation(self)
+        progressIndicator.incrementBy(-Double(numberOfFilesSelectedToProcess!))
     }
 }
 

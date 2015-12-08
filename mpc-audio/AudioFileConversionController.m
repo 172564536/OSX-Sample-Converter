@@ -42,7 +42,7 @@
     if (self) {
         [self initializeReaderWriter];
         self.destintionFolderUrl = destinationFolder;
-        self.audioFileUrls = [[NSMutableArray alloc]initWithArray:audioFileUrls];
+        self.audioFileUrls = [[NSMutableArray alloc]initWithArray:audioFileUrls copyItems:YES];
         self.exportConfig = exportConfig;
     }
     return self;

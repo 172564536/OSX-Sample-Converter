@@ -181,7 +181,7 @@
                                 </connections>
                             </button>
                             <progressIndicator fixedFrame="YES" maxValue="100" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="YsR-QT-ds3">
-                                <rect key="frame" x="20" y="18" width="267" height="22"/>
+                                <rect key="frame" x="20" y="18" width="267" height="20"/>
                             </progressIndicator>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qBE-Vv-bqD">
                                 <rect key="frame" x="191" y="89" width="271" height="17"/>

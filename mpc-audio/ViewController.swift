@@ -12,9 +12,11 @@ class ViewController: NSViewController, AudioFileConversionControllerDelegate {
     
     // MARK: outlets
     @IBOutlet weak var convertFilesButton: NSButton!
+    
     @IBOutlet weak var selectedOutputFolderTextField: NSTextField!
     @IBOutlet weak var numberOfFilesSelectedTextField: NSTextField!
     @IBOutlet weak var fileNamePrefixTextField: NSTextField!
+    
     @IBOutlet weak var progressIndicator: NSProgressIndicator!
     
     // MARK: ivars
@@ -25,14 +27,14 @@ class ViewController: NSViewController, AudioFileConversionControllerDelegate {
     // MARK: lifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setUpView()
     }
     
-     // MARK: setUpView
+    // MARK: setUpView
     func setUpView() {
-        hideConvertAudioButton(true)
+        enableConvertAudioButton(false)
         selectedOutputFolderTextField.editable = false;
+        numberOfFilesSelectedTextField.editable = false;
     }
     
     // MARK: userActions
@@ -52,7 +54,7 @@ class ViewController: NSViewController, AudioFileConversionControllerDelegate {
                 self.selectedOutputFolderTextField.stringValue = self.selectedFolder!.absoluteString
                 
                 if (self.selectedFolder != nil && self.canShowConvertAudioButton()) {
-                    self.hideConvertAudioButton(false)
+                    self.enableConvertAudioButton(true)
                 }
             }
         })
@@ -72,20 +74,18 @@ class ViewController: NSViewController, AudioFileConversionControllerDelegate {
                 self.selectedAudioFileUrls = filePicker.URLs
                 self.numberOfFilesSelectedTextField.stringValue = "Files selected: \(self.selectedAudioFileUrls.count)"
                 if (self.selectedAudioFileUrls.count > 0 && self.canShowConvertAudioButton()) {
-                    self.hideConvertAudioButton(false)
+                    self.enableConvertAudioButton(true)
                 } else {
-                    self.hideConvertAudioButton(true)
+                    self.enableConvertAudioButton(true)
                 }
             }
         }
-        
-        
     }
     
     @IBAction func convertFilesPressed(sender: NSButton) {
         
-        hideConvertAudioButton(true)
-        let exportPrefix = fileNamePrefixTextField.stringValue       
+        enableConvertAudioButton(false)
+        let exportPrefix = fileNamePrefixTextField.stringValue
         
         MpcUserDefaults.setUpDefaultValuesIfPlistMissing()
         
@@ -105,8 +105,8 @@ class ViewController: NSViewController, AudioFileConversionControllerDelegate {
         }
     }
     
-    func hideConvertAudioButton(hidden: Bool) {
-        self.convertFilesButton.hidden = hidden
+    func enableConvertAudioButton(enable: Bool) {
+        self.convertFilesButton.enabled = enable
     }
     
     // MARK: AudioFileConversionController / Delegate
@@ -121,7 +121,7 @@ class ViewController: NSViewController, AudioFileConversionControllerDelegate {
     
     func audioFileConversionControllerDidFinish() {
         stopProgressIndicator()
-        hideConvertAudioButton(false)
+        enableConvertAudioButton(true)
     }
     
     func audioFileConversionControllerDidReportProgress() {

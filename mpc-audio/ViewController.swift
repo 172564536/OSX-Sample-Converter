@@ -77,7 +77,7 @@ class ViewController: NSViewController, AudioFileConversionControllerDelegate {
                 if (self.selectedAudioFileUrls.count > 0 && self.canShowConvertAudioButton()) {
                     self.enableConvertAudioButton(true)
                 } else {
-                    self.enableConvertAudioButton(true)
+                    self.enableConvertAudioButton(false)
                 }
             }
         }

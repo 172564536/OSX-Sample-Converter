@@ -73,7 +73,7 @@ class ViewController: NSViewController, AudioFileConversionControllerDelegate {
             if (result == NSFileHandlingPanelOKButton) {
                 
                 self.selectedAudioFileUrls = filePicker.URLs
-                self.numberOfFilesSelectedTextField.stringValue = "Files selected: \(self.selectedAudioFileUrls.count)"
+                self.numberOfFilesSelectedTextField.stringValue = "files selected: \(self.selectedAudioFileUrls.count)"
                 if (self.selectedAudioFileUrls.count > 0 && self.canShowConvertAudioButton()) {
                     self.enableConvertAudioButton(true)
                 } else {

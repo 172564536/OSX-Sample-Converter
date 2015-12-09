@@ -131,6 +131,39 @@ class ViewController: NSViewController, AudioFileConversionControllerDelegate {
         incrementProgressIndicator()
     }
     
+    func audioFileConversionControllerDidEncounterFileClashForFile(fileName: String!) -> FileClashDecision {
+        
+        let alert = NSAlert()
+        alert.alertStyle = NSAlertStyle.InformationalAlertStyle
+        alert.messageText = "Existing file found at location:\n\(fileName)"
+        // These are applied in reverse order to how they appear on screen
+        alert.addButtonWithTitle(FILE_CLASH_BUTTON_TITLE_DELETE_APPLY_TO_ALL)
+        alert.addButtonWithTitle(FILE_CLASH_BUTTON_TITLE_DELETE)
+        alert.addButtonWithTitle(FILE_CLASH_BUTTON_TITLE_SKIP_APPLY_TO_ALL)
+        alert.addButtonWithTitle(FILE_CLASH_BUTTON_TITLE_SKIP)
+        alert.addButtonWithTitle(FILE_CLASH_BUTTON_TITLE_ABORT)
+        
+        let responseTag: NSModalResponse = alert.runModal()
+        
+        var decision: FileClashDecision = FileClashDecision.FILE_CLASH_ABORT
+        
+        switch responseTag {
+        case 1000:
+            decision = FileClashDecision.FILE_CLASH_DELETE_APPLY_TO_ALL;
+        case 1001:
+            decision = FileClashDecision.FILE_CLASH_DELETE;
+        case 1002:
+            decision = FileClashDecision.FILE_CLASH_SKIP_APPLY_TO_ALL;
+        case 1003:
+            decision = FileClashDecision.FILE_CLASH_SKIP;
+        case 1004:
+            decision = FileClashDecision.FILE_CLASH_ABORT;
+        default:
+            NSException(name: "** Illegal State **", reason: "case not handled in existing file found alert resonse", userInfo: nil).raise()
+        }
+        return decision
+    }
+    
     // MARK: ProgressIndicator
     func startProgressIndicator() {
         progressIndicator.maxValue = Double(selectedAudioFileUrls.count)
@@ -154,5 +187,7 @@ class ViewController: NSViewController, AudioFileConversionControllerDelegate {
         alert.messageText = message
         alert.runModal()
     }
+    
+    
 }
 

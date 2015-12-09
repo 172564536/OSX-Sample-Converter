@@ -12,6 +12,12 @@
 #import "FileOperations.h"
 #import "ExportConfig.h"
 
+NSString * const FILE_CLASH_BUTTON_TITLE_ABORT               = @"Abort";
+NSString * const FILE_CLASH_BUTTON_TITLE_SKIP                = @"Skip";
+NSString * const FILE_CLASH_BUTTON_TITLE_SKIP_APPLY_TO_ALL   = @"Skip (Apply All)";
+NSString * const FILE_CLASH_BUTTON_TITLE_DELETE              = @"Delete";
+NSString * const FILE_CLASH_BUTTON_TITLE_DELETE_APPLY_TO_ALL = @"Delete (Apply All)";
+
 @interface AudioFileConversionController () <AudioFileReaderWriterDelegate>
 
 @property (nonatomic, strong) AudioFileReaderWriter *readerWriter;
@@ -24,6 +30,9 @@
 @property NSInteger fileConversionCounter;
 @property NSInteger readWriteFailures;
 @property NSInteger sameLocationFailures;
+
+@property BOOL applySkipToAll;
+@property BOOL applyDeleteToAll;
 
 @end
 
@@ -47,6 +56,8 @@
         self.destintionFolderUrl = destinationFolder;
         self.audioFileUrls = [[NSMutableArray alloc]initWithArray:audioFileUrls copyItems:YES];
         self.exportConfig = exportConfig;
+        self.applyDeleteToAll = NO;
+        self.applySkipToAll = NO;
     }
     return self;
 }
@@ -88,12 +99,59 @@
     NSURL *outputFileUrl     = [NSURL URLWithString:newFileName relativeToURL:self.destintionFolderUrl];
     
     if ([inputFileUrl.path isEqualToString:outputFileUrl.path]) {
+        // File has same location - cant read and write from same file at once
         self.sameLocationFailures ++;
         [self checkForRemainingItemsToProcess];
+        
     } else if ([FileOperations fileExistsAtUrl:outputFileUrl]) {
-        [self checkForRemainingItemsToProcess];
+        // File Exists we need to deal with it
+        if (!self.applySkipToAll && !self.applyDeleteToAll) {
+            FileClashDecision decision = [self.delegate audioFileConversionControllerDidEncounterFileClashForFile:outputFileUrl.path];
+            [self resolveFileClashDecision:decision relatingToFilesAtInputUrl:inputFileUrl andOutputUrl:outputFileUrl];
+        } else {
+            if (self.applyDeleteToAll) {
+                [FileOperations deleteFileIfExists:outputFileUrl];
+                [self converFileFromInputUrl:inputFileUrl toOutputUrl:outputFileUrl];
+            } else if (self.applySkipToAll){
+                [self checkForRemainingItemsToProcess];
+            } else {
+                [NSException raise:@"** unhandled situation **" format:@"processItemForUrl in AudioFileConversionController"];
+            }
+        }
     } else {
-        [self.readerWriter convertAudioFileFromInputUrl:inputFileUrl toOutputUrl:outputFileUrl];
+        // No issues - proceed captain
+        [self converFileFromInputUrl:inputFileUrl toOutputUrl:outputFileUrl];
+    }
+}
+
+-(void)converFileFromInputUrl:(NSURL *)inputFileUrl toOutputUrl:(NSURL *)outputFileUrl
+{
+    [self.readerWriter convertAudioFileFromInputUrl:inputFileUrl toOutputUrl:outputFileUrl];
+}
+
+-(void)resolveFileClashDecision:(FileClashDecision)decision relatingToFilesAtInputUrl:(NSURL *)inputFileUrl andOutputUrl:(NSURL *)outputFileUrl
+{
+    switch (decision) {
+        case FILE_CLASH_ABORT:
+            [self.delegate audioFileConversionControllerDidFinishWithReport:[self generateReport]];
+            break;
+        case FILE_CLASH_SKIP:
+            [self checkForRemainingItemsToProcess];
+            break;
+        case FILE_CLASH_SKIP_APPLY_TO_ALL:
+            self.applySkipToAll = YES;
+            [self checkForRemainingItemsToProcess];
+            break;
+        case FILE_CLASH_DELETE:
+            [FileOperations deleteFileIfExists:outputFileUrl];
+            [self converFileFromInputUrl:inputFileUrl toOutputUrl:outputFileUrl];
+            break;
+        case FILE_CLASH_DELETE_APPLY_TO_ALL:
+            self.applyDeleteToAll = YES;
+            [self converFileFromInputUrl:inputFileUrl toOutputUrl:outputFileUrl];
+            break;
+        default:
+            break;
     }
 }
 
@@ -103,11 +161,11 @@
     [report appendString:[NSString stringWithFormat:@"Files converted: %ld\n", (long)self.fileConversionCounter]];
     if (self.readWriteFailures > 0) {
         [report appendString:@"---------------------\n"];
-        [report appendString:[NSString stringWithFormat:@"Files failed to process: %ld\n(see help for more info)\n", (long)self.readWriteFailures]];
+        [report appendString:[NSString stringWithFormat:@"Files failed to process: %ld", (long)self.readWriteFailures]];
     }
     if (self.sameLocationFailures > 0) {
         [report appendString:@"---------------------\n"];
-        [report appendString:[NSString stringWithFormat:@"Files failed due to input/out files having same name and location: %ld\n(see help for more info)\n", (long)self.sameLocationFailures]];
+        [report appendString:[NSString stringWithFormat:@"Files failed due to input/output files having same name and location: %ld\nCan not read and write to same file at same time", (long)self.sameLocationFailures]];
     }
     return [report copy];
 }

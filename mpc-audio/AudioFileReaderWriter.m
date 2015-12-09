@@ -95,9 +95,6 @@
                 } else {
                     [writerInput markAsFinished];
                     
-                    //ToDo:
-                    // 1. will this reader status need checking periodically (with other enum values) rather then just at end?
-                    
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wswitch"
                     switch ([reader status]) {

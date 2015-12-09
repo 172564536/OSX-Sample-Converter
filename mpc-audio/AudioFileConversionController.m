@@ -165,7 +165,7 @@ NSString * const FILE_CLASH_BUTTON_TITLE_DELETE_APPLY_TO_ALL = @"Delete (Apply A
     }
     if (self.sameLocationFailures > 0) {
         [report appendString:@"---------------------\n"];
-        [report appendString:[NSString stringWithFormat:@"Files failed due to input/output files having same name and location: %ld\nCan not read and write to same file at same time", (long)self.sameLocationFailures]];
+        [report appendString:[NSString stringWithFormat:@"Files failed due to input/output files having same name and location: %ld - can not read and write to same file at same time", (long)self.sameLocationFailures]];
     }
     return [report copy];
 }

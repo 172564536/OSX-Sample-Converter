@@ -38,4 +38,11 @@
     }
 }
 
++(BOOL)fileExistsAtUrl:(NSURL *)fileUrl
+{
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    BOOL fileExists = [fileManager fileExistsAtPath:fileUrl.path isDirectory:NO];
+    return fileExists;
+}
+
 @end

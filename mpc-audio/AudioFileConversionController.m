@@ -23,7 +23,7 @@
 
 @property NSInteger fileConversionCounter;
 @property NSInteger readWriteFailures;
-@property NSInteger sameFileNameFailures;
+@property NSInteger sameLocationFailures;
 
 @end
 
@@ -85,10 +85,12 @@
 {
     NSString *inpultFileName = [inputFileUrl lastPathComponent];
     NSString *newFileName    = [MpcFileNameGenerator createNewFileNameFromExistingFileName:inpultFileName withExportConfig:self.exportConfig fileNumber:self.fileConversionCounter];
-    NSURL *outputFileUrl     = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", self.destintionFolderUrl.absoluteString, newFileName]];
+    NSURL *outputFileUrl     = [NSURL URLWithString:newFileName relativeToURL:self.destintionFolderUrl];
     
-    if ([inputFileUrl.absoluteString isEqualToString:outputFileUrl.absoluteString]) {
-        self.sameFileNameFailures ++;
+    if ([inputFileUrl.path isEqualToString:outputFileUrl.path]) {
+        self.sameLocationFailures ++;
+        [self checkForRemainingItemsToProcess];
+    } else if ([FileOperations fileExistsAtUrl:outputFileUrl]) {
         [self checkForRemainingItemsToProcess];
     } else {
         [self.readerWriter convertAudioFileFromInputUrl:inputFileUrl toOutputUrl:outputFileUrl];
@@ -103,9 +105,9 @@
         [report appendString:@"---------------------\n"];
         [report appendString:[NSString stringWithFormat:@"Files failed to process: %ld\n(see help for more info)\n", (long)self.readWriteFailures]];
     }
-    if (self.sameFileNameFailures > 0) {
+    if (self.sameLocationFailures > 0) {
         [report appendString:@"---------------------\n"];
-        [report appendString:[NSString stringWithFormat:@"Files failed due to input/out files having same name and location: %ld\n(see help for more info)\n", (long)self.sameFileNameFailures]];
+        [report appendString:[NSString stringWithFormat:@"Files failed due to input/out files having same name and location: %ld\n(see help for more info)\n", (long)self.sameLocationFailures]];
     }
     return [report copy];
 }

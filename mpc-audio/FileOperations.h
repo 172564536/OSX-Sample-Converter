@@ -12,5 +12,6 @@
 
 +(BOOL)createFolderAtUrl:(NSURL *)fileUrl;
 +(BOOL)deleteFileIfExists:(NSURL *)fileUrl;
++(BOOL)fileExistsAtUrl:(NSURL *)fileUrl;
 
 @end

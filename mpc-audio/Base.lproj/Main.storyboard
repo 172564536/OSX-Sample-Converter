@@ -99,7 +99,7 @@
         <scene sceneID="R2V-B0-nI4">
             <objects>
                 <windowController showSeguePresentationStyle="single" id="B8D-0N-5wS" sceneMemberID="viewController">
-                    <window key="window" title="MPC File Convert" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
+                    <window key="window" title="MpBlaze" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="196" y="240" width="480" height="270"/>
@@ -113,10 +113,10 @@
             </objects>
             <point key="canvasLocation" x="75" y="250"/>
         </scene>
-        <!--MPC File Converter-->
+        <!--MpBlaze-->
         <scene sceneID="hIz-AP-VOD">
             <objects>
-                <viewController title="MPC File Converter" showSeguePresentationStyle="single" id="XfG-lQ-9wD" customClass="ViewController" customModule="mpc_audio" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="MpBlaze" showSeguePresentationStyle="single" id="XfG-lQ-9wD" customClass="ViewController" customModule="mpc_audio" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="m2S-Jp-Qdl">
                         <rect key="frame" x="0.0" y="0.0" width="480" height="189"/>
                         <autoresizingMask key="autoresizingMask"/>

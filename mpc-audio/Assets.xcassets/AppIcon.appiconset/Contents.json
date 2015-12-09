@@ -43,13 +43,13 @@
     {
       "size" : "512x512",
       "idiom" : "mac",
-      "filename" : "mpc-convert512.png",
+      "filename" : "mpc-convertV3_512.png",
       "scale" : "1x"
     },
     {
       "size" : "512x512",
       "idiom" : "mac",
-      "filename" : "mpc-convert.png",
+      "filename" : "mpc-convertV3.png",
       "scale" : "2x"
     }
   ],

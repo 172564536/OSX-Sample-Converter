@@ -119,9 +119,12 @@ class ViewController: NSViewController, AudioFileConversionControllerDelegate {
         conversionController!.start()
     }
     
-    func audioFileConversionControllerDidFinish() {
+    func audioFileConversionControllerDidFinishWithReport(report: String!) {
         stopProgressIndicator()
         enableConvertAudioButton(true)
+        if (report != nil) {
+            showAlertWithMesage(report)
+        }
     }
     
     func audioFileConversionControllerDidReportProgress() {
@@ -141,6 +144,15 @@ class ViewController: NSViewController, AudioFileConversionControllerDelegate {
     func stopProgressIndicator() {
         progressIndicator.stopAnimation(self)
         progressIndicator.incrementBy(-Double(numberOfFilesSelectedToProcess!))
+    }
+    
+    // MARK: Alert
+    func showAlertWithMesage(message: String) {
+        let alert = NSAlert()
+        alert.alertStyle = NSAlertStyle.InformationalAlertStyle
+        alert.addButtonWithTitle("Ok")
+        alert.messageText = message
+        alert.runModal()
     }
 }
 

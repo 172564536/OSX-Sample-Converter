@@ -13,7 +13,7 @@
 
 @required
 -(void)audioFileConversionControllerDidReportProgress;
--(void)audioFileConversionControllerDidFinish;
+-(void)audioFileConversionControllerDidFinishWithReport:(NSString *)report;
 @end
 
 @class ExportConfig;

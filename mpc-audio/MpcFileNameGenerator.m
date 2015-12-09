@@ -58,20 +58,8 @@
         [mutableFileName appendString:slicedString];
     }
     
-    [mutableFileName appendString:@".wav"];
-    
-    // Protect against user selecting same destination folder as input AND not selecting any options to alter name (truncate/prefix/append number)
-    if ([fileName isEqualToString:mutableFileName]) {
-        long charToReplaceIndex = mutableFileName.length - 5;
-        NSString *lastCharacterBeforeFileExtension = [mutableFileName substringWithRange:NSMakeRange(charToReplaceIndex, 1)];
-        if ([lastCharacterBeforeFileExtension isEqualToString:@"C"] || ([lastCharacterBeforeFileExtension isEqualToString:@"c"])) {
-            // picking '_' or 'C' with will mean it can read from 1 file and write to the other in the 'AudioFileReaderWriter'
-            [mutableFileName replaceCharactersInRange:NSMakeRange(charToReplaceIndex, 1) withString:@"_"];
-        } else {
-            [mutableFileName replaceCharactersInRange:NSMakeRange(charToReplaceIndex, 1) withString:@"C"];
-        }        
-    }
-    
+    [mutableFileName appendString:@".wav"];    
+ 
     return [mutableFileName copy];
 }
 

@@ -14,9 +14,9 @@
 
 NSString * const FILE_CLASH_BUTTON_TITLE_ABORT               = @"Abort";
 NSString * const FILE_CLASH_BUTTON_TITLE_SKIP                = @"Skip";
-NSString * const FILE_CLASH_BUTTON_TITLE_SKIP_APPLY_TO_ALL   = @"Skip (Apply All)";
+NSString * const FILE_CLASH_BUTTON_TITLE_SKIP_APPLY_TO_ALL   = @"Skip (apply all)";
 NSString * const FILE_CLASH_BUTTON_TITLE_DELETE              = @"Delete";
-NSString * const FILE_CLASH_BUTTON_TITLE_DELETE_APPLY_TO_ALL = @"Delete (Apply All)";
+NSString * const FILE_CLASH_BUTTON_TITLE_DELETE_APPLY_TO_ALL = @"Delete (apply all)";
 
 @interface AudioFileConversionController () <AudioFileReaderWriterDelegate>
 

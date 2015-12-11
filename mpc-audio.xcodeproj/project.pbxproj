@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C34ADEF21C1AC53600AEAD12 /* SerialNumberController.m in Sources */ = {isa = PBXBuildFile; fileRef = C34ADEF11C1AC53600AEAD12 /* SerialNumberController.m */; };
+		C34ADEF81C1AC8FD00AEAD12 /* ServerComms.m in Sources */ = {isa = PBXBuildFile; fileRef = C34ADEF71C1AC8FD00AEAD12 /* ServerComms.m */; };
+		C34ADEFB1C1AC9A400AEAD12 /* ServerResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = C34ADEFA1C1AC9A400AEAD12 /* ServerResponse.m */; };
 		C39A88DF1C143FF5000E2613 /* AudioFileConversionController.m in Sources */ = {isa = PBXBuildFile; fileRef = C39A88DE1C143FF5000E2613 /* AudioFileConversionController.m */; };
 		C39A88E41C14527E000E2613 /* AudioFileReaderWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = C39A88E31C14527E000E2613 /* AudioFileReaderWriter.m */; };
 		C39A88E71C145E7A000E2613 /* FileOperations.m in Sources */ = {isa = PBXBuildFile; fileRef = C39A88E61C145E7A000E2613 /* FileOperations.m */; };
@@ -21,6 +24,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C34ADEF01C1AC53600AEAD12 /* SerialNumberController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SerialNumberController.h; sourceTree = "<group>"; };
+		C34ADEF11C1AC53600AEAD12 /* SerialNumberController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SerialNumberController.m; sourceTree = "<group>"; };
+		C34ADEF61C1AC8FD00AEAD12 /* ServerComms.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerComms.h; sourceTree = "<group>"; };
+		C34ADEF71C1AC8FD00AEAD12 /* ServerComms.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerComms.m; sourceTree = "<group>"; };
+		C34ADEF91C1AC9A400AEAD12 /* ServerResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerResponse.h; sourceTree = "<group>"; };
+		C34ADEFA1C1AC9A400AEAD12 /* ServerResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerResponse.m; sourceTree = "<group>"; };
 		C39A88DD1C143FF5000E2613 /* AudioFileConversionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioFileConversionController.h; sourceTree = "<group>"; };
 		C39A88DE1C143FF5000E2613 /* AudioFileConversionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioFileConversionController.m; sourceTree = "<group>"; };
 		C39A88E21C14527E000E2613 /* AudioFileReaderWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioFileReaderWriter.h; sourceTree = "<group>"; };
@@ -54,6 +63,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C34ADEEF1C1AC50400AEAD12 /* SerialNumber */ = {
+			isa = PBXGroup;
+			children = (
+				C34ADEF01C1AC53600AEAD12 /* SerialNumberController.h */,
+				C34ADEF11C1AC53600AEAD12 /* SerialNumberController.m */,
+			);
+			name = SerialNumber;
+			sourceTree = "<group>";
+		};
+		C34ADEFC1C1ACA6400AEAD12 /* ServerComms */ = {
+			isa = PBXGroup;
+			children = (
+				C34ADEF61C1AC8FD00AEAD12 /* ServerComms.h */,
+				C34ADEF71C1AC8FD00AEAD12 /* ServerComms.m */,
+				C34ADEF91C1AC9A400AEAD12 /* ServerResponse.h */,
+				C34ADEFA1C1AC9A400AEAD12 /* ServerResponse.m */,
+			);
+			name = ServerComms;
+			sourceTree = "<group>";
+		};
 		C39A88E81C146D2E000E2613 /* AudioFileConversion */ = {
 			isa = PBXGroup;
 			children = (
@@ -115,6 +144,8 @@
 		C3F038B21C12FF8B00EB3849 /* mpc-audio */ = {
 			isa = PBXGroup;
 			children = (
+				C34ADEFC1C1ACA6400AEAD12 /* ServerComms */,
+				C34ADEEF1C1AC50400AEAD12 /* SerialNumber */,
 				C39A88F71C16D411000E2613 /* Utilts */,
 				C39A88F31C15ABBD000E2613 /* Config */,
 				C39A88F21C15ABAD000E2613 /* ViewControllers */,
@@ -200,9 +231,12 @@
 			files = (
 				C39A88FA1C16D77A000E2613 /* MpcFileNameGenerator.m in Sources */,
 				C3F038B61C12FF8B00EB3849 /* ViewController.swift in Sources */,
+				C34ADEFB1C1AC9A400AEAD12 /* ServerResponse.m in Sources */,
 				C39A88E71C145E7A000E2613 /* FileOperations.m in Sources */,
 				C39A88DF1C143FF5000E2613 /* AudioFileConversionController.m in Sources */,
+				C34ADEF21C1AC53600AEAD12 /* SerialNumberController.m in Sources */,
 				C39A88F11C15AA75000E2613 /* MpcUserDefaults.m in Sources */,
+				C34ADEF81C1AC8FD00AEAD12 /* ServerComms.m in Sources */,
 				C39A88F61C15BFE6000E2613 /* ExportConfig.m in Sources */,
 				C3F038B41C12FF8B00EB3849 /* AppDelegate.swift in Sources */,
 				C39A88E41C14527E000E2613 /* AudioFileReaderWriter.m in Sources */,

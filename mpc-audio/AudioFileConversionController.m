@@ -111,7 +111,7 @@ NSString * const FILE_CLASH_BUTTON_TITLE_DELETE_APPLY_TO_ALL = @"Delete (apply a
         } else {
             if (self.applyDeleteToAll) {
                 [FileOperations deleteFileIfExists:outputFileUrl];
-                [self converFileFromInputUrl:inputFileUrl toOutputUrl:outputFileUrl];
+                [self convertFileFromInputUrl:inputFileUrl toOutputUrl:outputFileUrl];
             } else if (self.applySkipToAll){
                 [self checkForRemainingItemsToProcess];
             } else {
@@ -120,11 +120,11 @@ NSString * const FILE_CLASH_BUTTON_TITLE_DELETE_APPLY_TO_ALL = @"Delete (apply a
         }
     } else {
         // No issues - proceed captain
-        [self converFileFromInputUrl:inputFileUrl toOutputUrl:outputFileUrl];
+        [self convertFileFromInputUrl:inputFileUrl toOutputUrl:outputFileUrl];
     }
 }
 
--(void)converFileFromInputUrl:(NSURL *)inputFileUrl toOutputUrl:(NSURL *)outputFileUrl
+-(void)convertFileFromInputUrl:(NSURL *)inputFileUrl toOutputUrl:(NSURL *)outputFileUrl
 {
     [self.readerWriter convertAudioFileFromInputUrl:inputFileUrl toOutputUrl:outputFileUrl];
 }
@@ -144,11 +144,11 @@ NSString * const FILE_CLASH_BUTTON_TITLE_DELETE_APPLY_TO_ALL = @"Delete (apply a
             break;
         case FILE_CLASH_DELETE:
             [FileOperations deleteFileIfExists:outputFileUrl];
-            [self converFileFromInputUrl:inputFileUrl toOutputUrl:outputFileUrl];
+            [self convertFileFromInputUrl:inputFileUrl toOutputUrl:outputFileUrl];
             break;
         case FILE_CLASH_DELETE_APPLY_TO_ALL:
             self.applyDeleteToAll = YES;
-            [self converFileFromInputUrl:inputFileUrl toOutputUrl:outputFileUrl];
+            [self convertFileFromInputUrl:inputFileUrl toOutputUrl:outputFileUrl];
             break;
         default:
             break;

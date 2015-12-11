@@ -29,6 +29,9 @@ class ViewController: NSViewController, AudioFileConversionControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpView()
+        
+        SerialNumberController.attemptAuthorisationForKey("965D1A94-33564923-8BD47293-4093BFEF");
+        
     }
     
     // MARK: setUpView

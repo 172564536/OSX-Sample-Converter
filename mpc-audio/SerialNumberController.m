@@ -87,7 +87,7 @@ NSString * const SUPPORT_MESSAGE = @"please contact support on: support@mpblaze.
             NSUserDefaults *defs = [NSUserDefaults standardUserDefaults];
             [defs setObject:buyersEmail forKey:USER_DEFS_AUTHORISED_EMAIL];
             [defs synchronize];
-            return callBack(@"Successfully authorised...\nNow get some beats made!", YES);
+            return callBack(@"Successfully authorised!", YES);
         } else {
             return callBack([NSString stringWithFormat:@"There was a problem retrieving your email from the Gumroad server, %@", SUPPORT_MESSAGE], NO);
         }

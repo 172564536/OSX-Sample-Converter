@@ -17,7 +17,6 @@ class serialNumberVC: NSViewController {
     @IBAction func authoriseButtonPressed(sender: AnyObject) {
         let serialNumber = serialNumberTextField.stringValue
         if (serialNumber.characters.count > 0) {
-            //            serialNumber = "965D1A94-33564923-8BD47293-4093BFEF"
             AttemptAuthorisationForSerial(serialNumber)
         } else {
             showMessage("Please enter your serial number")
@@ -45,9 +44,8 @@ class serialNumberVC: NSViewController {
                 weakSelf?.serialNumberTextField.enabled = true
             }
         }
-    }
-    
-    // MARK: Alert
+    }    
+
     func showMessage(message: String) {
         let alert = NSAlert()
         alert.alertStyle = NSAlertStyle.InformationalAlertStyle

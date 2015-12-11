@@ -12,6 +12,6 @@
 
 +(BOOL)userHasAuthorisedApp;
 +(NSString *)getAuthorisedUsersEmail;
-+(void)attemptAuthorisationForKey:(NSString*)key;
++(void)attemptAuthorisationForKey:(NSString*)key callBack:(void(^)(NSString *userMessage, BOOL AuthSuccess))callback;
 
 @end

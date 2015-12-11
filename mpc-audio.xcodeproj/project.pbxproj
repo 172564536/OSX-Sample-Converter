@@ -10,6 +10,7 @@
 		C34ADEF21C1AC53600AEAD12 /* SerialNumberController.m in Sources */ = {isa = PBXBuildFile; fileRef = C34ADEF11C1AC53600AEAD12 /* SerialNumberController.m */; };
 		C34ADEF81C1AC8FD00AEAD12 /* ServerComms.m in Sources */ = {isa = PBXBuildFile; fileRef = C34ADEF71C1AC8FD00AEAD12 /* ServerComms.m */; };
 		C34ADEFB1C1AC9A400AEAD12 /* ServerResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = C34ADEFA1C1AC9A400AEAD12 /* ServerResponse.m */; };
+		C34ADEFE1C1AD0BE00AEAD12 /* serialNumberVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34ADEFD1C1AD0BE00AEAD12 /* serialNumberVC.swift */; };
 		C39A88DF1C143FF5000E2613 /* AudioFileConversionController.m in Sources */ = {isa = PBXBuildFile; fileRef = C39A88DE1C143FF5000E2613 /* AudioFileConversionController.m */; };
 		C39A88E41C14527E000E2613 /* AudioFileReaderWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = C39A88E31C14527E000E2613 /* AudioFileReaderWriter.m */; };
 		C39A88E71C145E7A000E2613 /* FileOperations.m in Sources */ = {isa = PBXBuildFile; fileRef = C39A88E61C145E7A000E2613 /* FileOperations.m */; };
@@ -30,6 +31,7 @@
 		C34ADEF71C1AC8FD00AEAD12 /* ServerComms.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerComms.m; sourceTree = "<group>"; };
 		C34ADEF91C1AC9A400AEAD12 /* ServerResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerResponse.h; sourceTree = "<group>"; };
 		C34ADEFA1C1AC9A400AEAD12 /* ServerResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerResponse.m; sourceTree = "<group>"; };
+		C34ADEFD1C1AD0BE00AEAD12 /* serialNumberVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = serialNumberVC.swift; sourceTree = "<group>"; };
 		C39A88DD1C143FF5000E2613 /* AudioFileConversionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioFileConversionController.h; sourceTree = "<group>"; };
 		C39A88DE1C143FF5000E2613 /* AudioFileConversionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioFileConversionController.m; sourceTree = "<group>"; };
 		C39A88E21C14527E000E2613 /* AudioFileReaderWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioFileReaderWriter.h; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 			children = (
 				C39A88EB1C15A4DE000E2613 /* exportOptionsVC.swift */,
 				C3F038B51C12FF8B00EB3849 /* ViewController.swift */,
+				C34ADEFD1C1AD0BE00AEAD12 /* serialNumberVC.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -235,6 +238,7 @@
 				C39A88E71C145E7A000E2613 /* FileOperations.m in Sources */,
 				C39A88DF1C143FF5000E2613 /* AudioFileConversionController.m in Sources */,
 				C34ADEF21C1AC53600AEAD12 /* SerialNumberController.m in Sources */,
+				C34ADEFE1C1AD0BE00AEAD12 /* serialNumberVC.swift in Sources */,
 				C39A88F11C15AA75000E2613 /* MpcUserDefaults.m in Sources */,
 				C34ADEF81C1AC8FD00AEAD12 /* ServerComms.m in Sources */,
 				C39A88F61C15BFE6000E2613 /* ExportConfig.m in Sources */,

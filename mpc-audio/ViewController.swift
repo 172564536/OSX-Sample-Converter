@@ -10,6 +10,9 @@ import Cocoa
 
 class ViewController: NSViewController, AudioFileConversionControllerDelegate {
     
+    // MARK: constants
+    let SEGUE_SERIAL_NUMBER = "serialNumberSeg"
+    
     // MARK: outlets
     @IBOutlet weak var convertFilesButton: NSButton!
     
@@ -29,9 +32,17 @@ class ViewController: NSViewController, AudioFileConversionControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpView()
-        
-        SerialNumberController.attemptAuthorisationForKey("965D1A94-33564923-8BD47293-4093BFEF");
-        
+    }
+    
+    override func viewDidAppear() {
+        checkForRegisteredUser()
+    }
+    
+    // MARK: checkForRegisteredUser
+    func checkForRegisteredUser() {
+        if (!SerialNumberController.userHasAuthorisedApp()) {
+            performSegueWithIdentifier(SEGUE_SERIAL_NUMBER, sender: self)
+        }
     }
     
     // MARK: setUpView

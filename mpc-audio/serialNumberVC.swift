@@ -15,7 +15,7 @@ class serialNumberVC: NSViewController {
     @IBAction func authoriseButtonPressed(sender: AnyObject) {
         var serialNumber = serialNumberTextField.stringValue
         if (serialNumber.characters.count > 0) {
-            serialNumber = "965D1A94-33564923-8BD47293-4093BFEF"
+//            serialNumber = "965D1A94-33564923-8BD47293-4093BFEF"
             AttemptAuthorisationForSerial(serialNumber)
         } else {
             showMessage("Please enter your serial number")
@@ -25,7 +25,7 @@ class serialNumberVC: NSViewController {
     func AttemptAuthorisationForSerial(serial: String) {
             SerialNumberController.attemptAuthorisationForKey(serial) { (userMessage, authSuccess) -> Void in
                 if (authSuccess) {
-                    self.showMessage("Successfully authorised...\nNow get some beats made!")
+                    self.showMessage(userMessage)
                     self.dismissViewController(self)
                 } else {
                     self.showMessage(userMessage)

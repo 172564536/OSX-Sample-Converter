@@ -11,6 +11,7 @@
 #import "ServerComms.h"
 
 NSString * const USER_DEFS_AUTHORISED_EMAIL = @"mpc.audio.USER_DEFS_AUTHORISED_EMAIL";
+NSString * const SUPPORT_MESSAGE = @"please contact support on: support@mpblaze.rocks";
 
 @implementation SerialNumberController
 
@@ -19,7 +20,7 @@ NSString * const USER_DEFS_AUTHORISED_EMAIL = @"mpc.audio.USER_DEFS_AUTHORISED_E
     NSUserDefaults *defs = [NSUserDefaults standardUserDefaults];
     NSString *authorisedUser = [defs objectForKey:USER_DEFS_AUTHORISED_EMAIL];
     if (authorisedUser) {
-        return YES;
+        return NO;
     } else {
         return NO;
     }
@@ -62,15 +63,38 @@ NSString * const USER_DEFS_AUTHORISED_EMAIL = @"mpc.audio.USER_DEFS_AUTHORISED_E
         
         NSDictionary *purchaseDict = [response.responseDict objectForKey:@"purchase"];
         
-        BOOL purcahseChargedBack = [[purchaseDict objectForKey:@"chargebacked"]boolValue];
-        BOOL purchaseRefunded    = [[purchaseDict objectForKey:@"refunded"]boolValue];
+        if (purchaseDict == nil) {
+            if (!response.connectionMade) {
+                callBack([NSString stringWithFormat:@"Sorry could not connect to Gumroad server at this time. Please check your internet connection or try again later. If this is a persistent issue %@.", SUPPORT_MESSAGE], NO);
+                return;
+            }
+            
+            NSString *gumroadErrorMessage = [response.responseDict valueForKey:@"message"];
+            callBack(gumroadErrorMessage, NO);
+            return;
+        }
+        
+        BOOL purchaseChargedBack = [[purchaseDict objectForKey:@"chargebacked"]boolValue];
+        if (purchaseChargedBack) {
+            callBack([NSString stringWithFormat:@"Your purchase appears to have been charged back to your payment card, if you believe this to be incorrect  %@.", SUPPORT_MESSAGE], NO);
+            return;
+        }
+        
+        BOOL purchaseRefunded = [[purchaseDict objectForKey:@"refunded"]boolValue];
+        if (purchaseRefunded) {
+            callBack([NSString stringWithFormat:@"Your purchase appears to have been refunded, if you believe this to be incorrect %@.", SUPPORT_MESSAGE], NO);
+            return;
+        }
         
         NSString *buyersEmail = [purchaseDict objectForKey:@"email"];
-        
-        
-        callBack(nil, YES);
-        
-        // save users email
+        if (buyersEmail) {
+            NSUserDefaults *defs = [NSUserDefaults standardUserDefaults];
+            [defs setObject:buyersEmail forKey:USER_DEFS_AUTHORISED_EMAIL];
+            [defs synchronize];
+            callBack(@"Successfully authorised...\nNow get some beats made!", YES);
+        } else {
+            callBack([NSString stringWithFormat:@"There was a problem retrieving your email from the Gumroad server, %@.", SUPPORT_MESSAGE], NO);
+        }
     }
 }
 

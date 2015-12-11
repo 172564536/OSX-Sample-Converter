@@ -20,7 +20,7 @@ NSString * const SUPPORT_MESSAGE = @"please contact support on: support@mpblaze.
     NSUserDefaults *defs = [NSUserDefaults standardUserDefaults];
     NSString *authorisedUser = [defs objectForKey:USER_DEFS_AUTHORISED_EMAIL];
     if (authorisedUser) {
-        return NO;
+        return YES;
     } else {
         return NO;
     }
@@ -33,13 +33,16 @@ NSString * const SUPPORT_MESSAGE = @"please contact support on: support@mpblaze.
     return authorisedUser;
 }
 
+#pragma -
+#pragma - NetworkAthorisation
+
 +(void)attemptAuthorisationForKey:(NSString*)key callBack:(void(^)(NSString *userMessage, BOOL AuthSuccess))callback
 {
     NSDictionary *jsonDict = @{@"product_permalink" : @"zuIh",
                                @"license_key" : key};
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [self makeServerCallOnBackgroundThreadForJSON:jsonDict WithCallBack:^(ServerResponse *responseObject) {
+        [self makeServerCallForJSON:jsonDict WithCallBack:^(ServerResponse *responseObject) {
             [self processResponse:responseObject withCallBack:^(NSString *usermesage, BOOL authSuccess) {
                 dispatch_async(dispatch_get_main_queue(), ^(){
                     callback(usermesage, authSuccess);
@@ -49,7 +52,7 @@ NSString * const SUPPORT_MESSAGE = @"please contact support on: support@mpblaze.
     });
 }
 
-+(void)makeServerCallOnBackgroundThreadForJSON:(NSDictionary *)jsonDict WithCallBack:(void(^)(ServerResponse *responseObject))callBack
++(void)makeServerCallForJSON:(NSDictionary *)jsonDict WithCallBack:(void(^)(ServerResponse *responseObject))callBack
 {
     ServerComms *comms = [[ServerComms alloc]init];
     [comms postJSON:jsonDict toUrl:@"https://api.gumroad.com/v2/licenses/verify" withCallBack:^(ServerResponse *responseObject) {

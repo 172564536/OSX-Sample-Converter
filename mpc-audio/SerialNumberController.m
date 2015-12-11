@@ -59,27 +59,27 @@ NSString * const SUPPORT_MESSAGE = @"please contact support on: support@mpblaze.
 
 +(void)processResponse:(ServerResponse *)response withCallBack:(void(^)(NSString *usermesage, BOOL authSuccess))callBack
 {
+    if (!response.connectionMade) {
+        return callBack([NSString stringWithFormat:@"Sorry could not connect to Gumroad server at this time. Please check your internet connection or try again later. If this is a persistent issue %@", SUPPORT_MESSAGE], NO);
+    }
+    
     if (response.responseDict) {
         
         NSDictionary *purchaseDict = [response.responseDict objectForKey:@"purchase"];
         
         if (purchaseDict == nil) {
-            if (!response.connectionMade) {
-                return callBack([NSString stringWithFormat:@"Sorry could not connect to Gumroad server at this time. Please check your internet connection or try again later. If this is a persistent issue %@.", SUPPORT_MESSAGE], NO);
-            }
-            
             NSString *gumroadErrorMessage = [response.responseDict valueForKey:@"message"];
             return callBack(gumroadErrorMessage, NO);
         }
         
         BOOL purchaseChargedBack = [[purchaseDict objectForKey:@"chargebacked"]boolValue];
         if (purchaseChargedBack) {
-            return callBack([NSString stringWithFormat:@"Your purchase appears to have been charged back to your payment card, if you believe this to be incorrect  %@.", SUPPORT_MESSAGE], NO);
+            return callBack([NSString stringWithFormat:@"Your purchase appears to have been charged back to your payment card, if you believe this to be incorrect  %@", SUPPORT_MESSAGE], NO);
         }
         
         BOOL purchaseRefunded = [[purchaseDict objectForKey:@"refunded"]boolValue];
         if (purchaseRefunded) {
-           return callBack([NSString stringWithFormat:@"Your purchase appears to have been refunded, if you believe this to be incorrect %@.", SUPPORT_MESSAGE], NO);
+            return callBack([NSString stringWithFormat:@"Your purchase appears to have been refunded, if you believe this to be incorrect %@", SUPPORT_MESSAGE], NO);
         }
         
         NSString *buyersEmail = [purchaseDict objectForKey:@"email"];
@@ -89,7 +89,7 @@ NSString * const SUPPORT_MESSAGE = @"please contact support on: support@mpblaze.
             [defs synchronize];
             return callBack(@"Successfully authorised...\nNow get some beats made!", YES);
         } else {
-            return callBack([NSString stringWithFormat:@"There was a problem retrieving your email from the Gumroad server, %@.", SUPPORT_MESSAGE], NO);
+            return callBack([NSString stringWithFormat:@"There was a problem retrieving your email from the Gumroad server, %@", SUPPORT_MESSAGE], NO);
         }
     }
 }

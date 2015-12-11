@@ -47,8 +47,7 @@
     NSData *postData = [NSJSONSerialization dataWithJSONObject:JSON options:kNilOptions error:&dataConversionError];
     
     if (dataConversionError) {
-        callBack([self createResponseObjectConnectionMade:NO responseDict:nil error:dataConversionError]);
-        return;
+        return callBack([self createResponseObjectConnectionMade:NO responseDict:nil error:dataConversionError]);
     }
     
     NSURL *nsurl = [NSURL URLWithString:urlString];
@@ -59,16 +58,14 @@
     NSURLSessionTask *task = [self.session dataTaskWithRequest:urlRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         
         if (data == nil || error) {
-            callBack([self createResponseObjectConnectionMade:NO responseDict:nil error:error]);
-            return;
+           return callBack([self createResponseObjectConnectionMade:NO responseDict:nil error:error]);
         }
         
         NSError *jsonParseError = nil;
         NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&jsonParseError];
         
         if (jsonParseError) {
-            callBack([self createResponseObjectConnectionMade:YES responseDict:nil error:jsonParseError]);
-            return;
+           return callBack([self createResponseObjectConnectionMade:YES responseDict:nil error:jsonParseError]);
         }
         
         NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
@@ -82,7 +79,7 @@
             // todo: create status code parser to create user message
         }
         
-        callBack([self createResponseObjectConnectionMade:YES responseDict:jsonDict error:nil]);
+        return callBack([self createResponseObjectConnectionMade:YES responseDict:jsonDict error:nil]);
         
     }];
     

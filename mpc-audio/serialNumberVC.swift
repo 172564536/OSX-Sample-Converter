@@ -27,6 +27,7 @@ class serialNumberVC: NSViewController {
     func AttemptAuthorisationForSerial(serial: String) {
         
         authoriseButton.enabled = false
+        serialNumberTextField.enabled = false
         progress.hidden = false
         progress.startAnimation(self)
         weak var weakSelf = self
@@ -41,6 +42,7 @@ class serialNumberVC: NSViewController {
             } else {
                 weakSelf!.showMessage(userMessage)
                 weakSelf!.authoriseButton.enabled = true
+                weakSelf?.serialNumberTextField.enabled = true
             }
         }
     }

@@ -118,11 +118,11 @@
             <objects>
                 <viewController id="0yY-G6-Zzm" customClass="serialNumberVC" customModule="mpc_audio" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="6dn-IJ-IqG">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="174"/>
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="196"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4gG-eb-lY4">
-                                <rect key="frame" x="18" y="137" width="414" height="17"/>
+                                <rect key="frame" x="18" y="159" width="414" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Please Enter Your Serial Number" id="ScT-e4-oIB">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -130,7 +130,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4A2-Ne-dSJ">
-                                <rect key="frame" x="20" y="107" width="410" height="22"/>
+                                <rect key="frame" x="20" y="129" width="410" height="22"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="center" placeholderString="Serial Number" drawsBackground="YES" id="6I8-gA-pDS">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -138,7 +138,7 @@
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rmo-JF-nBN">
-                                <rect key="frame" x="123" y="70" width="202" height="32"/>
+                                <rect key="frame" x="123" y="92" width="202" height="32"/>
                                 <buttonCell key="cell" type="push" title="Authorise" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="qPh-zh-bx8">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -148,7 +148,7 @@
                                 </connections>
                             </button>
                             <progressIndicator hidden="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="eQC-sA-bCv">
-                                <rect key="frame" x="327" y="79" width="16" height="16"/>
+                                <rect key="frame" x="327" y="101" width="16" height="16"/>
                             </progressIndicator>
                         </subviews>
                     </view>
@@ -160,18 +160,18 @@
                 </viewController>
                 <customObject id="i7n-hs-DVi" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-745" y="592"/>
+            <point key="canvasLocation" x="-727" y="603"/>
         </scene>
         <!--MpBlaze-->
         <scene sceneID="hIz-AP-VOD">
             <objects>
                 <viewController title="MpBlaze" showSeguePresentationStyle="single" id="XfG-lQ-9wD" customClass="ViewController" customModule="mpc_audio" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="189"/>
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="196"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pf1-8F-pZa">
-                                <rect key="frame" x="20" y="83" width="165" height="25"/>
+                                <rect key="frame" x="20" y="90" width="165" height="25"/>
                                 <buttonCell key="cell" type="roundTextured" title="Files" bezelStyle="texturedRounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="mcs-S3-Vdt">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -181,7 +181,7 @@
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="J3K-4C-Zt0">
-                                <rect key="frame" x="20" y="114" width="165" height="25"/>
+                                <rect key="frame" x="20" y="121" width="165" height="25"/>
                                 <buttonCell key="cell" type="roundTextured" title="Output Folder" bezelStyle="texturedRounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="LRG-uY-MRH">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -191,7 +191,7 @@
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uvQ-6X-Blf">
-                                <rect key="frame" x="192" y="119" width="267" height="17"/>
+                                <rect key="frame" x="192" y="126" width="267" height="17"/>
                                 <textFieldCell key="cell" enabled="NO" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="left" placeholderString="" usesSingleLineMode="YES" id="SJe-6B-KkT">
                                     <font key="font" size="13" name=".HelveticaNeueDeskInterface-Light"/>
                                     <color key="textColor" name="alternateSelectedControlColor" catalog="System" colorSpace="catalog"/>
@@ -199,7 +199,7 @@
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uN7-Lh-F82">
-                                <rect key="frame" x="20" y="145" width="165" height="25"/>
+                                <rect key="frame" x="20" y="152" width="165" height="25"/>
                                 <buttonCell key="cell" type="roundTextured" title="Export Options" bezelStyle="texturedRounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Qda-Wn-N25">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -209,7 +209,7 @@
                                 </connections>
                             </button>
                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="q7c-jE-3E2">
-                                <rect key="frame" x="20" y="54" width="165" height="22"/>
+                                <rect key="frame" x="20" y="61" width="165" height="22"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="center" placeholderString="Add Prefix" usesSingleLineMode="YES" bezelStyle="round" id="s7z-aF-4DV">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -220,7 +220,7 @@
                                 </connections>
                             </textField>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bnm-tM-fXb">
-                                <rect key="frame" x="295" y="17" width="165" height="25"/>
+                                <rect key="frame" x="295" y="24" width="165" height="25"/>
                                 <buttonCell key="cell" type="roundTextured" title="Start Conversion" bezelStyle="texturedRounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="IQk-7L-iFo">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -230,19 +230,28 @@
                                 </connections>
                             </button>
                             <progressIndicator fixedFrame="YES" maxValue="100" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="YsR-QT-ds3">
-                                <rect key="frame" x="20" y="18" width="267" height="20"/>
+                                <rect key="frame" x="20" y="25" width="267" height="20"/>
                             </progressIndicator>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qBE-Vv-bqD">
-                                <rect key="frame" x="191" y="89" width="271" height="17"/>
+                                <rect key="frame" x="191" y="96" width="271" height="17"/>
                                 <textFieldCell key="cell" enabled="NO" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="left" usesSingleLineMode="YES" id="pGW-M2-KXo">
                                     <font key="font" size="13" name=".HelveticaNeueDeskInterface-Light"/>
                                     <color key="textColor" name="alternateSelectedControlColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" white="0.90372983870000001" alpha="1" colorSpace="calibratedWhite"/>
                                 </textFieldCell>
                             </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yoP-Ae-Ohp">
+                                <rect key="frame" x="20" y="4" width="442" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" id="SJD-9M-pvF">
+                                    <font key="font" size="10" name=".HelveticaNeueDeskInterface-UltraLightP2"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                     </view>
                     <connections>
+                        <outlet property="authorisedEmaiTextField" destination="yoP-Ae-Ohp" id="B5L-1p-wli"/>
                         <outlet property="convertFilesButton" destination="Bnm-tM-fXb" id="Gwm-5T-kda"/>
                         <outlet property="fileNamePrefixTextField" destination="q7c-jE-3E2" id="Hqr-yA-pvu"/>
                         <outlet property="numberOfFilesSelectedTextField" destination="qBE-Vv-bqD" id="u5R-lY-y0g"/>
@@ -253,7 +262,7 @@
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-242" y="599.5"/>
+            <point key="canvasLocation" x="-242" y="603"/>
         </scene>
         <!--Export OptionsVC-->
         <scene sceneID="b1T-B4-aQ0">

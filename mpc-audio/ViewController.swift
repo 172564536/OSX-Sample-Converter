@@ -19,6 +19,7 @@ class ViewController: NSViewController, AudioFileConversionControllerDelegate {
     @IBOutlet weak var selectedOutputFolderTextField: NSTextField!
     @IBOutlet weak var numberOfFilesSelectedTextField: NSTextField!
     @IBOutlet weak var fileNamePrefixTextField: NSTextField!
+    @IBOutlet weak var authorisedEmaiTextField: NSTextField!
     
     @IBOutlet weak var progressIndicator: NSProgressIndicator!
     
@@ -35,13 +36,20 @@ class ViewController: NSViewController, AudioFileConversionControllerDelegate {
     }
     
     override func viewDidAppear() {
-        checkForRegisteredUser()
+       let userRegistered = checkForRegisteredUser()
+        if (userRegistered) {
+            let userEmail = SerialNumberController.getAuthorisedUsersEmail()
+            authorisedEmaiTextField.stringValue = "Authorised to: \(userEmail)"
+        }
     }
     
     // MARK: checkForRegisteredUser
-    func checkForRegisteredUser() {
+    func checkForRegisteredUser() -> Bool {
         if (!SerialNumberController.userHasAuthorisedApp()) {
             performSegueWithIdentifier(SEGUE_SERIAL_NUMBER, sender: self)
+            return false
+        } else {
+            return true
         }
     }
     

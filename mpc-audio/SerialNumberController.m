@@ -68,6 +68,11 @@ NSString * const SUPPORT_MESSAGE = @"please contact support on: support@mpblaze.
     
     if (response.responseDict) {
         
+        NSInteger authUses = [[response.responseDict objectForKey:@"uses"]integerValue];
+        if (authUses >= 3) {
+            return callBack([NSString stringWithFormat:@"Your two license key activations appear to have been used. If you need more %@", SUPPORT_MESSAGE], NO);
+        }
+        
         NSDictionary *purchaseDict = [response.responseDict objectForKey:@"purchase"];
         
         if (purchaseDict == nil) {

@@ -45,7 +45,7 @@
 		C39A88F51C15BFE6000E2613 /* ExportConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExportConfig.m; sourceTree = "<group>"; };
 		C39A88F81C16D77A000E2613 /* MpcFileNameGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MpcFileNameGenerator.h; sourceTree = "<group>"; };
 		C39A88F91C16D77A000E2613 /* MpcFileNameGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MpcFileNameGenerator.m; sourceTree = "<group>"; };
-		C3F038B01C12FF8B00EB3849 /* mpc-audio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "mpc-audio.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C3F038B01C12FF8B00EB3849 /* MpBlaze.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MpBlaze.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3F038B31C12FF8B00EB3849 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C3F038B51C12FF8B00EB3849 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		C3F038B71C12FF8B00EB3849 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -139,7 +139,7 @@
 		C3F038B11C12FF8B00EB3849 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C3F038B01C12FF8B00EB3849 /* mpc-audio.app */,
+				C3F038B01C12FF8B00EB3849 /* MpBlaze.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -165,9 +165,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		C3F038AF1C12FF8B00EB3849 /* mpc-audio */ = {
+		C3F038AF1C12FF8B00EB3849 /* MpBlaze */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C3F038BF1C12FF8B00EB3849 /* Build configuration list for PBXNativeTarget "mpc-audio" */;
+			buildConfigurationList = C3F038BF1C12FF8B00EB3849 /* Build configuration list for PBXNativeTarget "MpBlaze" */;
 			buildPhases = (
 				C3F038AC1C12FF8B00EB3849 /* Sources */,
 				C3F038AD1C12FF8B00EB3849 /* Frameworks */,
@@ -177,9 +177,9 @@
 			);
 			dependencies = (
 			);
-			name = "mpc-audio";
+			name = MpBlaze;
 			productName = "mpc-audio";
-			productReference = C3F038B01C12FF8B00EB3849 /* mpc-audio.app */;
+			productReference = C3F038B01C12FF8B00EB3849 /* MpBlaze.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -197,7 +197,7 @@
 					};
 				};
 			};
-			buildConfigurationList = C3F038AB1C12FF8B00EB3849 /* Build configuration list for PBXProject "mpc-audio" */;
+			buildConfigurationList = C3F038AB1C12FF8B00EB3849 /* Build configuration list for PBXProject "MpBlaze" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -210,7 +210,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				C3F038AF1C12FF8B00EB3849 /* mpc-audio */,
+				C3F038AF1C12FF8B00EB3849 /* MpBlaze */,
 			);
 		};
 /* End PBXProject section */
@@ -351,7 +351,7 @@
 				INFOPLIST_FILE = "mpc-audio/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.carltaylordev.mpc-audio";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = MpBlaze;
 				SWIFT_OBJC_BRIDGING_HEADER = "mpc-audio/mpc-audio-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -366,7 +366,7 @@
 				INFOPLIST_FILE = "mpc-audio/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.carltaylordev.mpc-audio";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = MpBlaze;
 				SWIFT_OBJC_BRIDGING_HEADER = "mpc-audio/mpc-audio-Bridging-Header.h";
 			};
 			name = Release;
@@ -374,7 +374,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		C3F038AB1C12FF8B00EB3849 /* Build configuration list for PBXProject "mpc-audio" */ = {
+		C3F038AB1C12FF8B00EB3849 /* Build configuration list for PBXProject "MpBlaze" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C3F038BD1C12FF8B00EB3849 /* Debug */,
@@ -383,7 +383,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C3F038BF1C12FF8B00EB3849 /* Build configuration list for PBXNativeTarget "mpc-audio" */ = {
+		C3F038BF1C12FF8B00EB3849 /* Build configuration list for PBXNativeTarget "MpBlaze" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C3F038C01C12FF8B00EB3849 /* Debug */,

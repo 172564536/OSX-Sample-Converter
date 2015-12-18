@@ -65,7 +65,8 @@
 
 +(NSString*)cleanString:(NSString*)string
 {
-    NSString *cleanedString = [string stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSCharacterSet *illegalCharacters = [[NSCharacterSet alphanumericCharacterSet] invertedSet];
+    NSString *cleanedString = [[string componentsSeparatedByCharactersInSet: illegalCharacters] componentsJoinedByString: @""];
     return cleanedString;
 }
 

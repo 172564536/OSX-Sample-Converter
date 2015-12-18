@@ -13,6 +13,7 @@ class exportOptionsVC: NSViewController {
     enum CharacterLimit: Int {
         case LimitNone = 5000
         case Limit8 = 8
+        case limit12 = 12
         case Limit16 = 16
     }
     
@@ -44,8 +45,10 @@ class exportOptionsVC: NSViewController {
                 charLimitPopupButton.selectItemAtIndex(0)
             case 8:
                 charLimitPopupButton.selectItemAtIndex(1)
-            case 16:
+            case 12:
                 charLimitPopupButton.selectItemAtIndex(2)
+            case 16:
+                charLimitPopupButton.selectItemAtIndex(3)
             default:
                 charLimitPopupButton.selectItemAtIndex(0)
             }
@@ -66,6 +69,8 @@ class exportOptionsVC: NSViewController {
         case 1:
             maxCharCount = CharacterLimit.Limit8
         case 2:
+            maxCharCount = CharacterLimit.limit12
+        case 3:
             maxCharCount = CharacterLimit.Limit16
         default:
             NSException(name: "** Illegal State **", reason: "case not handled in charLimitPopUpButton", userInfo: nil).raise()

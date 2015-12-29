@@ -32,6 +32,17 @@
     }
     
     AVAssetTrack *track = [[origAsset tracksWithMediaType:AVMediaTypeAudio] objectAtIndex:0];
+    int originalTrackChannelCount = 2;
+    
+    NSArray *formatDescriptions = track.formatDescriptions;
+    for(int i = 0; i < formatDescriptions.count; ++i) {
+        CMAudioFormatDescriptionRef item = (CMAudioFormatDescriptionRef)CFBridgingRetain([formatDescriptions objectAtIndex:i]);
+        const AudioStreamBasicDescription *streamDescription = CMAudioFormatDescriptionGetStreamBasicDescription (item);
+        if(streamDescription && streamDescription -> mChannelsPerFrame == 1) {
+            originalTrackChannelCount = 1;
+        }
+    }
+    
     AVAssetReaderTrackOutput *readerOutput = [[AVAssetReaderTrackOutput alloc] initWithTrack:track
                                                                               outputSettings:nil];
     [reader addOutput:readerOutput];
@@ -44,29 +55,14 @@
     if (writerError) {
         [self callDelgateOnMainThreadWithOutcome:NO];
     }
+  
+    NSDictionary *outputSettings;
     
-    AudioChannelLayout channelLayout;
-    memset(&channelLayout, 0, sizeof(AudioChannelLayout));
-    channelLayout.mChannelLayoutTag = kAudioChannelLayoutTag_Stereo;
-    
-    AudioChannelLayout stereoChannelLayout = {
-        .mChannelLayoutTag = kAudioChannelLayoutTag_Stereo,
-        .mChannelBitmap = 0,
-        .mNumberChannelDescriptions = 0
-    };
-    NSData *channelLayoutAsData = [NSData dataWithBytes:&stereoChannelLayout length:offsetof(AudioChannelLayout, mChannelDescriptions)];
-    
-    NSDictionary *outputSettings = [NSDictionary dictionaryWithObjectsAndKeys:
-                                    [NSNumber numberWithUnsignedInt:kAudioFormatLinearPCM], AVFormatIDKey,
-                                    [NSNumber numberWithInteger:16], AVLinearPCMBitDepthKey,
-                                    AVSampleRateConverterAlgorithm_Mastering, AVSampleRateConverterAlgorithmKey,
-                                    [NSNumber numberWithBool:NO], AVLinearPCMIsFloatKey,
-                                    [NSNumber numberWithBool:NO], AVLinearPCMIsBigEndianKey,
-                                    [NSNumber numberWithBool:NO], AVLinearPCMIsNonInterleaved,
-                                    [NSNumber numberWithInteger:44100], AVSampleRateKey,
-                                    channelLayoutAsData, AVChannelLayoutKey,
-                                    [NSNumber numberWithUnsignedInteger:2], AVNumberOfChannelsKey,
-                                    nil];
+    if (originalTrackChannelCount == 1) {
+        outputSettings = [self createOutputSettingsForMono];
+    } else {
+        outputSettings = [self createOutputSettingsForStereo];
+    }
     
     AVAssetWriterInput *writerInput = [[AVAssetWriterInput alloc] initWithMediaType:AVMediaTypeAudio
                                                                      outputSettings:outputSettings];
@@ -130,6 +126,61 @@
             [self.delegate audioFileReaderWriterDidFail];
         }
     });
+}
+
+
+-(NSDictionary *)createOutputSettingsForMono
+{
+    AudioChannelLayout channelLayout;
+    memset(&channelLayout, 0, sizeof(AudioChannelLayout));
+    channelLayout.mChannelLayoutTag = kAudioChannelLayoutTag_Mono;
+    
+    AudioChannelLayout monoChannelLayout = {
+        .mChannelLayoutTag = kAudioChannelLayoutTag_Mono,
+        .mChannelBitmap = 0,
+        .mNumberChannelDescriptions = 0
+    };
+    NSData *channelLayoutAsData = [NSData dataWithBytes:&monoChannelLayout length:offsetof(AudioChannelLayout, mChannelDescriptions)];
+    
+    NSDictionary *outputSettings = [NSDictionary dictionaryWithObjectsAndKeys:
+                                    [NSNumber numberWithUnsignedInt:kAudioFormatLinearPCM], AVFormatIDKey,
+                                    [NSNumber numberWithInteger:16], AVLinearPCMBitDepthKey,
+                                    AVSampleRateConverterAlgorithm_Mastering, AVSampleRateConverterAlgorithmKey,
+                                    [NSNumber numberWithBool:NO], AVLinearPCMIsFloatKey,
+                                    [NSNumber numberWithBool:NO], AVLinearPCMIsBigEndianKey,
+                                    [NSNumber numberWithBool:NO], AVLinearPCMIsNonInterleaved,
+                                    [NSNumber numberWithInteger:44100], AVSampleRateKey,
+                                    channelLayoutAsData, AVChannelLayoutKey,
+                                    [NSNumber numberWithUnsignedInteger:1], AVNumberOfChannelsKey,
+                                    nil];
+    return outputSettings;
+}
+
+-(NSDictionary *)createOutputSettingsForStereo
+{
+    AudioChannelLayout channelLayout;
+    memset(&channelLayout, 0, sizeof(AudioChannelLayout));
+    channelLayout.mChannelLayoutTag = kAudioChannelLayoutTag_Stereo;
+    
+    AudioChannelLayout stereoChannelLayout = {
+        .mChannelLayoutTag = kAudioChannelLayoutTag_Stereo,
+        .mChannelBitmap = 0,
+        .mNumberChannelDescriptions = 0
+    };
+    NSData *channelLayoutAsData = [NSData dataWithBytes:&stereoChannelLayout length:offsetof(AudioChannelLayout, mChannelDescriptions)];
+    
+    NSDictionary *outputSettings = [NSDictionary dictionaryWithObjectsAndKeys:
+                                    [NSNumber numberWithUnsignedInt:kAudioFormatLinearPCM], AVFormatIDKey,
+                                    [NSNumber numberWithInteger:16], AVLinearPCMBitDepthKey,
+                                    AVSampleRateConverterAlgorithm_Mastering, AVSampleRateConverterAlgorithmKey,
+                                    [NSNumber numberWithBool:NO], AVLinearPCMIsFloatKey,
+                                    [NSNumber numberWithBool:NO], AVLinearPCMIsBigEndianKey,
+                                    [NSNumber numberWithBool:NO], AVLinearPCMIsNonInterleaved,
+                                    [NSNumber numberWithInteger:44100], AVSampleRateKey,
+                                    channelLayoutAsData, AVChannelLayoutKey,
+                                    [NSNumber numberWithUnsignedInteger:2], AVNumberOfChannelsKey,
+                                    nil];
+    return outputSettings;
 }
 
 @end

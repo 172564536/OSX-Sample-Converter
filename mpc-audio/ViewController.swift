@@ -128,6 +128,11 @@ class ViewController: NSViewController, AudioFileConversionControllerDelegate {
     
     func enableConvertAudioButton(enable: Bool) {
         self.convertFilesButton.enabled = enable
+        if (enable == true) {
+            self.convertFilesButton.hidden = false;
+        } else {
+            self.convertFilesButton.hidden = true;
+        }
     }
     
     // MARK: AudioFileConversionController / Delegate

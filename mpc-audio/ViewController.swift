@@ -84,7 +84,7 @@ class ViewController: NSViewController, AudioFileConversionControllerDelegate {
     @IBAction func selectFilesPressed(button: NSButton) {
         
         let filePicker: NSOpenPanel = NSOpenPanel()
-        filePicker.allowedFileTypes = ["wav", "aif"]
+        filePicker.allowedFileTypes = ["wav", "aif", "aiff"]
         filePicker.allowsMultipleSelection = true
         filePicker.canChooseFiles = true
         filePicker.title = "Select Files"

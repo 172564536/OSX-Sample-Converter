@@ -8,13 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-typedef NS_ENUM(NSUInteger, HTTP_METHOD) {
-    HTTP_METHOD_GET,
-    HTTP_METHOD_POST // todo use these
-};
-
 @class ServerResponse;
-
 
 @interface ServerComms : NSObject
 

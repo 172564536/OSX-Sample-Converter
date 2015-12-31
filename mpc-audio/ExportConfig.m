@@ -16,16 +16,18 @@
     NSNumber *appendNumberToFileName               = [defaults valueForKey:DEFS_KEY_APPEND_NUMBER_TO_FILE_NAME];
     NSNumber *replaceOriginalFilePrefix            = [defaults valueForKey:DEFS_KEY_REPLACE_EXISTING_PREFIX];
     NSNumber *permitedNumberOfCharactersInFileName = [defaults valueForKey:DEFS_KEY_MAX_CHARACTER_COUNT];
+    NSNumber *convertSamples                       = [defaults valueForKey:DEFS_KEY_CONVERT_SAMPLES];
     
     _appendNumberToFileName               = appendNumberToFileName;
     _replaceOriginalFilePrefix            = replaceOriginalFilePrefix;
     _permitedNumberOfCharactersInFileName = permitedNumberOfCharactersInFileName;
+    _convertSamples                       = convertSamples;
 }
 
 -(NSString *)description
 {
-    return [NSString stringWithFormat:@"ExportPrefix: %@\nAppendNumber: %@\nReplaceOrignalPrefix: %@\nPermittedNumberOfCharsInFileName: %@\n",
-            self.exportPrefix, self.appendNumberToFileName, self.replaceOriginalFilePrefix, self.permitedNumberOfCharactersInFileName];
+    return [NSString stringWithFormat:@"ExportPrefix: %@\nAppendNumber: %@\nReplaceOrignalPrefix: %@\nPermittedNumberOfCharsInFileName: %@\nConvertSamples: %@\n",
+            self.exportPrefix, self.appendNumberToFileName, self.replaceOriginalFilePrefix, self.permitedNumberOfCharactersInFileName, self.convertSamples];
 }
 
 @end

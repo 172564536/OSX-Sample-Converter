@@ -21,6 +21,7 @@ class exportOptionsVC: NSViewController {
     @IBOutlet weak var charLimitPopupButton: NSPopUpButton!
     @IBOutlet weak var appendNumberCheckButton: NSButton!
     @IBOutlet weak var replacePrefixCheckButton: NSButton!
+    @IBOutlet weak var convertSamplesCheckButton: NSButton!
     
     // MARK: lifeCycle
     override func viewDidLoad() {
@@ -37,9 +38,6 @@ class exportOptionsVC: NSViewController {
         
         if (charLimit != nil) {
             
-            //ToDo: figure out how to get the int back into the ENUM Value without getting error: 'fatal error: unexpectedly found nil while unwrapping an Optional value'
-            // it crashes even though the value is not nil
-            
             switch charLimit {
             case 5000:
                 charLimitPopupButton.selectItemAtIndex(0)
@@ -54,8 +52,9 @@ class exportOptionsVC: NSViewController {
             }
         }
         
-        appendNumberCheckButton.state  = MpcUserDefaults.valueForKey(DEFS_KEY_APPEND_NUMBER_TO_FILE_NAME).integerValue
-        replacePrefixCheckButton.state = MpcUserDefaults.valueForKey(DEFS_KEY_REPLACE_EXISTING_PREFIX).integerValue
+        appendNumberCheckButton.state   = MpcUserDefaults.valueForKey(DEFS_KEY_APPEND_NUMBER_TO_FILE_NAME).integerValue
+        replacePrefixCheckButton.state  = MpcUserDefaults.valueForKey(DEFS_KEY_REPLACE_EXISTING_PREFIX).integerValue
+        convertSamplesCheckButton.state = MpcUserDefaults.valueForKey(DEFS_KEY_CONVERT_SAMPLES).integerValue
     }
     
     // MARK: userActions
@@ -86,4 +85,8 @@ class exportOptionsVC: NSViewController {
     @IBAction func replacePrefixPressed(button: NSButton) {
         MpcUserDefaults.setValue(button.state, forKey: DEFS_KEY_REPLACE_EXISTING_PREFIX)
     }
+    
+    @IBAction func convertSamplesPressed(button: AnyObject) {
+         MpcUserDefaults.setValue(button.state, forKey: DEFS_KEY_CONVERT_SAMPLES)
+    }    
 }

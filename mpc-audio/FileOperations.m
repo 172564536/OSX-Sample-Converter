@@ -45,4 +45,16 @@
     return fileExists;
 }
 
++(BOOL)copyItemFromURL:(NSURL *)sourceUrl toUrl:(NSURL *)destinationUrl
+{
+    NSError *error;
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    [fileManager copyItemAtURL:sourceUrl toURL:destinationUrl error:&error];
+    if (!error) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
 @end

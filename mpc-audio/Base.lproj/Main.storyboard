@@ -277,11 +277,11 @@
             <objects>
                 <viewController id="vZl-4s-2vT" customClass="exportOptionsVC" customModule="MpBlaze" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="mew-M6-gOL">
-                        <rect key="frame" x="0.0" y="0.0" width="304" height="105"/>
+                        <rect key="frame" x="0.0" y="0.0" width="304" height="125"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oA5-Gn-fib">
-                                <rect key="frame" x="18" y="18" width="268" height="18"/>
+                                <rect key="frame" x="18" y="38" width="268" height="18"/>
                                 <buttonCell key="cell" type="check" title="Replace orignal file prefix with my prefix" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="YQw-RL-eu8">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -291,7 +291,7 @@
                                 </connections>
                             </button>
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sQ0-bS-RLt">
-                                <rect key="frame" x="18" y="38" width="197" height="18"/>
+                                <rect key="frame" x="18" y="58" width="197" height="18"/>
                                 <buttonCell key="cell" type="check" title="Append number to file name" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="Odr-5a-yiY">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -301,7 +301,7 @@
                                 </connections>
                             </button>
                             <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3ZG-ka-Lb8">
-                                <rect key="frame" x="18" y="62" width="168" height="25"/>
+                                <rect key="frame" x="18" y="82" width="168" height="25"/>
                                 <popUpButtonCell key="cell" type="roundTextured" title="12 character limit" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" selectedItem="2V5-sS-v23" id="1v6-fO-SIT">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="menu"/>
@@ -318,17 +318,28 @@
                                     <action selector="charLimitValueChanged:" target="vZl-4s-2vT" id="eUs-dh-mVN"/>
                                 </connections>
                             </popUpButton>
+                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NUK-nH-S1G">
+                                <rect key="frame" x="18" y="18" width="255" height="18"/>
+                                <buttonCell key="cell" type="check" title="Convert samples to 44.1 / 16bit" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="Tqr-9I-Btd">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="convertSamplesPressed:" target="vZl-4s-2vT" id="JxN-Pg-aXz"/>
+                                </connections>
+                            </button>
                         </subviews>
                     </view>
                     <connections>
                         <outlet property="appendNumberCheckButton" destination="sQ0-bS-RLt" id="jla-xy-ceN"/>
                         <outlet property="charLimitPopupButton" destination="3ZG-ka-Lb8" id="b5r-3b-x14"/>
+                        <outlet property="convertSamplesCheckButton" destination="NUK-nH-S1G" id="Xah-9v-G27"/>
                         <outlet property="replacePrefixCheckButton" destination="oA5-Gn-fib" id="j53-6G-rBj"/>
                     </connections>
                 </viewController>
                 <customObject id="Xfx-Jf-6pO" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="236" y="578.5"/>
+            <point key="canvasLocation" x="185" y="567.5"/>
         </scene>
     </scenes>
 </document>

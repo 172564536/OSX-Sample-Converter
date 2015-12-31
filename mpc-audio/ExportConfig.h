@@ -15,6 +15,7 @@
 @property (readonly, nonatomic) NSNumber *appendNumberToFileName;
 @property (readonly, nonatomic) NSNumber *replaceOriginalFilePrefix;
 @property (readonly, nonatomic) NSNumber *permitedNumberOfCharactersInFileName;
+@property (readonly, nonatomic) NSNumber *convertSamples;
 
 -(void)buildFromDefaults:(NSDictionary *)defaults;
 

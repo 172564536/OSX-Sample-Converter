@@ -12,6 +12,7 @@
 NSString * const DEFS_KEY_MAX_CHARACTER_COUNT        = @"mpc.defs.maxCharCount";
 NSString * const DEFS_KEY_APPEND_NUMBER_TO_FILE_NAME = @"mpc.defs.appendNumberToFileName";
 NSString * const DEFS_KEY_REPLACE_EXISTING_PREFIX    = @"mpc.defs.replaceExistingPrefix";
+NSString * const DEFS_KEY_CONVERT_SAMPLES            = @"mpc.defs.convertSamples";
 
 NSString * const FOLDER_NAME = @"Mpc-Audio-Convert";
 NSString * const PLIST_NAME  = @"mpcUserSettings.plist";
@@ -77,8 +78,14 @@ NSString * const PLIST_NAME  = @"mpcUserSettings.plist";
         [defs setValue:@16 forKey:DEFS_KEY_MAX_CHARACTER_COUNT];
         [defs setValue:@YES forKey:DEFS_KEY_APPEND_NUMBER_TO_FILE_NAME];
         [defs setValue:@NO forKey:DEFS_KEY_REPLACE_EXISTING_PREFIX];
+        [defs setValue:@YES forKey:DEFS_KEY_CONVERT_SAMPLES];
         [defs writeToFile:[self getPath] atomically:YES];
-    }  
+    } else {
+        // this is a bit of a hack to add a default value for existing users so I dont have to get them to delete the app
+        if (![defs valueForKey:DEFS_KEY_CONVERT_SAMPLES]) {
+            [defs setValue:@YES forKey:DEFS_KEY_CONVERT_SAMPLES];
+        }
+    }    
 }
 
 @end

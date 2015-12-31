@@ -47,7 +47,9 @@ NSString * const FILE_CLASH_BUTTON_TITLE_DELETE_APPLY_TO_ALL = @"Delete (apply a
     return nil;
 }
 
--(instancetype)initWithAudioFileUrls:(NSArray *)audioFileUrls DestinationFolder:(NSURL *)destinationFolder andExportOptionsConfig:(ExportConfig *)exportConfig
+-(instancetype)initWithAudioFileUrls:(NSArray *)audioFileUrls
+                   DestinationFolder:(NSURL *)destinationFolder
+              andExportOptionsConfig:(ExportConfig *)exportConfig
 {
     self = [super init];
     
@@ -126,7 +128,20 @@ NSString * const FILE_CLASH_BUTTON_TITLE_DELETE_APPLY_TO_ALL = @"Delete (apply a
 
 -(void)convertFileFromInputUrl:(NSURL *)inputFileUrl toOutputUrl:(NSURL *)outputFileUrl
 {
-    [self.readerWriter convertAudioFileFromInputUrl:inputFileUrl toOutputUrl:outputFileUrl];
+    BOOL convertAudioFile = self.exportConfig.convertSamples.boolValue;
+    
+    if (convertAudioFile) {
+        [self.readerWriter convertAudioFileFromInputUrl:inputFileUrl toOutputUrl:outputFileUrl];
+    } else {
+        BOOL success = [FileOperations copyItemFromURL:inputFileUrl toUrl:outputFileUrl];
+        if (success) {
+            self.fileConversionCounter ++;
+        } else {
+            self.readWriteFailures ++;
+        }
+        
+        [self checkForRemainingItemsToProcess];
+    }
 }
 
 -(void)resolveFileClashDecision:(FileClashDecision)decision relatingToFilesAtInputUrl:(NSURL *)inputFileUrl andOutputUrl:(NSURL *)outputFileUrl

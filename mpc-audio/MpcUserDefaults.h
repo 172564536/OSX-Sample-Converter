@@ -14,6 +14,7 @@
 extern NSString * const DEFS_KEY_MAX_CHARACTER_COUNT;
 extern NSString * const DEFS_KEY_APPEND_NUMBER_TO_FILE_NAME;
 extern NSString * const DEFS_KEY_REPLACE_EXISTING_PREFIX;
+extern NSString * const DEFS_KEY_CONVERT_SAMPLES;
 //
 
 +(id)valueForKey:(NSString*)key;

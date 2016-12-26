@@ -38,7 +38,7 @@ class ViewController: NSViewController, AudioFileConversionControllerDelegate {
     override func viewDidAppear() {
        let userRegistered = checkForRegisteredUser()
         if (userRegistered) {
-            let userEmail = SerialNumberController.getAuthorisedUsersEmail()
+            let userEmail = SerialNumberController.getAuthorisedUsersEmail()!
             authorisedEmaiTextField.stringValue = "Authorised to: \(userEmail)"
         }
     }

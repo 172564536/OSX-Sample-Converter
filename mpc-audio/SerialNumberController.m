@@ -30,7 +30,6 @@ NSString * const SUPPORT_MESSAGE = @"please contact support on: support@mpblaze.
 {
     NSUserDefaults *defs = [NSUserDefaults standardUserDefaults];
     NSString *authorisedUser = [defs objectForKey:USER_DEFS_AUTHORISED_EMAIL];
-    return nil;
     return authorisedUser;
 }
 

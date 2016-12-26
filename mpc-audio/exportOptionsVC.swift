@@ -11,10 +11,10 @@ import Cocoa
 class exportOptionsVC: NSViewController {
     
     enum CharacterLimit: Int {
-        case LimitNone = 5000
-        case Limit8 = 8
+        case limitNone = 5000
+        case limit8 = 8
         case limit12 = 12
-        case Limit16 = 16
+        case limit16 = 16
     }
     
     // MARK: outlets
@@ -34,59 +34,56 @@ class exportOptionsVC: NSViewController {
     // MARK: setUpView
     func setUpView() {
         
-        let charLimit = MpcUserDefaults.valueForKey(DEFS_KEY_MAX_CHARACTER_COUNT).integerValue
-        
-        if (charLimit != nil) {
-            
-            switch charLimit {
+        if let charLimitNumber = MpcUserDefaults.value(forKey: DEFS_KEY_MAX_CHARACTER_COUNT) as? NSNumber {
+            switch charLimitNumber.intValue {
             case 5000:
-                charLimitPopupButton.selectItemAtIndex(0)
+                charLimitPopupButton.selectItem(at: 0)
             case 8:
-                charLimitPopupButton.selectItemAtIndex(1)
+                charLimitPopupButton.selectItem(at: 1)
             case 12:
-                charLimitPopupButton.selectItemAtIndex(2)
+                charLimitPopupButton.selectItem(at: 2)
             case 16:
-                charLimitPopupButton.selectItemAtIndex(3)
+                charLimitPopupButton.selectItem(at: 3)
             default:
-                charLimitPopupButton.selectItemAtIndex(0)
+                charLimitPopupButton.selectItem(at: 0)
             }
         }
         
-        appendNumberCheckButton.state   = MpcUserDefaults.valueForKey(DEFS_KEY_APPEND_NUMBER_TO_FILE_NAME).integerValue
-        replacePrefixCheckButton.state  = MpcUserDefaults.valueForKey(DEFS_KEY_REPLACE_EXISTING_PREFIX).integerValue
-        convertSamplesCheckButton.state = MpcUserDefaults.valueForKey(DEFS_KEY_CONVERT_SAMPLES).integerValue
+        appendNumberCheckButton.state   = (MpcUserDefaults.value(forKey: DEFS_KEY_APPEND_NUMBER_TO_FILE_NAME) as AnyObject).integerValue
+        replacePrefixCheckButton.state  = (MpcUserDefaults.value(forKey: DEFS_KEY_REPLACE_EXISTING_PREFIX) as AnyObject).integerValue
+        convertSamplesCheckButton.state = (MpcUserDefaults.value(forKey: DEFS_KEY_CONVERT_SAMPLES) as AnyObject).integerValue
     }
     
     // MARK: userActions
-    @IBAction func charLimitValueChanged(button: NSPopUpButton) {
+    @IBAction func charLimitValueChanged(_ button: NSPopUpButton) {
         
-        var maxCharCount:CharacterLimit = CharacterLimit.LimitNone
+        var maxCharCount:CharacterLimit = CharacterLimit.limitNone
         
         switch button.indexOfSelectedItem {
         case 0:
-            maxCharCount = CharacterLimit.LimitNone
+            maxCharCount = CharacterLimit.limitNone
         case 1:
-            maxCharCount = CharacterLimit.Limit8
+            maxCharCount = CharacterLimit.limit8
         case 2:
             maxCharCount = CharacterLimit.limit12
         case 3:
-            maxCharCount = CharacterLimit.Limit16
+            maxCharCount = CharacterLimit.limit16
         default:
-            NSException(name: "** Illegal State **", reason: "case not handled in charLimitPopUpButton", userInfo: nil).raise()
+            NSException(name: NSExceptionName(rawValue: "** Illegal State **"), reason: "case not handled in charLimitPopUpButton", userInfo: nil).raise()
         }
         
         MpcUserDefaults.setValue(maxCharCount.rawValue, forKey: DEFS_KEY_MAX_CHARACTER_COUNT)
     }
     
-    @IBAction func appendNumberPressed(button: NSButton) {
+    @IBAction func appendNumberPressed(_ button: NSButton) {
         MpcUserDefaults.setValue(button.state, forKey: DEFS_KEY_APPEND_NUMBER_TO_FILE_NAME)
     }
     
-    @IBAction func replacePrefixPressed(button: NSButton) {
+    @IBAction func replacePrefixPressed(_ button: NSButton) {
         MpcUserDefaults.setValue(button.state, forKey: DEFS_KEY_REPLACE_EXISTING_PREFIX)
     }
     
-    @IBAction func convertSamplesPressed(button: AnyObject) {
+    @IBAction func convertSamplesPressed(_ button: NSButton) {
          MpcUserDefaults.setValue(button.state, forKey: DEFS_KEY_CONVERT_SAMPLES)
     }    
 }

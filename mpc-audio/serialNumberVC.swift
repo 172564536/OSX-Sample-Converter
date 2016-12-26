@@ -14,7 +14,7 @@ class serialNumberVC: NSViewController {
     @IBOutlet weak var authoriseButton: NSButton!
     @IBOutlet weak var progress: NSProgressIndicator!
     
-    @IBAction func authoriseButtonPressed(sender: AnyObject) {
+    @IBAction func authoriseButtonPressed(_ sender: AnyObject) {
         let serialNumber = serialNumberTextField.stringValue
         if (serialNumber.characters.count > 0) {
             AttemptAuthorisationForSerial(serialNumber)
@@ -23,34 +23,34 @@ class serialNumberVC: NSViewController {
         }
     }
     
-    func AttemptAuthorisationForSerial(serial: String) {
+    func AttemptAuthorisationForSerial(_ serial: String) {
         
-        authoriseButton.enabled = false
-        serialNumberTextField.enabled = false
-        progress.hidden = false
+        authoriseButton.isEnabled = false
+        serialNumberTextField.isEnabled = false
+        progress.isHidden = false
         progress.startAnimation(self)
         weak var weakSelf = self
         
-        SerialNumberController.attemptAuthorisationForKey(serial) { (userMessage, authSuccess) -> Void in
-            weakSelf?.progress.hidden = true
+        SerialNumberController.attemptAuthorisation(forKey: serial) { (userMessage, authSuccess) -> Void in
+            weakSelf?.progress.isHidden = true
             weakSelf?.progress.stopAnimation(weakSelf)
             
             if (authSuccess) {
-                weakSelf!.showMessage(userMessage)
+                weakSelf!.showMessage(userMessage!)
                 weakSelf!.dismissViewController(self)
             } else {
-                weakSelf!.showMessage(userMessage)
-                weakSelf!.authoriseButton.enabled = true
-                weakSelf?.serialNumberTextField.enabled = true
+                weakSelf!.showMessage(userMessage!)
+                weakSelf!.authoriseButton.isEnabled = true
+                weakSelf?.serialNumberTextField.isEnabled = true
             }
         }
     }    
 
-    func showMessage(message: String) {
+    func showMessage(_ message: String) {
         let alert = NSAlert()
-        alert.alertStyle = NSAlertStyle.InformationalAlertStyle
+        alert.alertStyle = NSAlertStyle.informational
         alert.messageText = message
-        alert.addButtonWithTitle("Ok")
+        alert.addButton(withTitle: "Ok")
         alert.runModal()
     }
 }

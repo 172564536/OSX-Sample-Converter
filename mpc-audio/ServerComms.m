@@ -30,8 +30,8 @@
 -(NSURLSession *)setUpSession
 {
     NSURLSessionConfiguration *sessionConfig = [NSURLSessionConfiguration defaultSessionConfiguration];
-    [sessionConfig setHTTPAdditionalHeaders:@{@"Accept": @"application/json"}];
-    [sessionConfig setHTTPAdditionalHeaders:@{@"Content-Type": @"application/json"}];
+    [sessionConfig setHTTPAdditionalHeaders:@{@"Accept": @"application/json"},
+                                              @"Content-Type": @"application/json"}];
     [sessionConfig setTimeoutIntervalForRequest:30.0];
     [sessionConfig setTimeoutIntervalForResource:60.0];
     [sessionConfig setHTTPMaximumConnectionsPerHost:1];

@@ -65,8 +65,8 @@
 
 +(NSString*)cleanString:(NSString*)string
 {
-    NSCharacterSet *illegalCharacters = [[NSCharacterSet characterSetWithCharactersInString:@"qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890_-+-&()!#"] invertedSet];
-    NSString *cleanedString = [[string componentsSeparatedByCharactersInSet: illegalCharacters] componentsJoinedByString: @""];
+    NSCharacterSet *legalCharacters = [[NSCharacterSet characterSetWithCharactersInString:@"qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890_-+-&()!#"] invertedSet];
+    NSString *cleanedString = [[string componentsSeparatedByCharactersInSet: legalCharacters] componentsJoinedByString: @""];
     return cleanedString;
 }
 

@@ -7,10 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C34ADEF21C1AC53600AEAD12 /* SerialNumberController.m in Sources */ = {isa = PBXBuildFile; fileRef = C34ADEF11C1AC53600AEAD12 /* SerialNumberController.m */; };
-		C34ADEF81C1AC8FD00AEAD12 /* ServerComms.m in Sources */ = {isa = PBXBuildFile; fileRef = C34ADEF71C1AC8FD00AEAD12 /* ServerComms.m */; };
-		C34ADEFB1C1AC9A400AEAD12 /* ServerResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = C34ADEFA1C1AC9A400AEAD12 /* ServerResponse.m */; };
-		C34ADEFE1C1AD0BE00AEAD12 /* serialNumberVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34ADEFD1C1AD0BE00AEAD12 /* serialNumberVC.swift */; };
 		C39A88DF1C143FF5000E2613 /* AudioFileConversionController.m in Sources */ = {isa = PBXBuildFile; fileRef = C39A88DE1C143FF5000E2613 /* AudioFileConversionController.m */; };
 		C39A88E41C14527E000E2613 /* AudioFileReaderWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = C39A88E31C14527E000E2613 /* AudioFileReaderWriter.m */; };
 		C39A88E71C145E7A000E2613 /* FileOperations.m in Sources */ = {isa = PBXBuildFile; fileRef = C39A88E61C145E7A000E2613 /* FileOperations.m */; };
@@ -25,13 +21,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		C34ADEF01C1AC53600AEAD12 /* SerialNumberController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SerialNumberController.h; sourceTree = "<group>"; };
-		C34ADEF11C1AC53600AEAD12 /* SerialNumberController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SerialNumberController.m; sourceTree = "<group>"; };
-		C34ADEF61C1AC8FD00AEAD12 /* ServerComms.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerComms.h; sourceTree = "<group>"; };
-		C34ADEF71C1AC8FD00AEAD12 /* ServerComms.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerComms.m; sourceTree = "<group>"; };
-		C34ADEF91C1AC9A400AEAD12 /* ServerResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerResponse.h; sourceTree = "<group>"; };
-		C34ADEFA1C1AC9A400AEAD12 /* ServerResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerResponse.m; sourceTree = "<group>"; };
-		C34ADEFD1C1AD0BE00AEAD12 /* serialNumberVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = serialNumberVC.swift; sourceTree = "<group>"; };
 		C39A88DD1C143FF5000E2613 /* AudioFileConversionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioFileConversionController.h; sourceTree = "<group>"; };
 		C39A88DE1C143FF5000E2613 /* AudioFileConversionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioFileConversionController.m; sourceTree = "<group>"; };
 		C39A88E21C14527E000E2613 /* AudioFileReaderWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioFileReaderWriter.h; sourceTree = "<group>"; };
@@ -65,26 +54,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		C34ADEEF1C1AC50400AEAD12 /* SerialNumber */ = {
-			isa = PBXGroup;
-			children = (
-				C34ADEF01C1AC53600AEAD12 /* SerialNumberController.h */,
-				C34ADEF11C1AC53600AEAD12 /* SerialNumberController.m */,
-			);
-			name = SerialNumber;
-			sourceTree = "<group>";
-		};
-		C34ADEFC1C1ACA6400AEAD12 /* ServerComms */ = {
-			isa = PBXGroup;
-			children = (
-				C34ADEF61C1AC8FD00AEAD12 /* ServerComms.h */,
-				C34ADEF71C1AC8FD00AEAD12 /* ServerComms.m */,
-				C34ADEF91C1AC9A400AEAD12 /* ServerResponse.h */,
-				C34ADEFA1C1AC9A400AEAD12 /* ServerResponse.m */,
-			);
-			name = ServerComms;
-			sourceTree = "<group>";
-		};
 		C39A88E81C146D2E000E2613 /* AudioFileConversion */ = {
 			isa = PBXGroup;
 			children = (
@@ -103,7 +72,6 @@
 			children = (
 				C39A88EB1C15A4DE000E2613 /* exportOptionsVC.swift */,
 				C3F038B51C12FF8B00EB3849 /* ViewController.swift */,
-				C34ADEFD1C1AD0BE00AEAD12 /* serialNumberVC.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -147,8 +115,6 @@
 		C3F038B21C12FF8B00EB3849 /* mpc-audio */ = {
 			isa = PBXGroup;
 			children = (
-				C34ADEFC1C1ACA6400AEAD12 /* ServerComms */,
-				C34ADEEF1C1AC50400AEAD12 /* SerialNumber */,
 				C39A88F71C16D411000E2613 /* Utilts */,
 				C39A88F31C15ABBD000E2613 /* Config */,
 				C39A88F21C15ABAD000E2613 /* ViewControllers */,
@@ -189,7 +155,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0710;
-				LastUpgradeCheck = 0820;
+				LastUpgradeCheck = 1160;
 				ORGANIZATIONNAME = "Carl Taylor";
 				TargetAttributes = {
 					C3F038AF1C12FF8B00EB3849 = {
@@ -200,7 +166,7 @@
 			};
 			buildConfigurationList = C3F038AB1C12FF8B00EB3849 /* Build configuration list for PBXProject "MpBlaze" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
@@ -235,13 +201,9 @@
 			files = (
 				C39A88FA1C16D77A000E2613 /* MpcFileNameGenerator.m in Sources */,
 				C3F038B61C12FF8B00EB3849 /* ViewController.swift in Sources */,
-				C34ADEFB1C1AC9A400AEAD12 /* ServerResponse.m in Sources */,
 				C39A88E71C145E7A000E2613 /* FileOperations.m in Sources */,
 				C39A88DF1C143FF5000E2613 /* AudioFileConversionController.m in Sources */,
-				C34ADEF21C1AC53600AEAD12 /* SerialNumberController.m in Sources */,
-				C34ADEFE1C1AD0BE00AEAD12 /* serialNumberVC.swift in Sources */,
 				C39A88F11C15AA75000E2613 /* MpcUserDefaults.m in Sources */,
-				C34ADEF81C1AC8FD00AEAD12 /* ServerComms.m in Sources */,
 				C39A88F61C15BFE6000E2613 /* ExportConfig.m in Sources */,
 				C3F038B41C12FF8B00EB3849 /* AppDelegate.swift in Sources */,
 				C39A88E41C14527E000E2613 /* AudioFileReaderWriter.m in Sources */,
@@ -271,14 +233,22 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -306,6 +276,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -317,14 +288,22 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -345,6 +324,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};
@@ -353,6 +333,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = "mpc-audio/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
@@ -360,7 +341,7 @@
 				PRODUCT_NAME = MpBlaze;
 				SWIFT_OBJC_BRIDGING_HEADER = "mpc-audio/mpc-audio-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -369,13 +350,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = "mpc-audio/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.carltaylordev.mpc-audio";
 				PRODUCT_NAME = MpBlaze;
 				SWIFT_OBJC_BRIDGING_HEADER = "mpc-audio/mpc-audio-Bridging-Header.h";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};

@@ -35,22 +35,10 @@ class ViewController: NSViewController, AudioFileConversionControllerDelegate {
         setUpView()
     }
     
-    override func viewDidAppear() {
-       let userRegistered = checkForRegisteredUser()
-        if (userRegistered) {
-            let userEmail = SerialNumberController.getAuthorisedUsersEmail()!
-            authorisedEmaiTextField.stringValue = "Authorised to: \(userEmail)"
-        }
-    }
-    
+
     // MARK: checkForRegisteredUser
     func checkForRegisteredUser() -> Bool {
-        if (!SerialNumberController.userHasAuthorisedApp()) {
-            performSegue(withIdentifier: SEGUE_SERIAL_NUMBER, sender: self)
-            return false
-        } else {
-            return true
-        }
+        return true
     }
     
     // MARK: setUpView
@@ -69,7 +57,7 @@ class ViewController: NSViewController, AudioFileConversionControllerDelegate {
         folderPicker.showsHiddenFiles = false
         folderPicker.showsTagField = false
         folderPicker.begin(completionHandler: { (result) -> Void in
-            if (result == NSFileHandlingPanelOKButton) {
+            if (result.rawValue == NSFileHandlingPanelOKButton) {
                 
                 self.selectedFolder = folderPicker.url!
                 self.selectedOutputFolderTextField.stringValue = self.selectedFolder!.absoluteString
@@ -90,7 +78,7 @@ class ViewController: NSViewController, AudioFileConversionControllerDelegate {
         filePicker.title = "Select Files"
         filePicker.canChooseDirectories = false
         filePicker.begin { (result) -> Void in
-            if (result == NSFileHandlingPanelOKButton) {
+            if (result.rawValue == NSFileHandlingPanelOKButton) {
                 
                 self.selectedAudioFileUrls = filePicker.urls
                 self.numberOfFilesSelectedTextField.stringValue = "\(self.selectedAudioFileUrls.count)"
@@ -161,7 +149,7 @@ class ViewController: NSViewController, AudioFileConversionControllerDelegate {
     func audioFileConversionControllerDidEncounterFileClash(forFile fileName: String!) -> FileClashDecision {
         
         let alert = NSAlert()
-        alert.alertStyle = NSAlertStyle.informational
+        alert.alertStyle = NSAlert.Style.informational
         alert.messageText = "Existing file found at location:\n\(fileName)"
         // These are applied in reverse order to how they appear on screen
         alert.addButton(withTitle: FILE_CLASH_BUTTON_TITLE_DELETE_APPLY_TO_ALL)
@@ -170,11 +158,11 @@ class ViewController: NSViewController, AudioFileConversionControllerDelegate {
         alert.addButton(withTitle: FILE_CLASH_BUTTON_TITLE_SKIP)
         alert.addButton(withTitle: FILE_CLASH_BUTTON_TITLE_ABORT)
         
-        let responseTag: NSModalResponse = alert.runModal()
+        let responseTag: NSApplication.ModalResponse = alert.runModal()
         
         var decision: FileClashDecision = FileClashDecision.FILE_CLASH_ABORT
         
-        switch responseTag {
+        switch responseTag.rawValue {
         case 1000:
             decision = FileClashDecision.FILE_CLASH_DELETE_APPLY_TO_ALL;
         case 1001:
@@ -209,7 +197,7 @@ class ViewController: NSViewController, AudioFileConversionControllerDelegate {
     // MARK: Alert
     func showAlertWithMesage(_ message: String) {
         let alert = NSAlert()
-        alert.alertStyle = NSAlertStyle.informational
+        alert.alertStyle = NSAlert.Style.informational
         alert.addButton(withTitle: "Ok")
         alert.messageText = message
         alert.runModal()

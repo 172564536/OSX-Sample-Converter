@@ -49,9 +49,9 @@ class exportOptionsVC: NSViewController {
             }
         }
         
-        appendNumberCheckButton.state   = (MpcUserDefaults.value(forKey: DEFS_KEY_APPEND_NUMBER_TO_FILE_NAME) as AnyObject).integerValue
-        replacePrefixCheckButton.state  = (MpcUserDefaults.value(forKey: DEFS_KEY_REPLACE_EXISTING_PREFIX) as AnyObject).integerValue
-        convertSamplesCheckButton.state = (MpcUserDefaults.value(forKey: DEFS_KEY_CONVERT_SAMPLES) as AnyObject).integerValue
+        appendNumberCheckButton.state   = NSControl.StateValue(rawValue: (MpcUserDefaults.value(forKey: DEFS_KEY_APPEND_NUMBER_TO_FILE_NAME) as AnyObject).integerValue!)
+        replacePrefixCheckButton.state  = NSControl.StateValue(rawValue: (MpcUserDefaults.value(forKey: DEFS_KEY_REPLACE_EXISTING_PREFIX) as AnyObject).integerValue!)
+        convertSamplesCheckButton.state = NSControl.StateValue(rawValue: (MpcUserDefaults.value(forKey: DEFS_KEY_CONVERT_SAMPLES) as AnyObject).integerValue!)
     }
     
     // MARK: userActions

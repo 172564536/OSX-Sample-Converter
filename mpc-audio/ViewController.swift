@@ -9,10 +9,7 @@
 import Cocoa
 
 class ViewController: NSViewController, AudioFileConversionControllerDelegate {
-    
-    // MARK: constants
-    let SEGUE_SERIAL_NUMBER = "serialNumberSeg"
-    
+        
     // MARK: outlets
     @IBOutlet weak var convertFilesButton: NSButton!
     
@@ -150,7 +147,7 @@ class ViewController: NSViewController, AudioFileConversionControllerDelegate {
         
         let alert = NSAlert()
         alert.alertStyle = NSAlert.Style.informational
-        alert.messageText = "Existing file found at location:\n\(fileName)"
+        alert.messageText = "Existing file found at location:\n\(String(describing: fileName))"
         // These are applied in reverse order to how they appear on screen
         alert.addButton(withTitle: FILE_CLASH_BUTTON_TITLE_DELETE_APPLY_TO_ALL)
         alert.addButton(withTitle: FILE_CLASH_BUTTON_TITLE_DELETE)

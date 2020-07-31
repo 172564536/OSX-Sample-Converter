@@ -118,68 +118,6 @@
             </objects>
             <point key="canvasLocation" x="75" y="250"/>
         </scene>
-        <!--Serial NumberVC-->
-        <scene sceneID="3z3-XM-bp1">
-            <objects>
-                <viewController id="0yY-G6-Zzm" customClass="serialNumberVC" customModule="MpBlaze" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="6dn-IJ-IqG">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="196"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <subviews>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4gG-eb-lY4">
-                                <rect key="frame" x="18" y="159" width="414" height="17"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Please Enter Your License Key" id="ScT-e4-oIB">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <textField verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4A2-Ne-dSJ">
-                                <rect key="frame" x="20" y="129" width="410" height="22"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="center" placeholderString="License Key" drawsBackground="YES" id="6I8-gA-pDS">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rmo-JF-nBN">
-                                <rect key="frame" x="123" y="92" width="202" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="push" title="Authorise with Server" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="qPh-zh-bx8">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="authoriseButtonPressed:" target="0yY-G6-Zzm" id="8xU-dv-F0W"/>
-                                </connections>
-                            </button>
-                            <progressIndicator hidden="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="eQC-sA-bCv">
-                                <rect key="frame" x="327" y="101" width="16" height="16"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            </progressIndicator>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qgl-2a-Lh7">
-                                <rect key="frame" x="18" y="19" width="414" height="18"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Please don't share your license key - thanks!" id="GDA-X3-1hz">
-                                    <font key="font" size="12" name="HelveticaNeue-LightItalic"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                        </subviews>
-                    </view>
-                    <connections>
-                        <outlet property="authoriseButton" destination="rmo-JF-nBN" id="4IB-1D-aX9"/>
-                        <outlet property="progress" destination="eQC-sA-bCv" id="gy6-cP-ZSy"/>
-                        <outlet property="serialNumberTextField" destination="4A2-Ne-dSJ" id="gya-gW-JEX"/>
-                    </connections>
-                </viewController>
-                <customObject id="i7n-hs-DVi" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-727" y="603"/>
-        </scene>
         <!--MpBlaze-->
         <scene sceneID="hIz-AP-VOD">
             <objects>
@@ -266,25 +204,14 @@
                                     <color key="backgroundColor" white="0.90372983870000001" alpha="1" colorSpace="calibratedWhite"/>
                                 </textFieldCell>
                             </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yoP-Ae-Ohp">
-                                <rect key="frame" x="20" y="4" width="442" height="17"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" id="SJD-9M-pvF">
-                                    <font key="font" metaFont="system" size="10"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
                         </subviews>
                     </view>
                     <connections>
-                        <outlet property="authorisedEmaiTextField" destination="yoP-Ae-Ohp" id="B5L-1p-wli"/>
                         <outlet property="convertFilesButton" destination="Bnm-tM-fXb" id="Gwm-5T-kda"/>
                         <outlet property="fileNamePrefixTextField" destination="q7c-jE-3E2" id="Hqr-yA-pvu"/>
                         <outlet property="numberOfFilesSelectedTextField" destination="qBE-Vv-bqD" id="u5R-lY-y0g"/>
                         <outlet property="progressIndicator" destination="YsR-QT-ds3" id="bbJ-VM-6aM"/>
                         <outlet property="selectedOutputFolderTextField" destination="uvQ-6X-Blf" id="gNA-Gr-f4A"/>
-                        <segue destination="0yY-G6-Zzm" kind="sheet" identifier="serialNumberSeg" id="9pf-mU-NZa"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

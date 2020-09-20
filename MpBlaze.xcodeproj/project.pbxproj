@@ -155,12 +155,14 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0710;
-				LastUpgradeCheck = 1160;
+				LastUpgradeCheck = 1170;
 				ORGANIZATIONNAME = "Carl Taylor";
 				TargetAttributes = {
 					C3F038AF1C12FF8B00EB3849 = {
 						CreatedOnToolsVersion = 7.1.1;
+						DevelopmentTeam = LEF7JX8LTJ;
 						LastSwiftMigration = 0820;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -333,12 +335,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 7;
+				DEVELOPMENT_TEAM = LEF7JX8LTJ;
+				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = "mpc-audio/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.carltaylordev.mpc-audio";
 				PRODUCT_NAME = MpBlaze;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "mpc-audio/mpc-audio-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
@@ -350,12 +357,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 7;
+				DEVELOPMENT_TEAM = LEF7JX8LTJ;
+				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = "mpc-audio/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.carltaylordev.mpc-audio";
 				PRODUCT_NAME = MpBlaze;
+				PROVISIONING_PROFILE_SPECIFIER = "MPBlaze Outside App Store";
 				SWIFT_OBJC_BRIDGING_HEADER = "mpc-audio/mpc-audio-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 			};

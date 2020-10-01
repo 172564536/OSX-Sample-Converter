@@ -22,6 +22,7 @@ class exportOptionsVC: NSViewController {
     @IBOutlet weak var appendNumberCheckButton: NSButton!
     @IBOutlet weak var replacePrefixCheckButton: NSButton!
     @IBOutlet weak var convertSamplesCheckButton: NSButton!
+    @IBOutlet weak var preserveFolderHierarchyCheckButton: NSButton!
     
     // MARK: lifeCycle
     override func viewDidLoad() {
@@ -49,9 +50,10 @@ class exportOptionsVC: NSViewController {
             }
         }
         
-        appendNumberCheckButton.state   = NSControl.StateValue(rawValue: (MpcUserDefaults.value(forKey: DEFS_KEY_APPEND_NUMBER_TO_FILE_NAME) as AnyObject).integerValue!)
-        replacePrefixCheckButton.state  = NSControl.StateValue(rawValue: (MpcUserDefaults.value(forKey: DEFS_KEY_REPLACE_EXISTING_PREFIX) as AnyObject).integerValue!)
-        convertSamplesCheckButton.state = NSControl.StateValue(rawValue: (MpcUserDefaults.value(forKey: DEFS_KEY_CONVERT_SAMPLES) as AnyObject).integerValue!)
+        appendNumberCheckButton.state            = NSControl.StateValue(rawValue: (MpcUserDefaults.value(forKey: DEFS_KEY_APPEND_NUMBER_TO_FILE_NAME) as AnyObject).integerValue!)
+        replacePrefixCheckButton.state           = NSControl.StateValue(rawValue: (MpcUserDefaults.value(forKey: DEFS_KEY_REPLACE_EXISTING_PREFIX) as AnyObject).integerValue!)
+        convertSamplesCheckButton.state          = NSControl.StateValue(rawValue: (MpcUserDefaults.value(forKey: DEFS_KEY_CONVERT_SAMPLES) as AnyObject).integerValue!)
+        preserveFolderHierarchyCheckButton.state = NSControl.StateValue(rawValue: (MpcUserDefaults.value(forKey: DEFS_KEY_PRESERVE_FOLDER_HIERARCHY) as AnyObject).integerValue!)
     }
     
     // MARK: userActions
@@ -85,5 +87,9 @@ class exportOptionsVC: NSViewController {
     
     @IBAction func convertSamplesPressed(_ button: NSButton) {
          MpcUserDefaults.setValue(button.state, forKey: DEFS_KEY_CONVERT_SAMPLES)
-    }    
+    }
+
+    @IBAction func preserveFolderHierarchyPressed(_ button: NSButton) {
+         MpcUserDefaults.setValue(button.state, forKey: DEFS_KEY_PRESERVE_FOLDER_HIERARCHY)
+    }
 }

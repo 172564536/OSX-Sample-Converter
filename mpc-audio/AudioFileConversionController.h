@@ -25,6 +25,7 @@ typedef NS_ENUM(NSUInteger, FileClashDecision) {
 @protocol AudioFileConversionControllerDelegate <NSObject>
 
 @required
+-(void)audioFileConversionControllerDidError:(NSString*)errorMessage;
 -(void)audioFileConversionControllerDidReportProgress;
 -(void)audioFileConversionControllerDidFinishWithReport:(NSString *)report;
 -(FileClashDecision)audioFileConversionControllerDidEncounterFileClashForFile:(NSString*)fileName;
@@ -34,8 +35,7 @@ typedef NS_ENUM(NSUInteger, FileClashDecision) {
 
 @interface AudioFileConversionController : NSObject
 
--(instancetype)initWithAudioFileUrls:(NSArray *)audioFileUrls
-                   DestinationFolder:(NSURL *)destinationFolder
+-(instancetype)initWithAudioFileModels:(NSArray *)models
               andExportOptionsConfig:(ExportConfig *)exportConfig;
 -(void)start;
 

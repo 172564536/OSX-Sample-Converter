@@ -8,28 +8,34 @@
 
 import Cocoa
 
-class ViewController: NSViewController, AudioFileConversionControllerDelegate {
+
+class ViewController: NSViewController, AudioFileConversionControllerDelegate, AudioFileModelFactoryDelegate {
         
     // MARK: outlets
     @IBOutlet weak var convertFilesButton: NSButton!
+    @IBOutlet weak var exportOptionButton: NSButton!
+    @IBOutlet weak var outputFolderButton: NSButton!
+    @IBOutlet weak var filesFolderButton: NSButton!
     
     @IBOutlet weak var selectedOutputFolderTextField: NSTextField!
     @IBOutlet weak var numberOfFilesSelectedTextField: NSTextField!
     @IBOutlet weak var fileNamePrefixTextField: NSTextField!
-    @IBOutlet weak var authorisedEmaiTextField: NSTextField!
     
     @IBOutlet weak var progressIndicator: NSProgressIndicator!
     
     // MARK: ivars
-    var selectedAudioFileUrls = [URL]()
-    var selectedFolder: URL?
+    var selectedFileUrls = [URL]()
+    var selectedOutputFolder: URL?
+    var selectedParentSourceFolder: URL?
     var conversionController: AudioFileConversionController?
     var numberOfFilesSelectedToProcess: Int?
-    
+    let audioModelFactory = AudioFileModelFactory()
+
     // MARK: lifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpView()
+        audioModelFactory.delegate = self
     }
     
 
@@ -56,10 +62,19 @@ class ViewController: NSViewController, AudioFileConversionControllerDelegate {
         folderPicker.begin(completionHandler: { (result) -> Void in
             if (result.rawValue == NSFileHandlingPanelOKButton) {
                 
-                self.selectedFolder = folderPicker.url!
-                self.selectedOutputFolderTextField.stringValue = self.selectedFolder!.absoluteString
+                self.selectedOutputFolder = folderPicker.url!
+
+                var pathString = ""
+                let paths = self.selectedOutputFolder!.pathComponents
+                if (paths.count > 1) {
+                    pathString = "\(paths[paths.count-2])\\\(paths.last!)"
+                } else {
+                    pathString = "\(paths.last)"
+                }
+
+                self.selectedOutputFolderTextField.stringValue = pathString
                 
-                if (self.selectedFolder != nil && self.canShowConvertAudioButton()) {
+                if (self.selectedOutputFolder != nil && self.canShowConvertAudioButton()) {
                     self.enableConvertAudioButton(true)
                 }
             }
@@ -73,13 +88,21 @@ class ViewController: NSViewController, AudioFileConversionControllerDelegate {
         filePicker.allowsMultipleSelection = true
         filePicker.canChooseFiles = true
         filePicker.title = "Select Files"
-        filePicker.canChooseDirectories = false
+        filePicker.canChooseDirectories = true
         filePicker.begin { (result) -> Void in
             if (result.rawValue == NSFileHandlingPanelOKButton) {
-                
-                self.selectedAudioFileUrls = filePicker.urls
-                self.numberOfFilesSelectedTextField.stringValue = "\(self.selectedAudioFileUrls.count)"
-                if (self.selectedAudioFileUrls.count > 0 && self.canShowConvertAudioButton()) {
+                self.selectedFileUrls = filePicker.urls
+                if (filePicker.urls.count > 1) {
+                    var components = filePicker.url?.pathComponents
+                    components!.removeLast()
+                    self.selectedParentSourceFolder = NSURL.fileURL(withPathComponents: components!)
+                } else {
+                    self.selectedParentSourceFolder = filePicker.url
+                }
+
+                self.numberOfFilesSelectedToProcess = self.audioModelFactory.countNumber(ofAudioFilesPresent: filePicker.urls).intValue
+                self.numberOfFilesSelectedTextField.stringValue = "\(self.numberOfFilesSelectedToProcess!)"
+                if (self.selectedFileUrls.count > 0 && self.canShowConvertAudioButton()) {
                     self.enableConvertAudioButton(true)
                 } else {
                     self.enableConvertAudioButton(false)
@@ -104,7 +127,7 @@ class ViewController: NSViewController, AudioFileConversionControllerDelegate {
     
     // MARK: hide/show convert audio button
     func canShowConvertAudioButton() -> Bool {
-        if (selectedFolder != nil && selectedAudioFileUrls.count > 0) {
+        if (selectedOutputFolder != nil && selectedFileUrls.count > 0) {
             return true;
         } else {
             return false;
@@ -119,23 +142,66 @@ class ViewController: NSViewController, AudioFileConversionControllerDelegate {
             self.convertFilesButton.isHidden = true;
         }
     }
+
+    // MARK: Show/hide Main Panel
+    func hideMainPanel(hide: Bool) {
+        selectedOutputFolderTextField.isHidden = hide
+        numberOfFilesSelectedTextField.isHidden = hide
+        fileNamePrefixTextField.isHidden = hide
+        exportOptionButton.isHidden = hide
+        outputFolderButton.isHidden = hide
+        filesFolderButton.isHidden = hide
+    }
     
-    // MARK: AudioFileConversionController / Delegate
+    // MARK: AudioFileConversionController + AudioFileModelFactory / Delegate
     func startConversionWithExportOptions(_ exportConfig: ExportConfig) {
-        
-        numberOfFilesSelectedToProcess = selectedAudioFileUrls.count
+
+        let convertedModels = audioModelFactory.convertSourceUrls(selectedFileUrls, parentSourceFolder: selectedParentSourceFolder, parentDestinationFolder: selectedOutputFolder, exportConfig: exportConfig)
         startProgressIndicator()
-        
-        conversionController = AudioFileConversionController.init(audioFileUrls: selectedAudioFileUrls, destinationFolder: selectedFolder,  andExportOptionsConfig: exportConfig)
+        hideMainPanel(hide: true)
+
+        conversionController = AudioFileConversionController.init(audioFileModels: convertedModels, andExportOptionsConfig: exportConfig)
         conversionController?.delegate = self
         conversionController!.start()
     }
-    
+
+    func audioFileModelFactoryDidError(_ errorDescription: String!) -> AudioFileModelFactoryErrorDecision {
+
+        let alert = NSAlert()
+        alert.alertStyle = NSAlert.Style.warning
+        alert.messageText = errorDescription
+        // These are applied in reverse order to how they appear on screen
+        alert.addButton(withTitle: "Continue (ignore similar errors)")
+        alert.addButton(withTitle: "Continue")
+        alert.addButton(withTitle: "Abort").setAccessibilityFocused(true)
+
+        let responseTag: NSApplication.ModalResponse = alert.runModal()
+
+        var decision: AudioFileModelFactoryErrorDecision = AudioFileModelFactoryErrorDecision.ERROR_ABORT;
+
+        switch responseTag.rawValue {
+        case 1000:
+            decision = AudioFileModelFactoryErrorDecision.ERROR_CONTINUE_FOR_ALL;
+        case 1001:
+            decision = AudioFileModelFactoryErrorDecision.ERROR_CONTINUE;
+        case 1002:
+            decision = AudioFileModelFactoryErrorDecision.ERROR_ABORT;
+        default:
+            NSException(name: NSExceptionName(rawValue: "** Illegal State **"), reason: "case not handled in modelFactory error found alert response", userInfo: nil).raise()
+        }
+        return decision;
+    }
+
+    func audioFileConversionControllerDidError(_ errorMessage: String!) {
+        showAlertWithMessage(errorMessage)
+    }
+
     func audioFileConversionControllerDidFinish(withReport report: String!) {
         stopProgressIndicator()
         enableConvertAudioButton(true)
+        hideMainPanel(hide: false)
         if (report != nil) {
-            showAlertWithMesage(report)
+            showAlertWithMessage(report)
         }
     }
     
@@ -147,7 +213,7 @@ class ViewController: NSViewController, AudioFileConversionControllerDelegate {
         
         let alert = NSAlert()
         alert.alertStyle = NSAlert.Style.informational
-        alert.messageText = "Existing file found at location:\n\(String(describing: fileName))"
+        alert.messageText = "Existing file found at location:\n\(String(describing: fileName!))"
         // These are applied in reverse order to how they appear on screen
         alert.addButton(withTitle: FILE_CLASH_BUTTON_TITLE_DELETE_APPLY_TO_ALL)
         alert.addButton(withTitle: FILE_CLASH_BUTTON_TITLE_DELETE)
@@ -171,14 +237,14 @@ class ViewController: NSViewController, AudioFileConversionControllerDelegate {
         case 1004:
             decision = FileClashDecision.FILE_CLASH_ABORT;
         default:
-            NSException(name: NSExceptionName(rawValue: "** Illegal State **"), reason: "case not handled in existing file found alert resonse", userInfo: nil).raise()
+            NSException(name: NSExceptionName(rawValue: "** Illegal State **"), reason: "case not handled in existing file found alert response", userInfo: nil).raise()
         }
         return decision
     }
     
     // MARK: ProgressIndicator
     func startProgressIndicator() {
-        progressIndicator.maxValue = Double(selectedAudioFileUrls.count)
+        progressIndicator.maxValue = Double(numberOfFilesSelectedToProcess!)
         progressIndicator.startAnimation(self)
     }
     
@@ -192,14 +258,12 @@ class ViewController: NSViewController, AudioFileConversionControllerDelegate {
     }
     
     // MARK: Alert
-    func showAlertWithMesage(_ message: String) {
+    func showAlertWithMessage(_ message: String) {
         let alert = NSAlert()
         alert.alertStyle = NSAlert.Style.informational
         alert.addButton(withTitle: "Ok")
         alert.messageText = message
         alert.runModal()
     }
-    
-    
 }
 

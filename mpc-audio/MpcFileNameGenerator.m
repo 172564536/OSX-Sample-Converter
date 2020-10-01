@@ -36,7 +36,7 @@
     }
     
     // Now we need to see if string needs trimming back to the permitted number of characters (with/wihout appended file number)
-    NSNumber *permittedNumberOfCharactersInFileName = exportConfig.permitedNumberOfCharactersInFileName;
+    NSNumber *permittedNumberOfCharactersInFileName = exportConfig.permittedNumberOfCharactersInFileName;
     BOOL appendNumberToFileName = [exportConfig.appendNumberToFileName boolValue];
     
     // Check if we need to append file number

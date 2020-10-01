@@ -8,8 +8,9 @@
 
 #import "AudioFileConversionController.h"
 #import "AudioFileReaderWriter.h"
-#import "MpcFileNameGenerator.h"
 #import "FileOperations.h"
+#import "AudioFileModel.h"
+#import "MpcFileNameGenerator.h"
 #import "ExportConfig.h"
 
 NSString * const FILE_CLASH_BUTTON_TITLE_ABORT               = @"Abort";
@@ -21,11 +22,10 @@ NSString * const FILE_CLASH_BUTTON_TITLE_DELETE_APPLY_TO_ALL = @"Delete (apply a
 @interface AudioFileConversionController () <AudioFileReaderWriterDelegate>
 
 @property (nonatomic, strong) AudioFileReaderWriter *readerWriter;
-@property (nonatomic, strong) NSMutableArray *audioFileUrls;
+@property (nonatomic, strong) NSMutableArray *audioFileModels;
 @property (nonatomic, strong) ExportConfig *exportConfig;
 
-@property (nonatomic, strong) NSURL *currentExportUrl;
-@property (nonatomic, strong) NSURL *destintionFolderUrl;
+@property (nonatomic, strong) AudioFileModel *currentModel;
 
 @property NSInteger fileConversionCounter;
 @property NSInteger readWriteFailures;
@@ -43,20 +43,19 @@ NSString * const FILE_CLASH_BUTTON_TITLE_DELETE_APPLY_TO_ALL = @"Delete (apply a
 
 -(instancetype)init
 {
-    [NSException raise:@"** Invalid State **" format:@"Call 'initWithAudioFileUrls' instead"];
+    [NSException raise:@"** Invalid State **" format:@"Call 'initWithAudioFileModels' instead"];
     return nil;
 }
 
--(instancetype)initWithAudioFileUrls:(NSArray *)audioFileUrls
-                   DestinationFolder:(NSURL *)destinationFolder
-              andExportOptionsConfig:(ExportConfig *)exportConfig
+- (instancetype)initWithAudioFileModels:(NSArray *)models
+                 andExportOptionsConfig:(ExportConfig *)exportConfig
+
 {
     self = [super init];
     
     if (self) {
         [self initializeReaderWriter];
-        self.destintionFolderUrl = destinationFolder;
-        self.audioFileUrls = [[NSMutableArray alloc]initWithArray:audioFileUrls copyItems:YES];
+        self.audioFileModels = [[NSMutableArray alloc]initWithArray:models];
         self.exportConfig = exportConfig;
         self.applyDeleteToAll = NO;
         self.applySkipToAll = NO;
@@ -83,22 +82,42 @@ NSString * const FILE_CLASH_BUTTON_TITLE_DELETE_APPLY_TO_ALL = @"Delete (apply a
 
 -(void)checkForRemainingItemsToProcess
 {
-    if (self.audioFileUrls.count > 0) {
+    if (self.audioFileModels.count > 0) {
         [self.delegate audioFileConversionControllerDidReportProgress];
         
-        self.currentExportUrl = [self.audioFileUrls objectAtIndex:0];
-        [self.audioFileUrls removeObjectAtIndex:0];
-        [self processItemForUrl:self.currentExportUrl];
+        self.currentModel = [self.audioFileModels objectAtIndex:0];
+        [self.audioFileModels removeObjectAtIndex:0];
+        [self processModel:self.currentModel];
     } else {
         [self.delegate audioFileConversionControllerDidFinishWithReport:[self generateReport]];
     }
 }
 
--(void)processItemForUrl:(NSURL*)inputFileUrl
+-(void)processModel:(AudioFileModel*)model
 {
-    NSString *inpultFileName = [inputFileUrl lastPathComponent];
-    NSString *newFileName    = [MpcFileNameGenerator createNewFileNameFromExistingFileName:inpultFileName withExportConfig:self.exportConfig fileNumber:self.fileConversionCounter];
-    NSURL *outputFileUrl     = [NSURL URLWithString:newFileName relativeToURL:self.destintionFolderUrl];
+    NSURL *inputFileUrl = model.sourceUrl;
+    NSString *inputFileName = [inputFileUrl lastPathComponent];
+    
+    NSString *newFileName = [MpcFileNameGenerator createNewFileNameFromExistingFileName:inputFileName withExportConfig:self.exportConfig fileNumber:self.fileConversionCounter];
+
+    NSMutableArray *outputPaths = [[NSMutableArray alloc] initWithArray:[model.destinationUrl pathComponents]];
+    [outputPaths removeLastObject];
+    NSURL *folderPath = [NSURL fileURLWithPathComponents:outputPaths];
+
+    BOOL isDir;
+    NSError *error;
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    BOOL exists = [fileManager fileExistsAtPath:folderPath.absoluteString isDirectory:&isDir];
+    if (!exists || (exists && !isDir)) {
+      [fileManager createDirectoryAtURL:folderPath withIntermediateDirectories:YES attributes:nil error:&error];
+      if (error) {
+          [self.delegate audioFileConversionControllerDidError:error.description];
+          return;
+      }
+    }
+
+    [outputPaths addObject:newFileName];
+    NSURL *outputFileUrl = [NSURL fileURLWithPathComponents:outputPaths];
     
     if ([inputFileUrl.path isEqualToString:outputFileUrl.path]) {
         // File has same location - cant read and write from same file at once
@@ -198,7 +217,7 @@ NSString * const FILE_CLASH_BUTTON_TITLE_DELETE_APPLY_TO_ALL = @"Delete (apply a
 {
     self.readWriteFailures ++;
     [self initializeReaderWriter];
-    [FileOperations deleteFileIfExists:self.currentExportUrl];
+    [FileOperations deleteFileIfExists:self.currentModel.destinationUrl];
     [self checkForRemainingItemsToProcess];
 }
 

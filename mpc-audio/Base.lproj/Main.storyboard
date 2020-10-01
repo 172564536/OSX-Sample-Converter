@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16097.2"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17156"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -208,8 +208,11 @@
                     </view>
                     <connections>
                         <outlet property="convertFilesButton" destination="Bnm-tM-fXb" id="Gwm-5T-kda"/>
+                        <outlet property="exportOptionButton" destination="uN7-Lh-F82" id="WJc-bV-9J1"/>
                         <outlet property="fileNamePrefixTextField" destination="q7c-jE-3E2" id="Hqr-yA-pvu"/>
+                        <outlet property="filesFolderButton" destination="Pf1-8F-pZa" id="g9p-Id-Rn9"/>
                         <outlet property="numberOfFilesSelectedTextField" destination="qBE-Vv-bqD" id="u5R-lY-y0g"/>
+                        <outlet property="outputFolderButton" destination="J3K-4C-Zt0" id="Owy-ne-gCS"/>
                         <outlet property="progressIndicator" destination="YsR-QT-ds3" id="bbJ-VM-6aM"/>
                         <outlet property="selectedOutputFolderTextField" destination="uvQ-6X-Blf" id="gNA-Gr-f4A"/>
                     </connections>
@@ -223,11 +226,11 @@
             <objects>
                 <viewController id="vZl-4s-2vT" customClass="exportOptionsVC" customModule="MpBlaze" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="mew-M6-gOL">
-                        <rect key="frame" x="0.0" y="0.0" width="304" height="125"/>
+                        <rect key="frame" x="0.0" y="0.0" width="304" height="145"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oA5-Gn-fib">
-                                <rect key="frame" x="18" y="38" width="268" height="18"/>
+                                <rect key="frame" x="18" y="58" width="268" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="check" title="Replace orignal file prefix with my prefix" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="YQw-RL-eu8">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -238,7 +241,7 @@
                                 </connections>
                             </button>
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sQ0-bS-RLt">
-                                <rect key="frame" x="18" y="58" width="197" height="18"/>
+                                <rect key="frame" x="18" y="78" width="197" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="check" title="Append number to file name" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="Odr-5a-yiY">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -249,11 +252,11 @@
                                 </connections>
                             </button>
                             <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3ZG-ka-Lb8">
-                                <rect key="frame" x="18" y="82" width="168" height="25"/>
+                                <rect key="frame" x="18" y="102" width="168" height="25"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <popUpButtonCell key="cell" type="roundTextured" title="12 character limit" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" selectedItem="2V5-sS-v23" id="1v6-fO-SIT">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
+                                    <font key="font" metaFont="menu"/>
                                     <menu key="menu" id="7YI-bI-g36">
                                         <items>
                                             <menuItem title="No character limit" id="B8I-fZ-bba"/>
@@ -268,7 +271,7 @@
                                 </connections>
                             </popUpButton>
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NUK-nH-S1G">
-                                <rect key="frame" x="18" y="18" width="255" height="18"/>
+                                <rect key="frame" x="18" y="38" width="255" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="check" title="Convert samples to 44.1 / 16bit" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="Tqr-9I-Btd">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -278,18 +281,30 @@
                                     <action selector="convertSamplesPressed:" target="vZl-4s-2vT" id="JxN-Pg-aXz"/>
                                 </connections>
                             </button>
+                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Eor-AX-zZc">
+                                <rect key="frame" x="18" y="18" width="255" height="18"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="check" title="Preserve folder hierarchy" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="338-VT-IZp">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="preserveFolderHierarchyPressed:" target="vZl-4s-2vT" id="iz8-ae-Sk7"/>
+                                </connections>
+                            </button>
                         </subviews>
                     </view>
                     <connections>
                         <outlet property="appendNumberCheckButton" destination="sQ0-bS-RLt" id="jla-xy-ceN"/>
                         <outlet property="charLimitPopupButton" destination="3ZG-ka-Lb8" id="b5r-3b-x14"/>
                         <outlet property="convertSamplesCheckButton" destination="NUK-nH-S1G" id="Xah-9v-G27"/>
+                        <outlet property="preserveFolderHierarchyCheckButton" destination="Eor-AX-zZc" id="tq2-LS-3H5"/>
                         <outlet property="replacePrefixCheckButton" destination="oA5-Gn-fib" id="j53-6G-rBj"/>
                     </connections>
                 </viewController>
                 <customObject id="Xfx-Jf-6pO" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="185" y="567.5"/>
+            <point key="canvasLocation" x="185" y="577.5"/>
         </scene>
     </scenes>
 </document>

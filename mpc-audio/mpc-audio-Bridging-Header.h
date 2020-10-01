@@ -5,4 +5,5 @@
 #import "AudioFileConversionController.h"
 #import "MpcUserDefaults.h"
 #import "ExportConfig.h"
-
+#import "AudioFileModelFactory.h"
+#import "AudioFileModel.h"

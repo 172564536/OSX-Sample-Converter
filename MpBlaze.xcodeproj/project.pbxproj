@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		804F73772522757A00C69F69 /* AudioFileModelFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 804F73762522757A00C69F69 /* AudioFileModelFactory.m */; };
+		80911B6725172B4D008BC114 /* AudioFileModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 80911B6625172B4D008BC114 /* AudioFileModel.m */; };
 		C39A88DF1C143FF5000E2613 /* AudioFileConversionController.m in Sources */ = {isa = PBXBuildFile; fileRef = C39A88DE1C143FF5000E2613 /* AudioFileConversionController.m */; };
 		C39A88E41C14527E000E2613 /* AudioFileReaderWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = C39A88E31C14527E000E2613 /* AudioFileReaderWriter.m */; };
 		C39A88E71C145E7A000E2613 /* FileOperations.m in Sources */ = {isa = PBXBuildFile; fileRef = C39A88E61C145E7A000E2613 /* FileOperations.m */; };
@@ -21,6 +23,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		804F73752522750500C69F69 /* AudioFileModelFactory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioFileModelFactory.h; sourceTree = "<group>"; };
+		804F73762522757A00C69F69 /* AudioFileModelFactory.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioFileModelFactory.m; sourceTree = "<group>"; };
+		80911B6625172B4D008BC114 /* AudioFileModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioFileModel.m; sourceTree = "<group>"; };
+		80911B6825172B83008BC114 /* AudioFileModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioFileModel.h; sourceTree = "<group>"; };
 		C39A88DD1C143FF5000E2613 /* AudioFileConversionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioFileConversionController.h; sourceTree = "<group>"; };
 		C39A88DE1C143FF5000E2613 /* AudioFileConversionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioFileConversionController.m; sourceTree = "<group>"; };
 		C39A88E21C14527E000E2613 /* AudioFileReaderWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioFileReaderWriter.h; sourceTree = "<group>"; };
@@ -63,6 +69,10 @@
 				C39A88E31C14527E000E2613 /* AudioFileReaderWriter.m */,
 				C39A88F81C16D77A000E2613 /* MpcFileNameGenerator.h */,
 				C39A88F91C16D77A000E2613 /* MpcFileNameGenerator.m */,
+				80911B6825172B83008BC114 /* AudioFileModel.h */,
+				80911B6625172B4D008BC114 /* AudioFileModel.m */,
+				804F73752522750500C69F69 /* AudioFileModelFactory.h */,
+				804F73762522757A00C69F69 /* AudioFileModelFactory.m */,
 			);
 			name = AudioFileConversion;
 			sourceTree = "<group>";
@@ -209,7 +219,9 @@
 				C39A88F61C15BFE6000E2613 /* ExportConfig.m in Sources */,
 				C3F038B41C12FF8B00EB3849 /* AppDelegate.swift in Sources */,
 				C39A88E41C14527E000E2613 /* AudioFileReaderWriter.m in Sources */,
+				80911B6725172B4D008BC114 /* AudioFileModel.m in Sources */,
 				C39A88EC1C15A4DE000E2613 /* exportOptionsVC.swift in Sources */,
+				804F73772522757A00C69F69 /* AudioFileModelFactory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
